@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Home extends BaseController
+class Register extends BaseController
 {
     public function index(): string
     {
@@ -16,11 +16,11 @@ class Home extends BaseController
                     $data['agb'] = $this->request->getPost('agb');
 
                     $data['error'] = $this->validation->getErrors();
-                    return view('login', $data);
+                    return view('register', $data);
                 }
 
             }
-            return view('login');
+            return view('register');
         }
     }
 }
