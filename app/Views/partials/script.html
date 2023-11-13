@@ -1,0 +1,121 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+    function generatePassword() {
+        var length = document.getElementById("passwordLength").value;
+        var includeNumbers = document.getElementById("includeNumbers").checked;
+        var includeSpecialChars = document.getElementById("includeSpecialChars").checked;
+        var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        if (includeNumbers) {
+            charset += "0123456789";
+        }
+        if (includeSpecialChars) {
+            charset += "!@#$%^&*()_+~`|}{[]\:;?><,./-=";
+        }
+        var password = "";
+        for (var i = 0, n = charset.length; i < length; ++i) {
+            password += charset.charAt(Math.floor(Math.random() * n));
+        }
+        document.getElementById("password").value = password;
+
+    }
+
+    function test() {
+        document.getElementById('passwortVerschlusselt').value = verschluesseln(document.getElementById("passwort").value, document.getElementById('schluessel').value);
+        const formElement = document.getElementById('myForm');
+        formElement.submit();
+    }
+
+    function generateNumericPassword() {
+        var length = document.getElementById("passwordLength").value;
+        var password = "";
+        for (var i = 0; i < length; ++i) {
+            password += Math.floor(Math.random() * 10);
+        }
+        document.getElementById("password").value = password;
+    }
+
+    function updatePasswordLength(length) {
+        document.getElementById("passwordLengthDisplay").innerHTML = length;
+    }
+
+    function verschluesseln(passwort, schluessel) {
+        let verschluesselt = CryptoJS.AES.encrypt(passwort, schluessel).toString();
+        return verschluesselt;
+    }
+
+    function entschluesseln(verschluesselt, schluessel) {
+        let entschluesselt = CryptoJS.AES.decrypt(verschluesselt, schluessel).toString(CryptoJS.enc.Utf8);
+        return entschluesselt;
+    }
+
+    function passwortSichtbarMachen() {
+        var passwortFeld = document.getElementById("password");
+        if (passwortFeld.type === "password") {
+            passwortFeld.type = "text";
+        } else {
+            passwortFeld.type = "password";
+        }
+    }
+
+    function dehas(passwort) {
+        if (document.getElementById("schluesselHolder").value === "") {
+            alert("Bitte geben Sie den Schlüssel an.")
+            return
+        }
+        let schluessel = document.getElementById("schluesselHolder").value;
+        alert("Passwort: " + entschluesseln(passwort, schluessel));
+    }
+
+    function dehasCopy(passwort) {
+        if (document.getElementById("schluesselHolder").value === "") {
+            alert("Bitte geben Sie den Schlüssel an.")
+            return
+        }
+        let schluessel = document.getElementById("schluesselHolder").value;
+        copy(entschluesseln(passwort, schluessel),"Das Passwort")
+        alert("Das Passwort wurde in die Zwischenablage kopiert.");
+    }
+
+    function copy(content){
+        let hiddenInput = document.createElement("input");
+        hiddenInput.setAttribute("type", "text");
+        hiddenInput.setAttribute("value", content);
+        document.body.appendChild(hiddenInput);
+        hiddenInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(hiddenInput);
+    }
+
+    function searchTable() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        var elementId = event.target.id;
+        input = document.getElementById(elementId);
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those that don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function scrollToEnd() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function confirmDelete() {
+        return confirm("Sind Sie sicher, dass Sie den Eintrag löschen möchten?");
+    }
+
+
+</script>

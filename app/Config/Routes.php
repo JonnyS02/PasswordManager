@@ -13,3 +13,6 @@ $routes->post('/login', 'Login::index');
 
 $routes->get('/register', 'user::index');
 $routes->post('/register', 'user::index');
+
+$routes->get('/home', 'home::index');
+$routes->post('/home', 'home::index');

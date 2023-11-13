@@ -2,6 +2,7 @@
 <html lang="en">
 
 <?php include "partials/head.php" ?>
+<?php include "partials/script.html"; ?>
 
 <body>
 <?php
@@ -39,92 +40,139 @@ include "partials/header.php";
                 <tr>
                     <?php $c = 1;
                     if (isset($passwords)): foreach ($passwords as $passwordFormList): ?>
-                    <td><?= $c ?></td>
-                    <td><?= $passwordFormList['Plattform'] ?></td>
-                    <td><?= $passwordFormList['Username'] ?></td>
-                    <td><?= $passwordFormList['Password'] ?></td>
-                    <td><?= $passwordFormList['Additional'] ?></td>
-                    <td></td>
+                        <td><?= $c ?></td>
+                        <td><?= $passwordFormList['Plattform'] ?></td>
+                        <td><?= $passwordFormList['Username'] ?></td>
+                        <td><?= $passwordFormList['Password'] ?></td>
+                        <td><?= $passwordFormList['Additional'] ?></td>
+                        <td></td>
                     <?php endforeach; endif; ?>
                 </tr>
                 </tbody>
             </table>
-            <div class="insertPassword">
-                PasswordGenerator
+            <div class="insertPassword passwordGenerator" style="margin-right: 10px;">
+                <div class="generator-container" style="padding: 10px;">
+                    <h3 style="font-family: 'Brush Script MT', cursive;">Password Generator</h3>
+                    <br>
+                    <label for="passwordLength">Passwort Länge: <span id="passwordLengthDisplay">12</span></label>
+                    <br>
+                    <input type="range" id="passwordLength" name="passwordLength" min="1" max="30" value="12"
+                           oninput="updatePasswordLength(this.value)" class="form-range">
+                    <br>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="includeNumbers"
+                               name="zahlen" checked>
+                        <label class="form-check-label" for="flexSwitchCheckChecked" id="includeNumbers">Mit
+                            Buchstaben</label>
+                    </div>
+                    <br>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="includeNumbers"
+                               name="zahlen" checked>
+                        <label class="form-check-label" for="flexSwitchCheckChecked" id="includeNumbers">Mit
+                            Zahlen</label>
+                    </div>
+                    <br>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="includeSpecialChars"
+                               name="sonderzeichen" checked>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Mit Sonderzeichen</label>
+                    </div>
+                    <hr>
+                    <div class="d-inline">
+                        <input type="submit" class="btn btn-primary btn-sm" value="Generieren"
+                               onclick="generatePassword()">
+                    </div>
+                    <a href="<?= base_url('index.php/home') ?>" class="btn btn-info btn-sm text-white">Reset</a>
+                    <br>
+                    <br>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" checked
+                               onclick="passwortSichtbarMachen()">
+                        <label class="form-check-label">Passwort anzeigen</label>
+                    </div>
+                </div>
             </div>
-            <div class="insertPassword">
+            <div class="insertPassword" style="margin-left: 10px;">
                 <div class="form-group">
                     <label for="emailInput">Password-Key</label>
                     <input name="username" type="text"
-                           class="form-control texinput <?= (isset($error['key'])) ? 'is-invalid' : '' ?> id=" key"
-                    placeholder="Enter the key to encrypt your password"
-                    value="<?php if (isset($key)) {
-                        echo $key;
-                    } ?>">
+                           class="form-control texinput <?= (isset($error['key'])) ? 'is-invalid' : '' ?>" id=" key"
+                           placeholder="Enter the key to encrypt your password"
+                           value="<?php if (isset($key)) {
+                               echo $key;
+                           } ?>">
                     <div class="invalid-feedback">
                         <?php if (isset($error['key'])) echo $error['key']; ?>
                     </div>
                 </div>
-                <br>
+                <p></p>
                 <div class="form-group">
                     <label for="emailInput">Password</label>
                     <input name="username" type="text"
-                           class="form-control texinput <?= (isset($error['password'])) ? 'is-invalid' : '' ?> id=" password"
-                    placeholder="Enter your password"
-                    value="<?php if (isset($password)) {
-                        echo $password;
-                    } ?>">
+                           class="form-control texinput <?= (isset($error['password'])) ? 'is-invalid' : '' ?>"
+                           id="password"
+                           placeholder="Enter your password"
+                           value="<?php if (isset($password)) {
+                               echo $password;
+                           } ?>">
                     <div class="invalid-feedback">
                         <?php if (isset($error['password'])) echo $error['password']; ?>
                     </div>
                 </div>
-                <br>
+                <p></p>
                 <div class="form-group">
                     <label for="emailInput">Plattform</label>
                     <input name="username" type="text"
-                           class="form-control texinput <?= (isset($error['plattform'])) ? 'is-invalid' : '' ?> id=" plattform"
-                    placeholder="Enter plattform"
-                    value="<?php if (isset($plattform)) {
-                        echo $plattform;
-                    } ?>">
+                           class="form-control texinput <?= (isset($error['plattform'])) ? 'is-invalid' : '' ?>" id="
+                           plattform"
+                           placeholder="Enter plattform"
+                           value="<?php if (isset($plattform)) {
+                               echo $plattform;
+                           } ?>">
                     <div class="invalid-feedback">
                         <?php if (isset($error['plattform'])) echo $error['plattform']; ?>
                     </div>
                 </div>
-                <br>
+                <p></p>
                 <div class="form-group">
                     <label for="emailInput">Username</label>
                     <input name="username" type="text"
-                           class="form-control texinput <?= (isset($error['username'])) ? 'is-invalid' : '' ?> id=" username"
-                    placeholder="Enter your username"
-                    value="<?php if (isset($username)) {
-                        echo $username;
-                    } ?>">
+                           class="form-control texinput <?= (isset($error['username'])) ? 'is-invalid' : '' ?>" id="
+                           username"
+                           placeholder="Enter your username"
+                           value="<?php if (isset($username)) {
+                               echo $username;
+                           } ?>">
                     <div class="invalid-feedback">
                         <?php if (isset($error['username'])) echo $error['username']; ?>
                     </div>
                 </div>
-                <br>
+                <p></p>
                 <div class="form-group">
                     <label for="emailInput">Other</label>
-                    <input name="username" type="text"
-                           class="form-control texinput <?= (isset($error['additional'])) ? 'is-invalid' : '' ?> id=" additional"
-                    placeholder="Enter additional information"
-                    value="<?php if (isset($additional)) {
-                        echo $additional;
-                    } ?>">
+                    <div style="display: flex; justify-content: center;align-items: center;">
+                        <input name="username" type="text" style="width: calc(100% - 60px);float: left;margin-right: 10px"
+                               class="form-control texinput <?= (isset($error['additional'])) ? 'is-invalid' : '' ?>"
+                               id="
+                           additional"
+                               placeholder="Enter additional information"
+                               value="<?php if (isset($additional)) {
+                                   echo $additional;
+                               } ?>">
+                        <button type="button" class="btn btn-success btn-sm" onclick="test()" style="width: 50px;float: left;">Save</button>
+                    </div>
                     <div class="invalid-feedback">
                         <?php if (isset($error['additional'])) echo $error['additional']; ?>
                     </div>
                 </div>
-                <br>
             </div>
         </div>
         <div class="right side">
             <div class="side-element empty">
             </div>
             <div class="side-element">
-                <a class="text-decoration-none" href="<?= base_url('index.php/login') ?>">Sign off</a>
+                <a class="text-decoration-none" href="<?= base_url('index.php/login') ?>">Sign Off</a>
             </div>
             <div class="side-element">
                 <a class="text-decoration-none" href="<?= base_url('index.php/login') ?>">Delete Account</a>

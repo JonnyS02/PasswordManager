@@ -15,7 +15,7 @@ include "partials/header.php";
                 <div class="form-group">
                     <label for="emailInput">Username</label>
                     <input name="username" type="text"
-                           class="form-control texinput <?= (isset($error['username'])) ? 'is-invalid' : '' ?> id=" username"
+                           class="form-control texinput <?= (isset($error['username'])) ? 'is-invalid' : '' ?>" id=" username"
                     placeholder="Enter your Username"
                     value="<?php if (isset($username)) {
                         echo $username;
@@ -24,11 +24,11 @@ include "partials/header.php";
                         <?php if (isset($error['username'])) echo $error['username']; ?>
                     </div>
                 </div>
-                <br>
+                <p></p>
                 <div class="form-group">
                     <label for="emailInput">Email</label>
                     <input name="email" type="text"
-                           class="form-control texinput <?= (isset($error['email'])) ? 'is-invalid' : '' ?> id=" email"
+                           class="form-control texinput <?= (isset($error['email'])) ? 'is-invalid' : '' ?>" id=" email"
                     placeholder="Enter your email"
                     value="<?php if (isset($email)) {
                         echo $email;
@@ -37,7 +37,7 @@ include "partials/header.php";
                         <?php if (isset($error['email'])) echo $error['email']; ?>
                     </div>
                 </div>
-                <br>
+                <p></p>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input name="password" type="password"
@@ -50,7 +50,7 @@ include "partials/header.php";
                         <?php if (isset($error['password'])) echo $error['password']; ?>
                     </div>
                 </div>
-                <br>
+                <p></p>
                 <div class="form-group">
                     <label for="repeatpassword">Password verification</label>
                     <input name="repeatpassword" type="password"
@@ -63,7 +63,7 @@ include "partials/header.php";
                         <?php if (isset($error['repeatpassword'])) echo $error['repeatpassword']; ?>
                     </div>
                 </div>
-                <br>
+                <p></p>
                 <div class="d-inline mb-3">
                     <input type="checkbox" id="agb" value="1" name="agb"
                            class="form-check-input <?= (isset($error['agb'])) ? 'is-invalid' : '' ?>" <?php if (isset($agb)) echo 'checked'; ?>>

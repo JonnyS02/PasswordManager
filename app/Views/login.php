@@ -14,7 +14,7 @@ include "partials/header.php";
                 <div class="form-group">
                     <label for="emailInput">Email</label>
                     <input name="email" type="text"
-                           class="form-control texinput <?= (isset($error['email'])) ? 'is-invalid' : '' ?> id=" email"
+                           class="form-control texinput <?= (isset($error['email'])) ? 'is-invalid' : '' ?>" id=" email"
                     placeholder="Enter your email"
                     value="<?php if (isset($email)) {
                         echo $email;
