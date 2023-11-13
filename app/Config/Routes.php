@@ -16,3 +16,6 @@ $routes->post('/register', 'user::index');
 
 $routes->get('/home', 'home::index');
 $routes->post('/home', 'home::index');
+
+$routes->get('/insertPassword', 'home::insertPassword');
+$routes->post('/insertPassword', 'home::insertPassword');

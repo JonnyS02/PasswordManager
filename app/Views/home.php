@@ -37,17 +37,24 @@ include "partials/header.php";
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <?php $c = 1;
-                    if (isset($passwords)): foreach ($passwords as $passwordFormList): ?>
+                <?php $c = 1;
+                if (isset($passwords)): foreach ($passwords as $passwordFormList): ?>
+                    <tr>
                         <td><?= $c ?></td>
                         <td><?= $passwordFormList['Plattform'] ?></td>
                         <td><?= $passwordFormList['Username'] ?></td>
-                        <td><?= $passwordFormList['Password'] ?></td>
+                        <td>
+                            <i class="fa-regular fa-eye" style="font-size: 1.2em" onclick="dehas('<?= $passwordFormList['Password'] ?>')"></i>&nbsp
+                            <i class="fa-regular fa-copy" style="font-size: 1.2em" onclick="dehas('<?= $passwordFormList['Password'] ?>')"></i>
+                        </td>
                         <td><?= $passwordFormList['Additional'] ?></td>
-                        <td></td>
-                    <?php endforeach; endif; ?>
-                </tr>
+                        <td>
+                            <i class="fa-regular fa-pen-to-square" style="font-size: 1.2em"></i>&nbsp
+                            <i class="fa-regular fa-trash-can" style="font-size: 1.2em"></i>
+                        </td>
+                    </tr>
+                    <?php $c++ ?>
+                <?php endforeach; endif; ?>
                 </tbody>
             </table>
             <div class="insertPassword passwordGenerator" style="margin-right: 10px;">
@@ -97,8 +104,8 @@ include "partials/header.php";
                 <div class="form-group">
                     <label for="emailInput">Password-Key</label>
                     <input name="username" type="text"
-                           class="form-control texinput <?= (isset($error['key'])) ? 'is-invalid' : '' ?>" id=" key"
-                           placeholder="Enter the key to encrypt your password"
+                           class="form-control texinput <?= (isset($error['key'])) ? 'is-invalid' : '' ?>"
+                           id="key" placeholder="Enter the key to encrypt your password"
                            value="<?php if (isset($key)) {
                                echo $key;
                            } ?>">
@@ -109,10 +116,9 @@ include "partials/header.php";
                 <p></p>
                 <div class="form-group">
                     <label for="emailInput">Password</label>
-                    <input name="username" type="text"
+                    <input name="password" type="text"
                            class="form-control texinput <?= (isset($error['password'])) ? 'is-invalid' : '' ?>"
-                           id="password"
-                           placeholder="Enter your password"
+                           id="password" placeholder="Enter your password"
                            value="<?php if (isset($password)) {
                                echo $password;
                            } ?>">
@@ -121,51 +127,55 @@ include "partials/header.php";
                     </div>
                 </div>
                 <p></p>
-                <div class="form-group">
-                    <label for="emailInput">Plattform</label>
-                    <input name="username" type="text"
-                           class="form-control texinput <?= (isset($error['plattform'])) ? 'is-invalid' : '' ?>" id="
-                           plattform"
-                           placeholder="Enter plattform"
-                           value="<?php if (isset($plattform)) {
-                               echo $plattform;
-                           } ?>">
-                    <div class="invalid-feedback">
-                        <?php if (isset($error['plattform'])) echo $error['plattform']; ?>
-                    </div>
-                </div>
-                <p></p>
-                <div class="form-group">
-                    <label for="emailInput">Username</label>
-                    <input name="username" type="text"
-                           class="form-control texinput <?= (isset($error['username'])) ? 'is-invalid' : '' ?>" id="
-                           username"
-                           placeholder="Enter your username"
-                           value="<?php if (isset($username)) {
-                               echo $username;
-                           } ?>">
-                    <div class="invalid-feedback">
-                        <?php if (isset($error['username'])) echo $error['username']; ?>
-                    </div>
-                </div>
-                <p></p>
-                <div class="form-group">
-                    <label for="emailInput">Other</label>
-                    <div style="display: flex; justify-content: center;align-items: center;">
-                        <input name="username" type="text" style="width: calc(100% - 60px);float: left;margin-right: 10px"
-                               class="form-control texinput <?= (isset($error['additional'])) ? 'is-invalid' : '' ?>"
-                               id="
-                           additional"
-                               placeholder="Enter additional information"
-                               value="<?php if (isset($additional)) {
-                                   echo $additional;
+                <form action="<?= base_url('index.php/insertPassword') ?>" method="POST" id="submitPassword">
+                    <input type="hidden" value=""
+                           name="passwortVerschlusselt" id="passwortVerschlusselt">
+                    <div class="form-group">
+                        <label for="emailInput">Plattform</label>
+                        <input name="plattform" type="text"
+                               class="form-control texinput <?= (isset($error['plattform'])) ? 'is-invalid' : '' ?>"
+                               id="plattform" placeholder="Enter plattform"
+                               value="<?php if (isset($plattform)) {
+                                   echo $plattform;
                                } ?>">
-                        <button type="button" class="btn btn-success btn-sm" onclick="test()" style="width: 50px;float: left;">Save</button>
+                        <div class="invalid-feedback">
+                            <?php if (isset($error['plattform'])) echo $error['plattform']; ?>
+                        </div>
                     </div>
-                    <div class="invalid-feedback">
-                        <?php if (isset($error['additional'])) echo $error['additional']; ?>
+                    <p></p>
+                    <div class="form-group">
+                        <label for="emailInput">Username</label>
+                        <input name="username" type="text"
+                               class="form-control texinput <?= (isset($error['username'])) ? 'is-invalid' : '' ?>"
+                               id="username" placeholder="Enter your username"
+                               value="<?php if (isset($username)) {
+                                   echo $username;
+                               } ?>">
+                        <div class="invalid-feedback">
+                            <?php if (isset($error['username'])) echo $error['username']; ?>
+                        </div>
                     </div>
-                </div>
+                    <p></p>
+                    <div class="form-group">
+                        <label for="emailInput">Other</label>
+                        <div style="display: flex; justify-content: center;align-items: center;">
+                            <input name="additional" type="text"
+                                   style="width: calc(100% - 48px);float: left;margin-right: 10px"
+                                   class="form-control texinput <?= (isset($error['additional'])) ? 'is-invalid' : '' ?>"
+                                   id="additional" placeholder="Enter additional information"
+                                   value="<?php if (isset($additional)) {
+                                       echo $additional;
+                                   } ?>">
+                            <button type="button" class="btn btn-success btn-sm" onclick="test()"
+                                    style="width: 38px;float: left;">
+                                <i class="fa-regular fa-floppy-disk" style="font-size: 1.7em"></i>
+                            </button>
+                        </div>
+                        <div class="invalid-feedback">
+                            <?php if (isset($error['additional'])) echo $error['additional']; ?>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="right side">

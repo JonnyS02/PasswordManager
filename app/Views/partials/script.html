@@ -20,8 +20,8 @@
     }
 
     function test() {
-        document.getElementById('passwortVerschlusselt').value = verschluesseln(document.getElementById("passwort").value, document.getElementById('schluessel').value);
-        const formElement = document.getElementById('myForm');
+        document.getElementById('passwortVerschlusselt').value = verschluesseln(document.getElementById("password").value, document.getElementById('key').value);
+        const formElement = document.getElementById('submitPassword');
         formElement.submit();
     }
 

@@ -6,9 +6,9 @@ use CodeIgniter\Model;
 
 class GeneralModel extends Model
 {
-    public function inserUser($name,$password,$verified,$email)
+    public function inserUser($name, $password, $verified, $email)
     {
-        if($this->getUser($email,"") != 0)
+        if ($this->getUser($email, "") != 0)
             return "Email is already in use";
 
         $password = password_hash($password, PASSWORD_DEFAULT);
@@ -23,47 +23,64 @@ class GeneralModel extends Model
         return "Inserted";
     }
 
-    public function getUser($email,$password){
+    public function getUser($email, $password)
+    {
         $user = $this->db->table('users');
-        $user->where('Email',$email);
+        $user->where('Email', $email);
         $user->select();
         $result = $user->get();
         $result = $result->getResultArray();
-        if(sizeof($result) == 0)
+        if (sizeof($result) == 0)
             return 0;
-        if (password_verify($password,$result[0]['Password']))
+        if (password_verify($password, $result[0]['Password']))
             return 1;
         return -1;
     }
 
-    public function getUserName($email){
+    public function getUserName($email)
+    {
         $user = $this->db->table('users');
-        $user->where('Email',$email);
+        $user->where('Email', $email);
         $user->select();
         $result = $user->get();
         $result = $result->getResultArray();
         return $result[0]['Name'];
     }
 
-    public function getPasswords($email){
+    public function getPasswords($email)
+    {
         $passwords = $this->db->table('passwords');
-        $passwords->where('Email',$email);
+        $passwords->where('Email', $email);
         $passwords->select();
         $result = $passwords->get();
         $result = $result->getResultArray();
         return $result;
     }
 
-    public function insertPassword($plattform,$password,$username,$additional,$email){
-        $password = [
-            'Plattform' => $plattform,
-            'Password' => $password,
-            'Username' => $username,
-            'Additional' => $additional,
-            'Email' => $email,
-        ];
-        $this->db->table('passwords')->insert($password);
-        return "Inserted";
+    public function insertPassword($plattform, $password, $username, $additional, $email)
+    {
+        if ($this->getPlattform($plattform)) {
+            $password = [
+                'Plattform' => $plattform,
+                'Password' => $password,
+                'Username' => $username,
+                'Additional' => $additional,
+                'Email' => $email,
+            ];
+            $this->db->table('passwords')->insert($password);
+            return "Inserted";
+        }
+        return "Password for plattform already inserted";
+    }
+
+    public function getPlattform($plattform)
+    {
+        $passwords = $this->db->table('passwords');
+        $passwords->where('Plattform', $plattform);
+        $passwords->select();
+        $result = $passwords->get();
+        $result = $result->getResultArray();
+        return sizeof($result) == 0;
     }
 
     private function debugger($array)
