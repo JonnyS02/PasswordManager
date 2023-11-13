@@ -38,4 +38,16 @@ class Home extends BaseController
         echo $model->insertPassword($plattform, $password, $username, $additional, $email);
         return $this->index();
     }
+
+    public function deletePassword()
+    {
+        $session = Services::session();
+
+        $passwordID = $this->request->getPost('passwordID');
+        $email = $session->get('email');
+
+        $model = new GeneralModel();
+        echo $model->deletePassword($passwordID, $email);
+        return $this->index();
+    }
 }

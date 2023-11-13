@@ -18,7 +18,7 @@ include "partials/header.php";
                 <a class="text-decoration-none" href="<?= base_url('index.php/register') ?>">Edit Profile</a>
             </div>
             <div class="side-element">
-                <a class="text-decoration-none" onclick="scrollToEnd()">Edit Passwords</a>
+                <a class="text-decoration-none" onclick="scrollToEnd()">Insert Password</a>
             </div>
             <div class="side-element">
                 <input type="text" id="myInput" onkeyup="searchTable()" placeholder="🔍 Plattform" class="form-control">
@@ -31,8 +31,8 @@ include "partials/header.php";
                     <th scope="col">No.</th>
                     <th scope="col">Plattform</th>
                     <th scope="col">Username</th>
-                    <th scope="col">Password</th>
                     <th scope="col">Other</th>
+                    <th scope="col">Password</th>
                     <th scope="col">Edit</th>
                 </tr>
                 </thead>
@@ -43,14 +43,22 @@ include "partials/header.php";
                         <td><?= $c ?></td>
                         <td><?= $passwordFormList['Plattform'] ?></td>
                         <td><?= $passwordFormList['Username'] ?></td>
-                        <td>
-                            <i class="fa-regular fa-eye" style="font-size: 1.2em" onclick="dehas('<?= $passwordFormList['Password'] ?>')"></i>&nbsp
-                            <i class="fa-regular fa-copy" style="font-size: 1.2em" onclick="dehas('<?= $passwordFormList['Password'] ?>')"></i>
-                        </td>
                         <td><?= $passwordFormList['Additional'] ?></td>
                         <td>
-                            <i class="fa-regular fa-pen-to-square" style="font-size: 1.2em"></i>&nbsp
-                            <i class="fa-regular fa-trash-can" style="font-size: 1.2em"></i>
+                            <i class="fa-regular fa-eye" style="font-size: 1.2em" onclick="dehas('<?= $passwordFormList['Password'] ?>')"></i>&nbsp
+                            <i class="fa-regular fa-copy" style="font-size: 1.2em" onclick="dehasCopy('<?= $passwordFormList['Password'] ?>')"></i>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center;">
+                                <form style="margin: 0;padding: 0" id="editPassword" action="<?= base_url('index.php/deletePassword') ?>" method="POST" onsubmit="return confirmDelete();">
+                                    <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
+                                    <i class="fa-regular fa-pen-to-square" style="font-size: 1.2em" onclick="confirmDelete()"></i>&nbsp;&nbsp;
+                                </form>
+                                <form style="margin: 0;padding: 0" id="editPassword" action="<?= base_url('index.php/deletePassword') ?>" method="POST" onsubmit="return confirmDelete();">
+                                    <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
+                                    <i class="fa-regular fa-trash-can" style="font-size: 1.2em" onclick="confirmDelete()"></i>&nbsp;&nbsp;
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     <?php $c++ ?>
@@ -103,7 +111,7 @@ include "partials/header.php";
             <div class="insertPassword" style="margin-left: 10px;">
                 <div class="form-group">
                     <label for="emailInput">Password-Key</label>
-                    <input name="username" type="text"
+                    <input name="username" type="password"
                            class="form-control texinput <?= (isset($error['key'])) ? 'is-invalid' : '' ?>"
                            id="key" placeholder="Enter the key to encrypt your password"
                            value="<?php if (isset($key)) {

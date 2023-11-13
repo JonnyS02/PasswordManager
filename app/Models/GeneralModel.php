@@ -59,7 +59,7 @@ class GeneralModel extends Model
 
     public function insertPassword($plattform, $password, $username, $additional, $email)
     {
-        if ($this->getPlattform($plattform)) {
+        if ($this->getPlattform($plattform,$email)) {
             $password = [
                 'Plattform' => $plattform,
                 'Password' => $password,
@@ -73,10 +73,19 @@ class GeneralModel extends Model
         return "Password for plattform already inserted";
     }
 
-    public function getPlattform($plattform)
+    public function deletePassword($passwordID, $email){
+        $passwords = $this->db->table('passwords');
+        $passwords->where('ID', $passwordID);
+        $passwords->where('Email', $email);
+        $passwords->delete();
+        return "Deleted";
+    }
+
+    public function getPlattform($plattform,$email)
     {
         $passwords = $this->db->table('passwords');
         $passwords->where('Plattform', $plattform);
+        $passwords->where('Email', $email);
         $passwords->select();
         $result = $passwords->get();
         $result = $result->getResultArray();

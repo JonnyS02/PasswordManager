@@ -114,8 +114,11 @@
     }
 
     function confirmDelete() {
-        return confirm("Sind Sie sicher, dass Sie den Eintrag löschen möchten?");
+        var userConfirmed = confirm("Möchten Sie das Formular abschicken?");
+        if (userConfirmed) {
+            document.getElementById('editPassword').submit();
+        }
+        return false;
     }
-
 
 </script>
