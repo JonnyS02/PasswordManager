@@ -25,9 +25,11 @@ body {
 }
 
 .side{
-    padding: 10px;
+    border-radius: 20px;
+    margin: 15px;
+    padding: 20px;
     float: left;
-    width: 20%;
+    width: calc(20% - 30px);
     background-color: #f6f7f9;
 }
 
@@ -46,4 +48,9 @@ body {
 
 .empty{
     padding: 0;
+}
+
+.insertPassword{
+    width: 50%;
+    float: left;
 }

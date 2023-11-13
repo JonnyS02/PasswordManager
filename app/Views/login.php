@@ -25,15 +25,6 @@ include "partials/header.php";
                 </div>
                 <br>
                 <div class="form-group">
-                    <div id="alert">
-                        <label for="password">
-                            <?php if (!isset($verify)) {
-                                echo "Password";
-                            } else {
-                                $error = "Keine Übereinstimmung mit Login-Daten!";
-                                include "templates/error.php";
-                            } ?>
-                        </label></div>
                     <input name="password" type="password"
                            class=" form-control texinput <?= (isset($error['password'])) ? 'is-invalid' : '' ?>"
                            id="password"

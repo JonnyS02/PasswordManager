@@ -39,15 +39,6 @@ include "partials/header.php";
                 </div>
                 <br>
                 <div class="form-group">
-                    <div id="alert">
-                        <label for="password">
-                            <?php if (!isset($verify)) {
-                                echo "Password";
-                            } else {
-                                $error = "Keine Übereinstimmung mit Login-Daten!";
-                                include "templates/error.php";
-                            } ?>
-                        </label></div>
                     <input name="password" type="password"
                            class=" form-control texinput <?= (isset($error['password'])) ? 'is-invalid' : '' ?>"
                            id="password"
@@ -60,15 +51,6 @@ include "partials/header.php";
                 </div>
                 <br>
                 <div class="form-group">
-                    <div id="alert">
-                        <label for="repeatpassword">
-                            <?php if (!isset($verify)) {
-                                echo "Repeat Password";
-                            } else {
-                                $error = "Keine Übereinstimmung mit Login-Daten!";
-                                include "templates/error.php";
-                            } ?>
-                        </label></div>
                     <input name="repeatpassword" type="password"
                            class=" form-control texinput <?= (isset($error['repeatpassword'])) ? 'is-invalid' : '' ?>"
                            id="repeatpassword"
@@ -88,9 +70,7 @@ include "partials/header.php";
                 </div>
                 <input type="submit" class="btn btn-primary font-weight-bold" value="Submit registration">
                 <a href="<?php echo base_url()?>" class="btn btn-secondary">Abort</a>
-
             </form>
-
             <br>
         </div>
     </div>

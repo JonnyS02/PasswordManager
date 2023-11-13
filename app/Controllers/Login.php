@@ -18,8 +18,11 @@ class Login extends BaseController
                 $status = $model->getUser($data['email'], $data['password']);
                 if ($status == 0)
                     echo "No user with this email found";
-                if ($status == 1)
+                if ($status == 1) {
+                    $this->session->set('email', $data['email']);
+                    $this->session->set('logged', TRUE);
                     return (new Home)->index($data['email']);
+                }
                 if ($status == -1)
                     echo "Wrong password";
 
@@ -28,9 +31,10 @@ class Login extends BaseController
                 return view('login', $data);
             }
         }
+        $this->session->set('email', '');
+        $this->session->set('logged', FALSE);
         $data['email'] = "Test@test.de";
         $data['password'] = "Test";
         return view('login', $data);
-
     }
 }

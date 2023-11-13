@@ -45,6 +45,27 @@ class GeneralModel extends Model
         return $result[0]['Name'];
     }
 
+    public function getPasswords($email){
+        $passwords = $this->db->table('passwords');
+        $passwords->where('Email',$email);
+        $passwords->select();
+        $result = $passwords->get();
+        $result = $result->getResultArray();
+        return $result;
+    }
+
+    public function insertPassword($plattform,$password,$username,$additional,$email){
+        $password = [
+            'Plattform' => $plattform,
+            'Password' => $password,
+            'Username' => $username,
+            'Additional' => $additional,
+            'Email' => $email,
+        ];
+        $this->db->table('passwords')->insert($password);
+        return "Inserted";
+    }
+
     private function debugger($array)
     {
         echo '<pre>';
