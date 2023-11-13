@@ -21,7 +21,7 @@ class Login extends BaseController
                 if ($status == 1) {
                     $this->session->set('email', $data['email']);
                     $this->session->set('logged', TRUE);
-                    return (new Home)->index($data['email']);
+                    return (new Home)->index();
                 }
                 if ($status == -1)
                     echo "Wrong password";
