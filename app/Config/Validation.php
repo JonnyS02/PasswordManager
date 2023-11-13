@@ -34,7 +34,7 @@ class Validation extends BaseConfig
      * @var array<string, string>
      */
     public array $templates = [
-        'list'   => 'CodeIgniter\Validation\Views\list',
+        'list' => 'CodeIgniter\Validation\Views\list',
         'single' => 'CodeIgniter\Validation\Views\single',
     ];
 
@@ -45,12 +45,22 @@ class Validation extends BaseConfig
     public $login = [
         'email' => 'required|valid_email',
         'password' => 'required',
-        'agb' => 'required'
     ];
 
-    public $login_errors = [
+    public $register = [
+        'email' => 'required|valid_email',
+        'password' => 'required',
+        'repeatpassword' => 'required',
+        'agb' => 'required',
+        'username' => 'required'
+    ];
+
+    public $register_errors = [
         'agb' => [
             'required' => 'Please Accept the terms and conditions.'
+        ],
+        'repeatpassword' => [
+            'required' => 'Please repeat your password.'
         ],
     ];
 }

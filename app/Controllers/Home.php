@@ -2,25 +2,14 @@
 
 namespace App\Controllers;
 
+use App\Models\GeneralModel;
+
 class Home extends BaseController
 {
-    public function index(): string
+    public function index($email): string
     {
-        {
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if ($this->validation->run($this->request->getPost(), 'login')) {
-                    echo "Erolg";
-                } else {
-                    $data['email'] = $this->request->getPost('email');
-                    $data['password'] = $this->request->getPost('password');
-                    $data['agb'] = $this->request->getPost('agb');
-
-                    $data['error'] = $this->validation->getErrors();
-                    return view('login', $data);
-                }
-
-            }
-            return view('login');
-        }
+        $model = new GeneralModel();
+        $data['user'] = $model->getUserName($email);
+        return view('home',$data);
     }
 }

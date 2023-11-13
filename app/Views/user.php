@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include "partials/head.php"?>
+<?php include "partials/head.php" ?>
 
 <body>
 <?php
@@ -10,8 +10,21 @@ include "partials/header.php";
 ?>
 <div class="containerSELF">
     <div class="centered-div">
-        <div style="margin-left: 15%;margin-right: 15%;max-width: 400px">
-            <form action="<?= base_url('index.php/login') ?>" method="POST" class="mt-4">
+        <div class="formHead">
+            <form action="<?= base_url('index.php/register') ?>" method="POST" class="mt-4">
+                <div class="form-group">
+                    <label for="emailInput">Username</label>
+                    <input name="username" type="text"
+                           class="form-control texinput <?= (isset($error['username'])) ? 'is-invalid' : '' ?> id=" username"
+                    placeholder="Enter your Username"
+                    value="<?php if (isset($username)) {
+                        echo $username;
+                    } ?>">
+                    <div class="invalid-feedback">
+                        <?php if (isset($error['username'])) echo $error['username']; ?>
+                    </div>
+                </div>
+                <br>
                 <div class="form-group">
                     <label for="emailInput">Email</label>
                     <input name="email" type="text"
@@ -36,7 +49,8 @@ include "partials/header.php";
                             } ?>
                         </label></div>
                     <input name="password" type="password"
-                           class=" form-control texinput <?= (isset($error['password'])) ? 'is-invalid' : '' ?>" id="password"
+                           class=" form-control texinput <?= (isset($error['password'])) ? 'is-invalid' : '' ?>"
+                           id="password"
                            placeholder="Enter your password" value="<?php if (isset($password)) {
                         echo $password;
                     } ?>">
@@ -55,8 +69,9 @@ include "partials/header.php";
                                 include "templates/error.php";
                             } ?>
                         </label></div>
-                    <input name="repeatpassword" type="repeatpassword"
-                           class=" form-control texinput <?= (isset($error['repeat-password'])) ? 'is-invalid' : '' ?>" id="repeatpassword"
+                    <input name="repeatpassword" type="password"
+                           class=" form-control texinput <?= (isset($error['repeatpassword'])) ? 'is-invalid' : '' ?>"
+                           id="repeatpassword"
                            placeholder="Repeat your password" value="<?php if (isset($repeatpassword)) {
                         echo $repeatpassword;
                     } ?>">
@@ -69,14 +84,17 @@ include "partials/header.php";
                     <input type="checkbox" id="agb" value="1" name="agb"
                            class="form-check-input <?= (isset($error['agb'])) ? 'is-invalid' : '' ?>" <?php if (isset($agb)) echo 'checked'; ?>>
                     <?php if (!isset($error['agb'])) echo ' <label for="agb">Accept terms and conditions</label><br><br>'; ?>
-                    <?php if (isset($error['agb'])) echo ' <label for="agb" style="color: rgb(218,53,69)">' .$error['agb'].'</label><br><br>'; ?>
+                    <?php if (isset($error['agb'])) echo ' <label for="agb" style="color: rgb(218,53,69)">' . $error['agb'] . '</label><br><br>'; ?>
                 </div>
                 <input type="submit" class="btn btn-primary font-weight-bold" value="Submit registration">
+                <a href="<?php echo base_url()?>" class="btn btn-secondary">Abort</a>
+
             </form>
+
             <br>
         </div>
     </div>
 </div>
-<?php include "partials/footer.php"?>
+<?php include "partials/footer.php" ?>
 </body>
 </html>
