@@ -39,6 +39,7 @@ include "partials/header.php";
                 </div>
                 <br>
                 <div class="form-group">
+                    <label for="password">Password</label>
                     <input name="password" type="password"
                            class=" form-control texinput <?= (isset($error['password'])) ? 'is-invalid' : '' ?>"
                            id="password"
@@ -51,6 +52,7 @@ include "partials/header.php";
                 </div>
                 <br>
                 <div class="form-group">
+                    <label for="repeatpassword">Password verification</label>
                     <input name="repeatpassword" type="password"
                            class=" form-control texinput <?= (isset($error['repeatpassword'])) ? 'is-invalid' : '' ?>"
                            id="repeatpassword"

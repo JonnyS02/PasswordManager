@@ -96,7 +96,7 @@ include "partials/header.php";
                     <label for="emailInput">Username</label>
                     <input name="username" type="text"
                            class="form-control texinput <?= (isset($error['username'])) ? 'is-invalid' : '' ?> id=" username"
-                    placeholder="Enter your Username"
+                    placeholder="Enter your username"
                     value="<?php if (isset($username)) {
                         echo $username;
                     } ?>">
@@ -117,6 +117,7 @@ include "partials/header.php";
                         <?php if (isset($error['additional'])) echo $error['additional']; ?>
                     </div>
                 </div>
+                <br>
             </div>
         </div>
         <div class="right side">
