@@ -61,11 +61,11 @@ body {
     border-radius: 20px;
 }
 
-form i{
+td i{
     transition: color 0.25s;
 }
 
-i:hover{
+td i:hover{
     cursor: pointer;
     color: #00bcff;
 }

@@ -7,7 +7,7 @@ use CodeIgniter\HTTP\Header;
 
 class Login extends BaseController
 {
-    public function index(): string
+    public function index()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data['email'] = $this->request->getPost('email');
@@ -21,7 +21,7 @@ class Login extends BaseController
                 if ($status == 1) {
                     $this->session->set('email', $data['email']);
                     $this->session->set('logged', TRUE);
-                    return (new Home)->index();
+                    return redirect()->to('home');
                 }
                 if ($status == -1)
                     echo "Wrong password";

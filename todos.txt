@@ -1,9 +1,8 @@
-- Generator Fixen
 - Delete Account einfügen
 - Edit Profile einfügen
 - Requirements bei Passwort setzen
  
 - Infos anzeigen
 - Sicherheit prüfen
-- Sprache auf englisch ändern
+- Sprache auf Englisch ändern
 - Readme ändern

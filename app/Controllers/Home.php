@@ -7,20 +7,23 @@ use Config\Services;
 
 class Home extends BaseController
 {
-    public function index(): string
+    public function index()
     {
         $session = Services::session();
 
-        $model = new GeneralModel();
-        $data['user'] = $model->getUserName($session->get('email'));
-        $data['passwords'] = $model->getPasswords($session->get('email'));
+        if( $this->session->get('logged')) {
+            $model = new GeneralModel();
+            $data['user'] = $model->getUserName($session->get('email'));
+            $data['passwords'] = $model->getPasswords($session->get('email'));
 
-        $data['plattform'] = "TestPlat";
-        $data['password'] = "TestP";
-        $data['username'] = "user12";
-        $data['additional'] = "otherStuff";
+            $data['plattform'] = "TestPlat";
+            $data['password'] = "TestP";
+            $data['username'] = "user12";
+            $data['additional'] = "otherStuff";
 
-        return view('home', $data);
+            return view('home', $data);
+        }else
+            return redirect()->to('login');
     }
 
 
@@ -49,5 +52,17 @@ class Home extends BaseController
         $model = new GeneralModel();
         echo $model->deletePassword($passwordID, $email);
         return $this->index();
+    }
+
+    public function deleteUser(){
+        $session = Services::session();
+        $email = $session->get('email');
+        $model = new GeneralModel();
+        echo $model->deleteUser($email);
+        return redirect()->to('login');
+    }
+
+    public function editProfile(){
+
     }
 }

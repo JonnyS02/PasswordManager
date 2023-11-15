@@ -92,6 +92,17 @@ class GeneralModel extends Model
         return sizeof($result) == 0;
     }
 
+    public function deleteUser($email){
+        $passwords = $this->db->table('passwords');
+        $passwords->where('Email', $email);
+        $passwords->delete();
+
+        $user = $this->db->table('users');
+        $user->where('Email', $email);
+        $user->delete();
+
+        return "deleted";
+    }
     private function debugger($array)
     {
         echo '<pre>';

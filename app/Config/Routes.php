@@ -22,3 +22,5 @@ $routes->post('/insertPassword', 'home::insertPassword');
 
 $routes->get('/deletePassword', 'home::deletePassword');
 $routes->post('/deletePassword', 'home::deletePassword');
+
+$routes->get('/deleteUser', 'home::deleteUser');

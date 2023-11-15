@@ -75,9 +75,9 @@ include "partials/header.php";
                            oninput="updatePasswordLength(this.value)" class="form-range">
                     <br>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="includeNumbers"
+                        <input class="form-check-input" type="checkbox" role="switch" id="includeLetters"
                                name="zahlen" checked>
-                        <label class="form-check-label" for="flexSwitchCheckChecked" id="includeNumbers">Mit
+                        <label class="form-check-label" for="flexSwitchCheckChecked" id="includeLetters">Mit
                             Buchstaben</label>
                     </div>
                     <br>
@@ -193,7 +193,7 @@ include "partials/header.php";
                 <a class="text-decoration-none" href="<?= base_url('index.php/login') ?>">Sign Off</a>
             </div>
             <div class="side-element">
-                <a class="text-decoration-none" href="<?= base_url('index.php/login') ?>">Delete Account</a>
+                <a class="text-decoration-none" href="<?= base_url('index.php/deleteUser') ?>">Delete Account</a>
             </div>
             <div class="side-element">
                 <input type="password" id="schluesselHolder" placeholder="🔑 Key" class="form-control">
