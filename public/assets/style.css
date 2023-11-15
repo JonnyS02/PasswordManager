@@ -69,3 +69,7 @@ td i:hover{
     cursor: pointer;
     color: #00bcff;
 }
+
+hr{
+    z-index: 0;
+}

@@ -8,6 +8,16 @@ class User extends BaseController
 {
     public function index(): string
     {
+        $data['username'] = "Johan";
+        $data['email'] = "Test@test.de";
+        $data['name'] = "Johna";
+        $data['password'] = "Test";
+        $data['repeatpassword'] = "Test";
+        $data['agb'] = "checked";
+
+        $data['success'] = "Register";
+        $data['finished'] = false;
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data['username'] = $this->request->getPost('username');
             $data['email'] = $this->request->getPost('email');
@@ -18,22 +28,19 @@ class User extends BaseController
 
             if ($this->validation->run($this->request->getPost(), 'register') && $data['repeatpassword'] == $data['password']) {
                 $model = new GeneralModel();
-                $status = $model->inserUser($data['username'], $data['password'], true, $data['email']);
-                echo $status;
+                if($model->insertUser($data['username'], $data['password'], true, $data['email'],3)){
+                    $data['success'] = "Account created !";
+                    $data['finished'] = true;
+                }else{
+                    $data['error']['email'] ="Email is already in use.";
+                }
             } else {
                 $data['error'] = $this->validation->getErrors();
-                if ($data['repeatpassword'] != $data['password'] && $data['repeatpassword'] != "")
+                if ($data['repeatpassword'] != $data['password'] && $data['repeatpassword'] != "") {
                     $data['error']['repeatpassword'] = "There was a typo in that password.";
-
-                return view('user', $data);
+                }
             }
         }
-        $data['username'] = "Johan";
-        $data['email'] = "Test@test.de";
-        $data['name'] = "Johna";
-        $data['password'] = "Test";
-        $data['repeatpassword'] = "Test";
-        $data['agb'] = "checked";
         return view('user', $data);
     }
 }

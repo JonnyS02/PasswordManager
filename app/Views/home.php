@@ -9,6 +9,16 @@
 $name = "&nbsp" . $user;
 include "partials/header.php";
 ?>
+<div id="confirmationModal">
+    <div id="modalContent">
+        <h3>Delete Account</h3>
+        <hr>
+        <p>Are you sure you want to delete your account?</p>
+        <p>Your  user-information and passwords will immediately be deleted.</p>
+        <button class="btn btn-danger btn-sm" onclick="confirmRedirect('<?= base_url('index.php/deleteUser') ?>')">Yes</button>&nbsp&nbsp
+        <button class="btn btn-primary btn-sm" onclick="closeConfirmationModal()">Abort</button>
+    </div>
+</div>
 <div class="containerSELF">
     <div class="centered-div">
         <div class="left side">
@@ -50,13 +60,13 @@ include "partials/header.php";
                         </td>
                         <td>
                             <div style="display: flex; align-items: center;">
-                                <form style="margin: 0;padding: 0" id="editPassword" action="<?= base_url('index.php/deletePassword') ?>" method="POST" onsubmit="return confirmDelete();">
+                                <form style="margin: 0;padding: 0" id="editPassword<?=$c?>" action="<?= base_url('index.php/deletePassword') ?>" method="POST">
                                     <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
-                                    <i class="fa-regular fa-pen-to-square" style="font-size: 1.2em" onclick="confirmDelete()"></i>&nbsp;&nbsp;
+                                    <i class="fa-regular fa-pen-to-square" style="font-size: 1.2em" onclick="confirmDelete(<?=$c?>)"></i>&nbsp;&nbsp;
                                 </form>
-                                <form style="margin: 0;padding: 0" id="editPassword" action="<?= base_url('index.php/deletePassword') ?>" method="POST" onsubmit="return confirmDelete();">
+                                <form style="margin: 0;padding: 0" id="deletePassword<?=$c?>" action="<?= base_url('index.php/deletePassword') ?>" method="POST">
                                     <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
-                                    <i class="fa-regular fa-trash-can" style="font-size: 1.2em" onclick="confirmDelete()"></i>&nbsp;&nbsp;
+                                    <i class="fa-regular fa-trash-can" style="font-size: 1.2em" onclick="confirmDelete(<?=$c?>)"></i>&nbsp;&nbsp;
                                 </form>
                             </div>
                         </td>
@@ -112,26 +122,20 @@ include "partials/header.php";
                 <div class="form-group">
                     <label for="emailInput">Password-Key</label>
                     <input name="username" type="password"
-                           class="form-control texinput <?= (isset($error['key'])) ? 'is-invalid' : '' ?>"
+                           class="form-control texinput "
                            id="key" placeholder="Enter the key to encrypt your password"
-                           value="<?php if (isset($key)) {
-                               echo $key;
-                           } ?>">
-                    <div class="invalid-feedback">
-                        <?php if (isset($error['key'])) echo $error['key']; ?>
+                           value="">
+                    <div class="invalid-feedback" id="key-invalid">
                     </div>
                 </div>
                 <p></p>
                 <div class="form-group">
                     <label for="emailInput">Password</label>
                     <input name="password" type="text"
-                           class="form-control texinput <?= (isset($error['password'])) ? 'is-invalid' : '' ?>"
+                           class="form-control texinput "
                            id="password" placeholder="Enter your password"
-                           value="<?php if (isset($password)) {
-                               echo $password;
-                           } ?>">
-                    <div class="invalid-feedback">
-                        <?php if (isset($error['password'])) echo $error['password']; ?>
+                           value="">
+                    <div class="invalid-feedback" id="password-invalid">
                     </div>
                 </div>
                 <p></p>
@@ -141,27 +145,24 @@ include "partials/header.php";
                     <div class="form-group">
                         <label for="emailInput">Plattform</label>
                         <input name="plattform" type="text"
-                               class="form-control texinput <?= (isset($error['plattform'])) ? 'is-invalid' : '' ?>"
+                               class="form-control texinput <?= ($error['plattform'] != "") ? 'is-invalid' : '' ?>"
                                id="plattform" placeholder="Enter plattform"
                                value="<?php if (isset($plattform)) {
                                    echo $plattform;
                                } ?>">
-                        <div class="invalid-feedback">
-                            <?php if (isset($error['plattform'])) echo $error['plattform']; ?>
+                        <div class="invalid-feedback" id="plattform-invalid">
+                            <?= $error['plattform']?>
                         </div>
                     </div>
                     <p></p>
                     <div class="form-group">
                         <label for="emailInput">Username</label>
                         <input name="username" type="text"
-                               class="form-control texinput <?= (isset($error['username'])) ? 'is-invalid' : '' ?>"
+                               class="form-control texinput"
                                id="username" placeholder="Enter your username"
                                value="<?php if (isset($username)) {
                                    echo $username;
                                } ?>">
-                        <div class="invalid-feedback">
-                            <?php if (isset($error['username'])) echo $error['username']; ?>
-                        </div>
                     </div>
                     <p></p>
                     <div class="form-group">
@@ -169,18 +170,15 @@ include "partials/header.php";
                         <div style="display: flex; justify-content: center;align-items: center;">
                             <input name="additional" type="text"
                                    style="width: calc(100% - 48px);float: left;margin-right: 10px"
-                                   class="form-control texinput <?= (isset($error['additional'])) ? 'is-invalid' : '' ?>"
+                                   class="form-control texinput "
                                    id="additional" placeholder="Enter additional information"
                                    value="<?php if (isset($additional)) {
                                        echo $additional;
                                    } ?>">
-                            <button type="button" class="btn btn-success btn-sm" onclick="test()"
+                            <button type="button" class="btn btn-success btn-sm" onclick="generatePassword_and_sendForm()"
                                     style="width: 38px;float: left;">
                                 <i class="fa-regular fa-floppy-disk" style="font-size: 1.7em"></i>
                             </button>
-                        </div>
-                        <div class="invalid-feedback">
-                            <?php if (isset($error['additional'])) echo $error['additional']; ?>
                         </div>
                     </div>
                 </form>
@@ -193,7 +191,7 @@ include "partials/header.php";
                 <a class="text-decoration-none" href="<?= base_url('index.php/login') ?>">Sign Off</a>
             </div>
             <div class="side-element">
-                <a class="text-decoration-none" href="<?= base_url('index.php/deleteUser') ?>">Delete Account</a>
+                <a onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'" class="text-decoration-none" onclick="openConfirmationModal()" >Delete Account</a>
             </div>
             <div class="side-element">
                 <input type="password" id="schluesselHolder" placeholder="🔑 Key" class="form-control">

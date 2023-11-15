@@ -9,32 +9,39 @@ class Login extends BaseController
 {
     public function index()
     {
+        $data['email'] = "Test@test.de";
+        $data['password'] = "Test";
+
+        $this->session->set('email', '');
+        $this->session->set('logged', FALSE);
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data['email'] = $this->request->getPost('email');
             $data['password'] = $this->request->getPost('password');
 
             if ($this->validation->run($this->request->getPost(), 'login')) {
                 $model = new GeneralModel();
-                $status = $model->getUser($data['email'], $data['password']);
-                if ($status == 0)
-                    echo "No user with this email found";
+                $status = $model->checkPassword($data['email'], $data['password']);
+                if ($status == 0) {
+                    $data['error']['email'] = "No user with this email found.";
+                }
                 if ($status == 1) {
                     $this->session->set('email', $data['email']);
                     $this->session->set('logged', TRUE);
+                    $model->setAttempts($data['email'],false);
                     return redirect()->to('home');
                 }
-                if ($status == -1)
-                    echo "Wrong password";
-
-            } else {
+                if ($status == -1) {
+                    $attempts = $model->setAttempts($data['email'],true);
+                    if($attempts <= 0){
+                        $data['error']['password'] = "You've reached the maximum of attempts.";
+                    }else{
+                        $data['error']['password'] = "Wrong password, ".$attempts." attempts left.";
+                    }
+                }
+            } else
                 $data['error'] = $this->validation->getErrors();
-                return view('login', $data);
-            }
         }
-        $this->session->set('email', '');
-        $this->session->set('logged', FALSE);
-        $data['email'] = "Test@test.de";
-        $data['password'] = "Test";
         return view('login', $data);
     }
 }

@@ -27,19 +27,34 @@
         document.getElementById("password").value = password;
     }
 
-    function test() {
-        document.getElementById('passwortVerschlusselt').value = verschluesseln(document.getElementById("password").value, document.getElementById('key').value);
-        const formElement = document.getElementById('submitPassword');
-        formElement.submit();
+    function generatePassword_and_sendForm() {
+        if (areInputsValid()) {
+            document.getElementById('passwortVerschlusselt').value = verschluesseln(document.getElementById("password").value, document.getElementById('key').value);
+            const formElement = document.getElementById('submitPassword');
+            formElement.submit();
+        }
     }
 
-    function generateNumericPassword() {
-        var length = document.getElementById("passwordLength").value;
-        var password = "";
-        for (var i = 0; i < length; ++i) {
-            password += Math.floor(Math.random() * 10);
+    function areInputsValid() {
+        return true;
+    }
+
+    function areInputsValid() {
+        var inputs = ['key', 'password', 'plattform'];
+        var valid = true;
+        for (var i = 0; i < inputs.length; i++) {
+            var invalid = document.getElementById(inputs[i] + '-invalid');
+            var field = document.getElementById(inputs[i]);
+            if (field.value === "") {
+                field.classList.add("is-invalid");
+                invalid.innerHTML = "The " + inputs[i] + " field is required.";
+                valid = false;
+            } else {
+                field.classList.remove("is-invalid");
+                invalid.innerHTML = "";
+            }
         }
-        document.getElementById("password").value = password;
+        return valid;
     }
 
     function updatePasswordLength(length) {
@@ -80,11 +95,11 @@
             return
         }
         let schluessel = document.getElementById("schluesselHolder").value;
-        copy(entschluesseln(passwort, schluessel),"Das Passwort")
+        copy(entschluesseln(passwort, schluessel), "Das Passwort")
         alert("Das Passwort wurde in die Zwischenablage kopiert.");
     }
 
-    function copy(content){
+    function copy(content) {
         let hiddenInput = document.createElement("input");
         hiddenInput.setAttribute("type", "text");
         hiddenInput.setAttribute("value", content);
@@ -121,12 +136,24 @@
         window.scrollTo(0, document.body.scrollHeight);
     }
 
-    function confirmDelete() {
+    function confirmDelete(number) {
         var userConfirmed = confirm("Möchten Sie das Formular abschicken?");
         if (userConfirmed) {
-            document.getElementById('editPassword').submit();
+            document.getElementById('deletePassword' + number).submit();
         }
         return false;
+    }
+
+    function openConfirmationModal() {
+        document.getElementById('confirmationModal').style.display = 'flex';
+    }
+
+    function closeConfirmationModal() {
+        document.getElementById('confirmationModal').style.display = 'none';
+    }
+
+    function confirmRedirect(link) {
+        window.location.href = link;
     }
 
 </script>

@@ -7,19 +7,20 @@ use Config\Services;
 
 class Home extends BaseController
 {
-    public function index()
+    public function index($plattform ="",$username ="",$additional="",$plattform_error="")
     {
         $session = Services::session();
 
         if( $this->session->get('logged')) {
+
             $model = new GeneralModel();
-            $data['user'] = $model->getUserName($session->get('email'));
+            $data['user'] = ($model->getUser($session->get('email')))[0]['Name'];
             $data['passwords'] = $model->getPasswords($session->get('email'));
 
-            $data['plattform'] = "TestPlat";
-            $data['password'] = "TestP";
-            $data['username'] = "user12";
-            $data['additional'] = "otherStuff";
+            $data['plattform'] = $plattform;
+            $data['error']['plattform'] = $plattform_error;
+            $data['username'] = $username;
+            $data['additional'] = $additional;
 
             return view('home', $data);
         }else
@@ -38,7 +39,9 @@ class Home extends BaseController
         $email = $session->get('email');
 
         $model = new GeneralModel();
-        echo $model->insertPassword($plattform, $password, $username, $additional, $email);
+        if(!$model->insertPassword($plattform, $password, $username, $additional, $email)){
+            return $this->index($plattform,$username,$additional,"Password for plattform already inserted.");
+        }
         return $this->index();
     }
 
@@ -54,15 +57,13 @@ class Home extends BaseController
         return $this->index();
     }
 
-    public function deleteUser(){
+    public function deleteUser(): \CodeIgniter\HTTP\RedirectResponse
+    {
         $session = Services::session();
         $email = $session->get('email');
         $model = new GeneralModel();
-        echo $model->deleteUser($email);
+        $model->deleteUser($email);
         return redirect()->to('login');
     }
 
-    public function editProfile(){
-
-    }
 }

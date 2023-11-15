@@ -5,7 +5,7 @@
 
 <body>
 <?php
-$name = "Register";
+$name = $success;
 include "partials/header.php";
 ?>
 <div class="containerSELF">
@@ -19,7 +19,7 @@ include "partials/header.php";
                     placeholder="Enter your Username"
                     value="<?php if (isset($username)) {
                         echo $username;
-                    } ?>">
+                    } ?>" <?= ($finished) ? 'disabled':''?>>
                     <div class="invalid-feedback">
                         <?php if (isset($error['username'])) echo $error['username']; ?>
                     </div>
@@ -32,7 +32,7 @@ include "partials/header.php";
                     placeholder="Enter your email"
                     value="<?php if (isset($email)) {
                         echo $email;
-                    } ?>">
+                    } ?>" <?= ($finished) ? 'disabled':''?>>
                     <div class="invalid-feedback">
                         <?php if (isset($error['email'])) echo $error['email']; ?>
                     </div>
@@ -45,7 +45,7 @@ include "partials/header.php";
                            id="password"
                            placeholder="Enter your password" value="<?php if (isset($password)) {
                         echo $password;
-                    } ?>">
+                    } ?>" <?= ($finished) ? 'disabled':''?>>
                     <div class="invalid-feedback">
                         <?php if (isset($error['password'])) echo $error['password']; ?>
                     </div>
@@ -58,7 +58,7 @@ include "partials/header.php";
                            id="repeatpassword"
                            placeholder="Repeat your password" value="<?php if (isset($repeatpassword)) {
                         echo $repeatpassword;
-                    } ?>">
+                    } ?>" <?= ($finished) ? 'disabled':''?>>
                     <div class="invalid-feedback">
                         <?php if (isset($error['repeatpassword'])) echo $error['repeatpassword']; ?>
                     </div>
@@ -66,12 +66,15 @@ include "partials/header.php";
                 <p></p>
                 <div class="d-inline mb-3">
                     <input type="checkbox" id="agb" value="1" name="agb"
-                           class="form-check-input <?= (isset($error['agb'])) ? 'is-invalid' : '' ?>" <?php if (isset($agb)) echo 'checked'; ?>>
+                           class="form-check-input <?= (isset($error['agb'])) ? 'is-invalid' : '' ?>" <?php if (isset($agb)) echo 'checked'; ?> <?= ($finished) ? 'disabled':''?>>
                     <?php if (!isset($error['agb'])) echo ' <label for="agb">Accept terms and conditions</label><br><br>'; ?>
                     <?php if (isset($error['agb'])) echo ' <label for="agb" style="color: rgb(218,53,69)">' . $error['agb'] . '</label><br><br>'; ?>
                 </div>
-                <input type="submit" class="btn btn-primary font-weight-bold" value="Submit registration">
-                <a href="<?php echo base_url()?>" class="btn btn-secondary">Abort</a>
+                <?php if(!$finished){
+                    echo '<input type="submit" class="btn btn-primary font-weight-bold" value="Submit registration"> <a href="<?php echo base_url()?>" class="btn btn-secondary">Abort</a>';
+                }else{
+                    echo '<a href="'. base_url().'" class="btn btn-primary">Back to login</a>';
+                }?>
             </form>
             <br>
         </div>

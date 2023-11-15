@@ -6,10 +6,10 @@ use CodeIgniter\Model;
 
 class GeneralModel extends Model
 {
-    public function inserUser($name, $password, $verified, $email)
+    public function insertUser($name, $password, $verified, $email, $attempts): string
     {
-        if ($this->getUser($email, "") != 0)
-            return "Email is already in use";
+        if (sizeof($this->getUser($email)) != 0)
+            return false;
 
         $password = password_hash($password, PASSWORD_DEFAULT);
         $user = [
@@ -17,49 +17,64 @@ class GeneralModel extends Model
             'Password' => $password,
             'Verified' => $verified,
             'Email' => $email,
+            'Attempts' => $attempts,
         ];
 
         $this->db->table('users')->insert($user);
-        return "Inserted";
+        return true;
     }
 
-    public function getUser($email, $password)
+    function getUser($email): array
     {
         $user = $this->db->table('users');
         $user->where('Email', $email);
         $user->select();
         $result = $user->get();
-        $result = $result->getResultArray();
+        return $result->getResultArray();
+    }
+
+    public function checkPassword($email, $password): int
+    {
+        $result = $this->getUser($email);
+
         if (sizeof($result) == 0)
             return 0;
+        if($result[0]['Attempts'] <= 0)
+            return -1;
         if (password_verify($password, $result[0]['Password']))
             return 1;
         return -1;
     }
 
-    public function getUserName($email)
+    public function setAttempts($email, $decrease)
     {
-        $user = $this->db->table('users');
-        $user->where('Email', $email);
-        $user->select();
-        $result = $user->get();
-        $result = $result->getResultArray();
-        return $result[0]['Name'];
+        $attempts = $this->getUser($email)[0]['Attempts'];
+        if ($attempts <= 0)
+            return 0;
+        if ($decrease)
+            $attempts = $attempts - 1;
+        else
+            $attempts = 3;
+
+        $change = $this->db->table('users');
+        $change->set('Attempts',$attempts);
+        $change->update();
+        $change->where('Email', $email);
+        return $attempts;
     }
 
-    public function getPasswords($email)
+    public function getPasswords($email): array
     {
         $passwords = $this->db->table('passwords');
         $passwords->where('Email', $email);
         $passwords->select();
         $result = $passwords->get();
-        $result = $result->getResultArray();
-        return $result;
+        return $result->getResultArray();
     }
 
-    public function insertPassword($plattform, $password, $username, $additional, $email)
+    public function insertPassword($plattform, $password, $username, $additional, $email): bool
     {
-        if ($this->getPlattform($plattform,$email)) {
+        if ($this->getPlattform($plattform, $email)) {
             $password = [
                 'Plattform' => $plattform,
                 'Password' => $password,
@@ -68,12 +83,13 @@ class GeneralModel extends Model
                 'Email' => $email,
             ];
             $this->db->table('passwords')->insert($password);
-            return "Inserted";
+            return true;
         }
-        return "Password for plattform already inserted";
+        return false;
     }
 
-    public function deletePassword($passwordID, $email){
+    public function deletePassword($passwordID, $email): string
+    {
         $passwords = $this->db->table('passwords');
         $passwords->where('ID', $passwordID);
         $passwords->where('Email', $email);
@@ -81,7 +97,7 @@ class GeneralModel extends Model
         return "Deleted";
     }
 
-    public function getPlattform($plattform,$email)
+    public function getPlattform($plattform, $email): bool
     {
         $passwords = $this->db->table('passwords');
         $passwords->where('Plattform', $plattform);
@@ -92,7 +108,8 @@ class GeneralModel extends Model
         return sizeof($result) == 0;
     }
 
-    public function deleteUser($email){
+    public function deleteUser($email): string
+    {
         $passwords = $this->db->table('passwords');
         $passwords->where('Email', $email);
         $passwords->delete();
@@ -103,6 +120,7 @@ class GeneralModel extends Model
 
         return "deleted";
     }
+
     private function debugger($array)
     {
         echo '<pre>';
