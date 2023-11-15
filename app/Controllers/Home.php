@@ -43,7 +43,7 @@ class Home extends BaseController
         if(!$model->insertPassword($plattform, $password, $username, $additional, $email)){
             return $this->index($plattform,$username,$additional,"Password for plattform already inserted.");
         }
-        return $this->index();
+        return redirect()->to('home');
     }
 
     public function deletePassword()
@@ -55,7 +55,7 @@ class Home extends BaseController
 
         $model = new GeneralModel();
         $model->deletePassword($passwordID, $email);
-        return $this->index();
+        return redirect()->to('home');
     }
 
     public function deleteUser(): RedirectResponse
