@@ -71,7 +71,7 @@ include "partials/header.php";
                     <?php if (isset($error['agb'])) echo ' <label for="agb" style="color: rgb(218,53,69)">' . $error['agb'] . '</label><br><br>'; ?>
                 </div>
                 <?php if(!$finished){
-                    echo '<input type="submit" class="btn btn-primary font-weight-bold" value="Submit registration"> <a href="<?php echo base_url()?>" class="btn btn-secondary">Abort</a>';
+                    echo '<input type="submit" class="btn btn-primary font-weight-bold" value="Submit registration"> <a href="'.base_url().'" class="btn btn-secondary">Abort</a>';
                 }else{
                     echo '<a href="'. base_url().'" class="btn btn-primary">Back to login</a>';
                 }?>
