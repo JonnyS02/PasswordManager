@@ -34,6 +34,7 @@ body {
 }
 
 .middle{
+    padding-bottom: 20px;
     width: 60%;
     float: left;
 }
