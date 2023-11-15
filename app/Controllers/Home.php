@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\GeneralModel;
+use CodeIgniter\HTTP\RedirectResponse;
 use Config\Services;
 
 class Home extends BaseController
@@ -57,7 +58,7 @@ class Home extends BaseController
         return $this->index();
     }
 
-    public function deleteUser(): \CodeIgniter\HTTP\RedirectResponse
+    public function deleteUser(): RedirectResponse
     {
         $session = Services::session();
         $email = $session->get('email');

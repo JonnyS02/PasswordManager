@@ -20,6 +20,15 @@ include "partials/header.php";
     </div>
 </div>
 
+<div id="confirmationModal-noKey" class="confirmationModal">
+    <div id="modalContent-noKey" class="modalContent">
+        <h3>No Key</h3>
+        <hr>
+        <p>Please enter your Key to decrypt the password</p>
+        <button class="btn btn-primary btn-sm" onclick="closeConfirmationModal('confirmationModal-noKey','modalContent-noKey')">Okay</button>
+    </div>
+</div>
+
 <div class="containerSELF">
     <div class="centered-div">
         <div class="left side">
@@ -56,8 +65,8 @@ include "partials/header.php";
                         <td><?= $passwordFormList['Username'] ?></td>
                         <td><?= $passwordFormList['Additional'] ?></td>
                         <td>
-                            <i class="fa-regular fa-eye" style="font-size: 1.2em" onclick="dehas('<?= $passwordFormList['Password'] ?>')"></i>&nbsp
-                            <i class="fa-regular fa-copy" style="font-size: 1.2em" onclick="dehasCopy('<?= $passwordFormList['Password'] ?>')"></i>
+                            <i class="fa-regular fa-eye" style="font-size: 1.2em" onclick="dehas('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>&nbsp
+                            <i class="fa-regular fa-copy" style="font-size: 1.2em" onclick="dehasCopy('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>
                         </td>
                         <td>
                             <div style="display: flex; align-items: center;">

@@ -76,23 +76,28 @@
         }
     }
 
-    function dehas(passwort) {
+    function dehas(passwort,modal_name,modalContent_name) {
+        var field = document.getElementById('schluesselHolder');
         if (document.getElementById("schluesselHolder").value === "") {
-            alert("Bitte geben Sie den Schlüssel an.")
+            openConfirmationModal(modal_name,modalContent_name);
+            field.classList.add("is-invalid");
             return
         }
+        field.classList.remove("is-invalid");
         let schluessel = document.getElementById("schluesselHolder").value;
         alert("Passwort: " + entschluesseln(passwort, schluessel));
     }
 
-    function dehasCopy(passwort) {
+    function dehasCopy(passwort,modal_name,modalContent_name) {
+        var field = document.getElementById('schluesselHolder');
         if (document.getElementById("schluesselHolder").value === "") {
-            alert("Bitte geben Sie den Schlüssel an.")
+            openConfirmationModal(modal_name,modalContent_name);
+            field.classList.add("is-invalid");
             return
         }
+        field.classList.remove("is-invalid");
         let schluessel = document.getElementById("schluesselHolder").value;
         copy(entschluesseln(passwort, schluessel), "Das Passwort")
-        alert("Das Passwort wurde in die Zwischenablage kopiert.");
     }
 
     function copy(content) {

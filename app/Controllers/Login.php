@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\GeneralModel;
-use CodeIgniter\HTTP\Header;
 
 class Login extends BaseController
 {
