@@ -8,8 +8,8 @@ class Login extends BaseController
 {
     public function index()
     {
-        $data['email'] = "Test@test.de";
-        $data['password'] = "Test";
+        $data['email'] = "";
+        $data['password'] = "";
 
         $this->session->set('email', '');
         $this->session->set('logged', FALSE);

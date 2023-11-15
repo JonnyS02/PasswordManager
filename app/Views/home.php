@@ -14,9 +14,13 @@ include "partials/header.php";
         <h3>Delete Account</h3>
         <hr>
         <p>Are you sure you want to delete your account?</p>
-        <p>Your  user-information and passwords will immediately be deleted.</p>
-        <button class="btn btn-danger btn-sm" onclick="confirmRedirect('<?= base_url('index.php/deleteUser') ?>')">Yes</button>&nbsp&nbsp
-        <button class="btn btn-primary btn-sm" onclick="closeConfirmationModal('confirmationModal-account','modalContent-account')">Abort</button>
+        <p>Your user-information and passwords will immediately be deleted.</p>
+        <button class="btn btn-danger btn-sm" onclick="confirmRedirect('<?= base_url('index.php/deleteUser') ?>')">Yes
+        </button>
+        &nbsp&nbsp
+        <button class="btn btn-primary btn-sm"
+                onclick="closeConfirmationModal('confirmationModal-account','modalContent-account')">Abort
+        </button>
     </div>
 </div>
 
@@ -25,7 +29,9 @@ include "partials/header.php";
         <h3>No Key</h3>
         <hr>
         <p>Please enter your Key to decrypt the password</p>
-        <button class="btn btn-primary btn-sm" onclick="closeConfirmationModal('confirmationModal-noKey','modalContent-noKey')">Okay</button>
+        <button class="btn btn-primary btn-sm"
+                onclick="closeConfirmationModal('confirmationModal-noKey','modalContent-noKey')">Okay
+        </button>
     </div>
 </div>
 
@@ -65,27 +71,39 @@ include "partials/header.php";
                         <td><?= $passwordFormList['Username'] ?></td>
                         <td><?= $passwordFormList['Additional'] ?></td>
                         <td>
-                            <i class="fa-regular fa-eye" style="font-size: 1.2em" onclick="dehas('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>&nbsp
-                            <i class="fa-regular fa-copy" style="font-size: 1.2em" onclick="dehasCopy('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>
+                            <i class="fa-regular fa-eye" style="font-size: 1.2em"
+                               onclick="dehas('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>&nbsp
+                            <i class="fa-regular fa-copy" style="font-size: 1.2em"
+                               onclick="dehasCopy('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>
                         </td>
                         <td>
                             <div style="display: flex; align-items: center;">
-                                <form style="margin: 0;padding: 0" id="editPassword<?=$c?>" action="<?= base_url('index.php/deletePassword') ?>" method="POST">
+                                <form style="margin: 0;padding: 0" id="editPassword<?= $c ?>"
+                                      action="<?= base_url('index.php/deletePassword') ?>" method="POST">
                                     <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
                                     <i class="fa-regular fa-pen-to-square" style="font-size: 1.2em"></i>&nbsp;&nbsp;
                                 </form>
-                                    <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
-                                    <i class="fa-regular fa-trash-can" style="font-size: 1.2em" onclick="openConfirmationModal('confirmationModal-password<?=$c?>','modalContent-password<?=$c?>')"></i>&nbsp;&nbsp;
+                                <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
+                                <i class="fa-regular fa-trash-can" style="font-size: 1.2em"
+                                   onclick="openConfirmationModal('confirmationModal-password<?= $c ?>','modalContent-password<?= $c ?>')"></i>&nbsp;&nbsp;
                             </div>
                         </td>
                     </tr>
-                    <div id="confirmationModal-password<?=$c?>" class="confirmationModal">
-                        <div id="modalContent-password<?=$c?>" class="modalContent">
+                    <div id="confirmationModal-password<?= $c ?>" class="confirmationModal">
+                        <div id="modalContent-password<?= $c ?>" class="modalContent">
                             <h3>Delete Password</h3>
                             <hr>
-                            <p>Are you sure you want to delete the password for <b><?= $passwordFormList['Plattform'] ?></b> ?</p>
-                            <button class="btn btn-danger btn-sm" onclick="confirmRedirect('<?= base_url('index.php/deletePassword?ID='. $passwordFormList['ID']) ?>')">Yes</button>&nbsp&nbsp
-                            <button class="btn btn-primary btn-sm" onclick="closeConfirmationModal('confirmationModal-password<?=$c?>','modalContent-password<?=$c?>')">Abort</button>
+                            <p>Are you sure you want to delete the password for
+                                <b><?= $passwordFormList['Plattform'] ?></b> ?</p>
+                            <button class="btn btn-danger btn-sm"
+                                    onclick="confirmRedirect('<?= base_url('index.php/deletePassword?ID=' . $passwordFormList['ID']) ?>')">
+                                Yes
+                            </button>
+                            &nbsp&nbsp
+                            <button class="btn btn-primary btn-sm"
+                                    onclick="closeConfirmationModal('confirmationModal-password<?= $c ?>','modalContent-password<?= $c ?>')">
+                                Abort
+                            </button>
                         </div>
                     </div>
                     <?php $c++ ?>
@@ -156,6 +174,9 @@ include "partials/header.php";
                     </div>
                 </div>
                 <p></p>
+
+                <?=($error['plattform'] != "") ?'<script>window.onload = scrollToEnd();</script>':'';?>
+
                 <form action="<?= base_url('index.php/insertPassword') ?>" method="POST" id="submitPassword">
                     <input type="hidden" value=""
                            name="passwortVerschlusselt" id="passwortVerschlusselt">
@@ -210,7 +231,8 @@ include "partials/header.php";
             </div>
             <div class="side-element">
                 <a onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'"
-                   class="text-decoration-none" onclick="openConfirmationModal('confirmationModal-account','modalContent-account')">Delete
+                   class="text-decoration-none"
+                   onclick="openConfirmationModal('confirmationModal-account','modalContent-account')">Delete
                     Account</a>
             </div>
             <div class="side-element">

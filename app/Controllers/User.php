@@ -8,12 +8,12 @@ class User extends BaseController
 {
     public function index(): string
     {
-        $data['username'] = "Johan";
-        $data['email'] = "Test@test.de";
-        $data['name'] = "Johna";
-        $data['password'] = "Test";
-        $data['repeatpassword'] = "Test";
-        $data['agb'] = "checked";
+        $data['username'] = "";
+        $data['email'] = "";
+        $data['name'] = "";
+        $data['password'] = "";
+        $data['repeatpassword'] = "";
+        $data['agb'] = "";
 
         $data['success'] = "Register";
         $data['finished'] = false;
