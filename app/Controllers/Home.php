@@ -49,11 +49,11 @@ class Home extends BaseController
     {
         $session = Services::session();
 
-        $passwordID = $this->request->getPost('passwordID');
+        $passwordID = $_GET['ID'];
         $email = $session->get('email');
 
         $model = new GeneralModel();
-        echo $model->deletePassword($passwordID, $email);
+        $model->deletePassword($passwordID, $email);
         return $this->index();
     }
 

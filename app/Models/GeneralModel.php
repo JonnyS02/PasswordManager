@@ -88,13 +88,12 @@ class GeneralModel extends Model
         return false;
     }
 
-    public function deletePassword($passwordID, $email): string
+    public function deletePassword($passwordID, $email)
     {
         $passwords = $this->db->table('passwords');
         $passwords->where('ID', $passwordID);
         $passwords->where('Email', $email);
         $passwords->delete();
-        return "Deleted";
     }
 
     public function getPlattform($plattform, $email): bool
@@ -119,13 +118,5 @@ class GeneralModel extends Model
         $user->delete();
 
         return "deleted";
-    }
-
-    private function debugger($array)
-    {
-        echo '<pre>';
-        var_dump($array);
-        echo '</pre>';
-        die();
     }
 }

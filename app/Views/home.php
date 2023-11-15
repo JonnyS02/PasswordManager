@@ -9,16 +9,17 @@
 $name = "&nbsp" . $user;
 include "partials/header.php";
 ?>
-<div id="confirmationModal">
-    <div id="modalContent">
+<div id="confirmationModal-account" class="confirmationModal">
+    <div id="modalContent-account" class="modalContent">
         <h3>Delete Account</h3>
         <hr>
         <p>Are you sure you want to delete your account?</p>
         <p>Your  user-information and passwords will immediately be deleted.</p>
         <button class="btn btn-danger btn-sm" onclick="confirmRedirect('<?= base_url('index.php/deleteUser') ?>')">Yes</button>&nbsp&nbsp
-        <button class="btn btn-primary btn-sm" onclick="closeConfirmationModal()">Abort</button>
+        <button class="btn btn-primary btn-sm" onclick="closeConfirmationModal('confirmationModal-account','modalContent-account')">Abort</button>
     </div>
 </div>
+
 <div class="containerSELF">
     <div class="centered-div">
         <div class="left side">
@@ -62,15 +63,22 @@ include "partials/header.php";
                             <div style="display: flex; align-items: center;">
                                 <form style="margin: 0;padding: 0" id="editPassword<?=$c?>" action="<?= base_url('index.php/deletePassword') ?>" method="POST">
                                     <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
-                                    <i class="fa-regular fa-pen-to-square" style="font-size: 1.2em" onclick="confirmDelete(<?=$c?>)"></i>&nbsp;&nbsp;
+                                    <i class="fa-regular fa-pen-to-square" style="font-size: 1.2em"></i>&nbsp;&nbsp;
                                 </form>
-                                <form style="margin: 0;padding: 0" id="deletePassword<?=$c?>" action="<?= base_url('index.php/deletePassword') ?>" method="POST">
                                     <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
-                                    <i class="fa-regular fa-trash-can" style="font-size: 1.2em" onclick="confirmDelete(<?=$c?>)"></i>&nbsp;&nbsp;
-                                </form>
+                                    <i class="fa-regular fa-trash-can" style="font-size: 1.2em" onclick="openConfirmationModal('confirmationModal-password<?=$c?>','modalContent-password<?=$c?>')"></i>&nbsp;&nbsp;
                             </div>
                         </td>
                     </tr>
+                    <div id="confirmationModal-password<?=$c?>" class="confirmationModal">
+                        <div id="modalContent-password<?=$c?>" class="modalContent">
+                            <h3>Delete Password</h3>
+                            <hr>
+                            <p>Are you sure you want to delete the password for <b><?= $passwordFormList['Plattform'] ?></b> ?</p>
+                            <button class="btn btn-danger btn-sm" onclick="confirmRedirect('<?= base_url('index.php/deletePassword?ID='. $passwordFormList['ID']) ?>')">Yes</button>&nbsp&nbsp
+                            <button class="btn btn-primary btn-sm" onclick="closeConfirmationModal('confirmationModal-password<?=$c?>','modalContent-password<?=$c?>')">Abort</button>
+                        </div>
+                    </div>
                     <?php $c++ ?>
                 <?php endforeach; endif; ?>
                 </tbody>
@@ -151,7 +159,7 @@ include "partials/header.php";
                                    echo $plattform;
                                } ?>">
                         <div class="invalid-feedback" id="plattform-invalid">
-                            <?= $error['plattform']?>
+                            <?= $error['plattform'] ?>
                         </div>
                     </div>
                     <p></p>
@@ -175,7 +183,8 @@ include "partials/header.php";
                                    value="<?php if (isset($additional)) {
                                        echo $additional;
                                    } ?>">
-                            <button type="button" class="btn btn-success btn-sm" onclick="generatePassword_and_sendForm()"
+                            <button type="button" class="btn btn-success btn-sm"
+                                    onclick="generatePassword_and_sendForm()"
                                     style="width: 38px;float: left;">
                                 <i class="fa-regular fa-floppy-disk" style="font-size: 1.7em"></i>
                             </button>
@@ -191,7 +200,9 @@ include "partials/header.php";
                 <a class="text-decoration-none" href="<?= base_url('index.php/login') ?>">Sign Off</a>
             </div>
             <div class="side-element">
-                <a onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'" class="text-decoration-none" onclick="openConfirmationModal()" >Delete Account</a>
+                <a onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'"
+                   class="text-decoration-none" onclick="openConfirmationModal('confirmationModal-account','modalContent-account')">Delete
+                    Account</a>
             </div>
             <div class="side-element">
                 <input type="password" id="schluesselHolder" placeholder="🔑 Key" class="form-control">

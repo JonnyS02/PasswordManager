@@ -36,10 +36,6 @@
     }
 
     function areInputsValid() {
-        return true;
-    }
-
-    function areInputsValid() {
         var inputs = ['key', 'password', 'plattform'];
         var valid = true;
         for (var i = 0; i < inputs.length; i++) {
@@ -110,7 +106,6 @@
     }
 
     function searchTable() {
-        // Declare variables
         var input, filter, table, tr, td, i, txtValue;
         var elementId = event.target.id;
         input = document.getElementById(elementId);
@@ -118,7 +113,6 @@
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
 
-        // Loop through all table rows, and hide those that don't match the search query
         for (i = 0; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[1];
             if (td) {
@@ -136,20 +130,22 @@
         window.scrollTo(0, document.body.scrollHeight);
     }
 
-    function confirmDelete(number) {
-        var userConfirmed = confirm("Möchten Sie das Formular abschicken?");
-        if (userConfirmed) {
-            document.getElementById('deletePassword' + number).submit();
-        }
-        return false;
+    function openConfirmationModal(modal_name,modalContent_name) {
+        var modal = document.getElementById(modal_name);
+        modal.style.display = 'flex';
+        setTimeout(function () {
+            modal.style.opacity = '1';
+            document.getElementById(modalContent_name).style.opacity = '1';
+        }, 10);
     }
 
-    function openConfirmationModal() {
-        document.getElementById('confirmationModal').style.display = 'flex';
-    }
-
-    function closeConfirmationModal() {
-        document.getElementById('confirmationModal').style.display = 'none';
+    function closeConfirmationModal(modal_name,modalContent_name) {
+        var modal = document.getElementById(modal_name);
+        modal.style.opacity = '0';
+        document.getElementById(modalContent_name).style.opacity = '0';
+        setTimeout(function () {
+            modal.style.display = 'none';
+        }, 500);
     }
 
     function confirmRedirect(link) {
