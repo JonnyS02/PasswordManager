@@ -1,4 +1,4 @@
 - Edit Profile einfügen
-
+- Edit Passwort einfügen
 - Sprache auf Englisch ändern
 - Readme ändern
