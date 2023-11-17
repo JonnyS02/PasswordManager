@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\GeneralModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -54,6 +55,8 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
         $this->session = \Config\Services::session();
         $this->validation = \Config\Services::validation();
+        $this->model = new GeneralModel();
+
         // E.g.: $this->session = \Config\Services::session();
     }
 }

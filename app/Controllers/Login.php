@@ -19,19 +19,18 @@ class Login extends BaseController
             $data['password'] = $this->request->getPost('password');
 
             if ($this->validation->run($this->request->getPost(), 'login')) {
-                $model = new GeneralModel();
-                $status = $model->checkPassword($data['email'], $data['password']);
+                $status = $this->model->checkPassword($data['email'], $data['password']);
                 if ($status == 0) {
                     $data['error']['email'] = "No user with this email found.";
                 }
                 if ($status == 1) {
                     $this->session->set('email', $data['email']);
                     $this->session->set('logged', TRUE);
-                    $model->setAttempts($data['email'],false);
+                    $this->model->setAttempts($data['email'],false);
                     return redirect()->to('home');
                 }
                 if ($status == -1) {
-                    $attempts = $model->setAttempts($data['email'],true);
+                    $attempts = $this->model->setAttempts($data['email'],true);
                     if($attempts <= 0){
                         $data['error']['password'] = "You've reached the maximum of attempts.";
                     }else{

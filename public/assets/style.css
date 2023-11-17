@@ -62,6 +62,14 @@ body {
     border-radius: 20px;
 }
 
+.passwordHighlighter{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 1px #00bcff;
+    border-style: solid;
+    border-radius: 20px;
+}
+
 td i{
     transition: color 0.25s;
 }

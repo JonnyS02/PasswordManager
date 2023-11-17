@@ -1,0 +1,25 @@
+<script>
+    function enableNewPassword() {
+        var repeatpassword = document.getElementById('repeatpassword');
+        repeatpassword.disabled = !repeatpassword.disabled;
+        var password = document.getElementById('password');
+        password.disabled = !password.disabled;
+
+        if (repeatpassword.disabled) {
+            repeatpassword.value = "";
+            repeatpassword.placeholder ="";
+            repeatpassword.classList.remove("is-invalid");
+        }else {
+            repeatpassword.placeholder ="Repeat your new password";
+        }
+
+        if (password.disabled) {
+            password.value = "";
+            password.placeholder ="";
+            password.classList.remove("is-invalid");
+        }else {
+            password.placeholder ="Enter your new password";
+        }
+    }
+
+</script>

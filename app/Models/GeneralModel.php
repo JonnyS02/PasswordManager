@@ -39,7 +39,7 @@ class GeneralModel extends Model
 
         if (sizeof($result) == 0)
             return 0;
-        if($result[0]['Attempts'] <= 0)
+        if ($result[0]['Attempts'] <= 0)
             return -1;
         if (password_verify($password, $result[0]['Password']))
             return 1;
@@ -57,9 +57,9 @@ class GeneralModel extends Model
             $attempts = 3;
 
         $change = $this->db->table('users');
-        $change->set('Attempts',$attempts);
-        $change->update();
+        $change->set('Attempts', $attempts);
         $change->where('Email', $email);
+        $change->update();
         return $attempts;
     }
 
@@ -107,8 +107,11 @@ class GeneralModel extends Model
         return sizeof($result) == 0;
     }
 
-    public function deleteUser($email): string
+    public function deleteUser($email,$password)
     {
+        if ($this->checkPassword($email,$password) == -1)
+            return false;
+
         $passwords = $this->db->table('passwords');
         $passwords->where('Email', $email);
         $passwords->delete();
@@ -117,6 +120,39 @@ class GeneralModel extends Model
         $user->where('Email', $email);
         $user->delete();
 
-        return "deleted";
+        return true;
+    }
+
+    public function insertChangesProfile($name, $email, $oldEmail, $password = "")
+    {
+        $oldUser = $this->getUser($oldEmail);
+        if ($oldUser[0]['Name'] == $name &&  $oldUser[0]['Email'] == $email && (password_verify($password,$oldUser[0]['Password']) || $password == ""))
+            return false;
+
+        if ($password == "") {
+            $updated_user = [
+                'Name' => $name,
+                'Email' => $email,
+            ];
+        }else{
+            $password = password_hash($password, PASSWORD_DEFAULT);
+            $updated_user = [
+                'Name' => $name,
+                'Password' => $password,
+                'Email' => $email,
+            ];
+        }
+
+        $change = $this->db->table('users');
+        $change->where('Email', $oldEmail);
+        $change->update($updated_user);
+
+        if($oldEmail != $email){
+            $change_email = $this->db->table('passwords');
+            $change_email->set('Email', $email);
+            $change_email->where('Email', $oldEmail);
+            $change_email->update();
+        }
+        return true;
     }
 }

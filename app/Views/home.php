@@ -2,21 +2,44 @@
 <html lang="en">
 
 <?php include "partials/head.php" ?>
-<?php include "partials/script.html"; ?>
+<?php include "partials/home_script.html"; ?>
 
 <body>
 <?php
 $name = "&nbsp" . $user;
 include "partials/header.php";
 ?>
-<div id="confirmationModal-account" class="confirmationModal">
-    <div id="modalContent-account" class="modalContent">
+
+<?= (isset($notDeleted)) ? "    <script>
+        window.onload = function () {
+            openConfirmationModal('confirmationModal-account', 'modalContent-account');
+        };
+    </script>" : ""; ?>
+
+
+<div id="confirmationModal-account" class="confirmationModal" style="<?= (isset($notDeleted)) ? 'opacity: 1':""?>">
+    <div id="modalContent-account" class="modalContent" style="<?= (isset($notDeleted)) ? 'opacity: 1':""?>">
         <h3>Delete Account</h3>
         <hr>
         <p>Are you sure you want to delete your account?</p>
         <p>Your user-information and passwords will immediately be deleted.</p>
-        <button class="btn btn-danger btn-sm" onclick="confirmRedirect('<?= base_url('index.php/deleteUser') ?>')">Yes
-        </button>
+        <form action="<?= base_url('index.php/deleteUser') ?>" method="POST" class="mt-4" id="deleteUser">
+            <div class="form-group">
+                <label for="password_account">Confirmation Password</label>
+                <input name="password_account" type="password"
+                       class=" form-control texinput <?= (isset($notDeleted)) ? 'is-invalid' : '' ?>"
+                       id="password_account"
+                       placeholder="Enter your passwort" value="<?php if (isset($password_account)) {
+                    echo $password_account;
+                } ?>">
+                <div class="invalid-feedback">
+                    <?php if (isset($notDeleted)) echo $notDeleted; ?>
+                </div>
+            </div>
+            <p></p>
+        </form>
+        <input type="submit" class="btn btn-danger font-weight-bold" onclick="send_Form('deleteUser')" value="Delete Account">
+
         &nbsp&nbsp
         <button class="btn btn-primary btn-sm"
                 onclick="closeConfirmationModal('confirmationModal-account','modalContent-account')">Abort
@@ -41,7 +64,7 @@ include "partials/header.php";
             <div class="side-element empty">
             </div>
             <div class="side-element">
-                <a class="text-decoration-none" href="<?= base_url('index.php/register') ?>">Edit Profile</a>
+                <a class="text-decoration-none" href="<?= base_url('index.php/editProfile') ?>">Edit Profile</a>
             </div>
             <div class="side-element">
                 <a class="text-decoration-none" onclick="scrollToEnd()">Insert Password</a>
@@ -175,7 +198,7 @@ include "partials/header.php";
                 </div>
                 <p></p>
 
-                <?=($error['plattform'] != "") ?'<script>window.onload = scrollToEnd();</script>':'';?>
+                <?= ($error['plattform'] != "") ? '<script>window.onload = scrollToEnd();</script>' : ''; ?>
 
                 <form action="<?= base_url('index.php/insertPassword') ?>" method="POST" id="submitPassword">
                     <input type="hidden" value=""

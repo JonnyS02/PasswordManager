@@ -63,4 +63,16 @@ class Validation extends BaseConfig
             'required' => 'Please repeat your password.'
         ],
     ];
+
+    public $insertChangesProfile = [
+        'email' => 'required|valid_email',
+        'username' => 'required',
+        'password_old' => 'required',
+    ];
+
+    public $insertChangesProfile_errors = [
+        'password_old' => [
+            'required' => 'Please enter your current password to verify changes.'
+        ],
+    ];
 }

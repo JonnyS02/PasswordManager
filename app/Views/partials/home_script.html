@@ -35,6 +35,11 @@
         }
     }
 
+    function send_Form(id){
+        const formElement = document.getElementById(id);
+        formElement.submit();
+    }
+
     function areInputsValid() {
         var inputs = ['key', 'password', 'plattform'];
         var valid = true;
@@ -135,6 +140,13 @@
         window.scrollTo(0, document.body.scrollHeight);
     }
 
+    function enableNewPassword(){
+        var repeatpassword = document.getElementById('repeatpassword');
+        repeatpassword.disabled = !repeatpassword.disabled;
+        var password = document.getElementById('password');
+        password.disabled = !password.disabled;
+    }
+
     function openConfirmationModal(modal_name,modalContent_name) {
         var modal = document.getElementById(modal_name);
         modal.style.display = 'flex';
@@ -151,10 +163,6 @@
         setTimeout(function () {
             modal.style.display = 'none';
         }, 500);
-    }
-
-    function confirmRedirect(link) {
-        window.location.href = link;
     }
 
 </script>

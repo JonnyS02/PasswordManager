@@ -23,4 +23,11 @@ $routes->post('/insertPassword', 'home::insertPassword');
 $routes->get('/deletePassword', 'home::deletePassword');
 $routes->post('/deletePassword', 'home::deletePassword');
 
-$routes->get('/deleteUser', 'home::deleteUser');
+$routes->get('/deleteUser', 'home::index');
+$routes->post('/deleteUser', 'home::deleteUser');
+
+$routes->get('/editProfile', 'user::editProfile');
+$routes->post('/editProfile', 'user::editProfile');
+
+$routes->get('/insertChangesProfile', 'user::insertChangesProfile');
+$routes->post('/insertChangesProfile', 'user::insertChangesProfile');

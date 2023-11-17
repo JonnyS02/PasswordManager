@@ -8,21 +8,21 @@ use Config\Services;
 
 class Home extends BaseController
 {
-    public function index($plattform ="",$username ="",$additional="",$plattform_error="")
+    public function index($plattform ="",$username ="",$additional="",$plattform_error="",$notDeleted = "",$password_account="")
     {
-        $session = Services::session();
 
         if( $this->session->get('logged')) {
 
-            $model = new GeneralModel();
-            $data['user'] = ($model->getUser($session->get('email')))[0]['Name'];
-            $data['passwords'] = $model->getPasswords($session->get('email'));
-
+            $data['user'] = ($this->model->getUser($this->session->get('email')))[0]['Name'];
+            $data['passwords'] = $this->model->getPasswords($this->session->get('email'));
             $data['plattform'] = $plattform;
             $data['error']['plattform'] = $plattform_error;
             $data['username'] = $username;
             $data['additional'] = $additional;
-
+            if($notDeleted != "") {
+                $data['notDeleted'] = $notDeleted;
+                $data['password_account'] = $password_account;
+            }
             return view('home', $data);
         }else
             return redirect()->to('login');
@@ -31,16 +31,13 @@ class Home extends BaseController
 
     public function insertPassword()
     {
-        $session = Services::session();
-
         $plattform = $this->request->getPost('plattform');
         $password = $this->request->getPost('passwortVerschlusselt');
         $username = $this->request->getPost('username');
         $additional = $this->request->getPost('additional');
-        $email = $session->get('email');
+        $email = $this->session->get('email');
 
-        $model = new GeneralModel();
-        if(!$model->insertPassword($plattform, $password, $username, $additional, $email)){
+        if(!$this->model->insertPassword($plattform, $password, $username, $additional, $email)){
             return $this->index($plattform,$username,$additional,"Password for plattform already inserted.");
         }
         return redirect()->to('home');
@@ -48,23 +45,30 @@ class Home extends BaseController
 
     public function deletePassword()
     {
-        $session = Services::session();
-
         $passwordID = $_GET['ID'];
-        $email = $session->get('email');
+        $email = $this->session->get('email');
 
-        $model = new GeneralModel();
-        $model->deletePassword($passwordID, $email);
+        $this->model->deletePassword($passwordID, $email);
         return redirect()->to('home');
     }
 
-    public function deleteUser(): RedirectResponse
+    public function deleteUser()
     {
-        $session = Services::session();
-        $email = $session->get('email');
-        $model = new GeneralModel();
-        $model->deleteUser($email);
-        return redirect()->to('login');
+        $password_account = $this->request->getPost('password_account');
+        $email = $this->session->get('email');
+        $deleted = $this->model->deleteUser($email,$password_account);
+        if($deleted) {
+            return redirect()->to('login');
+        }else{
+            if($password_account =="")
+                return $this->index("", "", "", "", "The password field is required.", $password_account);
+            $attempts = $this->model->setAttempts($email, true);
+            if ($attempts <= 0)
+                $notDeleted = "You've reached the maximum of attempts.";
+            else
+                $notDeleted = "Wrong password, ".$attempts." attempts left.";
+            return $this->index("", "", "", "", $notDeleted, $password_account);
+        }
     }
 
 }
