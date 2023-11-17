@@ -1,4 +1,6 @@
 - Edit Profile einfügen
 - Edit Passwort einfügen
+- Responsiv machen
+-
 - Sprache auf Englisch ändern
 - Readme ändern
