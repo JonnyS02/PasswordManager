@@ -42,7 +42,8 @@ include "partials/header.php";
 
         &nbsp&nbsp
         <button class="btn btn-primary btn-sm"
-                onclick="closeConfirmationModal('confirmationModal-account','modalContent-account');document.getElementById('password_account').classList.remove('is-invalid') ">Abort
+                onclick="closeConfirmationModal('confirmationModal-account','modalContent-account');
+                document.getElementById('password_account').classList.remove('is-invalid'); document.getElementById('password_account').value ='' ">Abort
         </button>
     </div>
 </div>
