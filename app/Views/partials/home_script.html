@@ -62,6 +62,15 @@
         document.getElementById("passwordLengthDisplay").innerHTML = length;
     }
 
+    function resetSettings(){
+        document.getElementById('passwordLength').value = 12;
+        updatePasswordLength(12);
+
+        document.getElementById('includeLetters').checked = true;
+        document.getElementById('includeNumbers').checked = true;
+        document.getElementById('includeSpecialChars').checked = true;
+    }
+
     function verschluesseln(passwort, schluessel) {
         let verschluesselt = CryptoJS.AES.encrypt(passwort, schluessel).toString();
         return verschluesselt;

@@ -31,3 +31,5 @@ $routes->post('/editProfile', 'User::editProfile');
 
 $routes->get('/insertChangesProfile', 'User::insertChangesProfile');
 $routes->post('/insertChangesProfile', 'User::insertChangesProfile');
+
+$routes->get('/password', 'Home::password');
