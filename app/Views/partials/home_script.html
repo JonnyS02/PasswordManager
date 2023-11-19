@@ -35,7 +35,7 @@
         }
     }
 
-    function send_Form(id){
+    function send_Form(id) {
         const formElement = document.getElementById(id);
         formElement.submit();
     }
@@ -62,10 +62,11 @@
         document.getElementById("passwordLengthDisplay").innerHTML = length;
     }
 
-    function resetSettings(){
+    function resetSettings() {
         document.getElementById('passwordLength').value = 12;
         updatePasswordLength(12);
-
+        if (!document.getElementById('viewPassword').checked === true)
+            passwortSichtbarMachen();
         document.getElementById('includeLetters').checked = true;
         document.getElementById('includeNumbers').checked = true;
         document.getElementById('includeSpecialChars').checked = true;
@@ -91,10 +92,10 @@
         }
     }
 
-    function dehas(passwort,modal_name,modalContent_name) {
+    function dehas(passwort, modal_name, modalContent_name) {
         var field = document.getElementById('schluesselHolder');
         if (document.getElementById("schluesselHolder").value === "") {
-            openConfirmationModal(modal_name,modalContent_name);
+            openConfirmationModal(modal_name, modalContent_name);
             field.classList.add("is-invalid");
             return
         }
@@ -103,10 +104,10 @@
         alert("Passwort: " + entschluesseln(passwort, schluessel));
     }
 
-    function dehasCopy(passwort,modal_name,modalContent_name) {
+    function dehasCopy(passwort, modal_name, modalContent_name) {
         var field = document.getElementById('schluesselHolder');
         if (document.getElementById("schluesselHolder").value === "") {
-            openConfirmationModal(modal_name,modalContent_name);
+            openConfirmationModal(modal_name, modalContent_name);
             field.classList.add("is-invalid");
             return
         }
@@ -150,14 +151,14 @@
         window.scrollTo(0, document.body.scrollHeight);
     }
 
-    function enableNewPassword(){
+    function enableNewPassword() {
         var repeatpassword = document.getElementById('repeatpassword');
         repeatpassword.disabled = !repeatpassword.disabled;
         var password = document.getElementById('password');
         password.disabled = !password.disabled;
     }
 
-    function openConfirmationModal(modal_name,modalContent_name) {
+    function openConfirmationModal(modal_name, modalContent_name) {
         var modal = document.getElementById(modal_name);
         modal.style.display = 'flex';
         setTimeout(function () {
@@ -166,7 +167,7 @@
         }, 10);
     }
 
-    function closeConfirmationModal(modal_name,modalContent_name) {
+    function closeConfirmationModal(modal_name, modalContent_name) {
         var modal = document.getElementById(modal_name);
         modal.style.opacity = '0';
         document.getElementById(modalContent_name).style.opacity = '0';
