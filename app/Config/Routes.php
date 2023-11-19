@@ -33,3 +33,4 @@ $routes->get('/insertChangesProfile', 'User::insertChangesProfile');
 $routes->post('/insertChangesProfile', 'User::insertChangesProfile');
 
 $routes->get('/password', 'Home::password');
+$routes->post('/password', 'Home::password');

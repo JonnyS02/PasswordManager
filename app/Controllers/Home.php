@@ -8,10 +8,10 @@ use Config\Services;
 
 class Home extends BaseController
 {
-    public function index($plattform ="",$username ="",$additional="",$plattform_error="",$notDeleted = "",$password_account="")
+    public function index($plattform = "", $username = "", $additional = "", $plattform_error = "", $notDeleted = "", $password_account = "")
     {
 
-        if( $this->session->get('logged')) {
+        if ($this->session->get('logged')) {
 
             $data['user'] = ($this->model->getUser($this->session->get('email')))[0]['Name'];
             $data['passwords'] = $this->model->getPasswords($this->session->get('email'));
@@ -19,19 +19,19 @@ class Home extends BaseController
             $data['error']['plattform'] = $plattform_error;
             $data['username'] = $username;
             $data['additional'] = $additional;
-            if($notDeleted != "") {
+            if ($notDeleted != "") {
                 $data['notDeleted'] = $notDeleted;
                 $data['password_account'] = $password_account;
             }
             return view('home', $data);
-        }else
+        } else
             return redirect()->to('login');
     }
 
 
     public function insertPassword()
     {
-        if( $this->session->get('logged')) {
+        if ($this->session->get('logged')) {
             $plattform = $this->request->getPost('plattform');
             $password = $this->request->getPost('passwortVerschlusselt');
             $username = $this->request->getPost('username');
@@ -42,7 +42,7 @@ class Home extends BaseController
                 return $this->password($plattform, $username, $additional, "Password for plattform already inserted.");
             }
             return redirect()->to('home');
-        }else
+        } else
             return redirect()->to('login');
     }
 
@@ -55,31 +55,43 @@ class Home extends BaseController
         return redirect()->to('home');
     }
 
-    public function password($plattform ="",$username ="",$additional="",$plattform_error="")
+    public function password($plattform = "", $username = "", $additional = "", $plattform_error = "")
     {
-        $data['success'] = "Insert Password";
-        $data['plattform'] = $plattform;
-        $data['error']['plattform'] = $plattform_error;
-        $data['username'] = $username;
-        $data['additional'] = $additional;
-        return view('password',$data);
+        if ($this->session->get('logged')) {
+            $data['success'] = "Insert Password";
+            $data['plattform'] = $plattform;
+            $data['error']['plattform'] = $plattform_error;
+            $data['username'] = $username;
+            $data['additional'] = $additional;
+
+            $passwordID = $this->request->getPost('passwordID');
+            if($passwordID != ""){
+               $password = $this->model->getPasswords($this->session->get('email'),$passwordID);
+                $data['plattform'] = $password[0]['Plattform'];
+                $data['username'] = $password[0]['Username'];
+                $data['additional'] = $password[0]['Additional'];
+                $data['success'] = "Edit Password";
+            }
+            return view('password', $data);
+        } else
+            return redirect()->to('login');
     }
 
     public function deleteUser()
     {
         $password_account = $this->request->getPost('password_account');
         $email = $this->session->get('email');
-        $deleted = $this->model->deleteUser($email,$password_account);
-        if($deleted) {
+        $deleted = $this->model->deleteUser($email, $password_account);
+        if ($deleted) {
             return redirect()->to('login');
-        }else{
-            if($password_account =="")
+        } else {
+            if ($password_account == "")
                 return $this->index("", "", "", "", "The password field is required.", $password_account);
             $attempts = $this->model->setAttempts($email, true);
             if ($attempts <= 0)
                 $notDeleted = "You've reached the maximum of attempts.";
             else
-                $notDeleted = "Wrong password, ".$attempts." attempts left.";
+                $notDeleted = "Wrong password, " . $attempts . " attempts left.";
             return $this->index("", "", "", "", $notDeleted, $password_account);
         }
     }

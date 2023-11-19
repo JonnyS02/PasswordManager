@@ -63,10 +63,12 @@ class GeneralModel extends Model
         return $attempts;
     }
 
-    public function getPasswords($email): array
+    public function getPasswords($email,$id=""): array
     {
         $passwords = $this->db->table('passwords');
         $passwords->where('Email', $email);
+        if($id != "")
+            $passwords->where('ID', $id);
         $passwords->select();
         $result = $passwords->get();
         return $result->getResultArray();

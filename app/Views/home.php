@@ -16,6 +16,17 @@ include "partials/header.php";
         };
     </script>" : ""; ?>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Warte eine Sekunde und leere das Textfeld
+        setTimeout(function() {
+            var myInput = document.getElementById('myInput');
+            myInput.value = '';
+            var schluesselHolder = document.getElementById('schluesselHolder');
+            schluesselHolder.value = '';
+        }, 100);
+    });
+</script>
 
 <div id="confirmationModal-account" class="confirmationModal" style="<?= (isset($notDeleted)) ? 'opacity: 1':""?>">
     <div id="modalContent-account" class="modalContent" style="<?= (isset($notDeleted)) ? 'opacity: 1':""?>">
@@ -103,9 +114,9 @@ include "partials/header.php";
                         <td>
                             <div style="display: flex; align-items: center;">
                                 <form style="margin: 0;padding: 0" id="editPassword<?= $c ?>"
-                                      action="<?= base_url('index.php/deletePassword') ?>" method="POST">
+                                      action="<?= base_url('index.php/password') ?>" method="POST">
                                     <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
-                                    <i class="fa-regular fa-pen-to-square" style="font-size: 1.2em"></i>&nbsp;&nbsp;
+                                    <i class="fa-regular fa-pen-to-square" style="font-size: 1.2em" onclick="send_Form('editPassword<?= $c ?>')"></i>&nbsp;&nbsp;
                                 </form>
                                 <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
                                 <i class="fa-regular fa-trash-can" style="font-size: 1.2em"
@@ -154,5 +165,6 @@ include "partials/header.php";
     </div>
 </div>
 <?php include "partials/footer.php" ?>
+
 </body>
 </html>
