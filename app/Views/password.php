@@ -52,7 +52,7 @@ include "partials/header.php";
                     <br>
                     <br>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" checked
+                        <input class="form-check-input" type="checkbox" role="switch" id="viewPassword" checked
                                onclick="passwortSichtbarMachen()">
                         <label class="form-check-label">Passwort anzeigen</label>
                     </div>
