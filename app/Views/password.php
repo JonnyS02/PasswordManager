@@ -10,7 +10,7 @@ $name = $success;
 include "partials/header.php";
 ?>
 <div class="containerSELF">
-    <div class="centered-div" style="margin-top: 20px">
+    <div class="centered-div" style="padding-top: 20px">
         <div class="left side" style="background-color: rgba(0,0,0,0)">
         </div>
 
