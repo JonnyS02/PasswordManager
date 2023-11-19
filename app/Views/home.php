@@ -24,7 +24,7 @@ include "partials/header.php";
             myInput.value = '';
             var schluesselHolder = document.getElementById('schluesselHolder');
             schluesselHolder.value = '';
-        }, 100);
+        }, 700);
     });
 </script>
 
