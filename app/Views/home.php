@@ -120,7 +120,7 @@ include "partials/header.php";
                             <p>Are you sure you want to delete the password for
                                 <b><?= $passwordFormList['Plattform'] ?></b> ?</p>
                             <button class="btn btn-danger btn-sm"
-                                    onclick="confirmRedirect('<?= base_url('index.php/deletePassword?ID=' . $passwordFormList['ID']) ?>')">
+                                    onclick="window.location.href ='<?= base_url('index.php/deletePassword?ID=' . $passwordFormList['ID']) ?>'">
                                 Yes
                             </button>
                             &nbsp&nbsp

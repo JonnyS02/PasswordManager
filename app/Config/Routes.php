@@ -11,23 +11,23 @@ $routes->post('/', 'Login::index');
 $routes->get('/login', 'Login::index');
 $routes->post('/login', 'Login::index');
 
-$routes->get('/register', 'user::index');
-$routes->post('/register', 'user::index');
+$routes->get('/register', 'User::index');
+$routes->post('/register', 'User::index');
 
-$routes->get('/home', 'home::index');
-$routes->post('/home', 'home::index');
+$routes->get('/home', 'Home::index');
+$routes->post('/home', 'Home::index');
 
-$routes->get('/insertPassword', 'home::insertPassword');
-$routes->post('/insertPassword', 'home::insertPassword');
+$routes->get('/insertPassword', 'Home::insertPassword');
+$routes->post('/insertPassword', 'Home::insertPassword');
 
-$routes->get('/deletePassword', 'home::deletePassword');
-$routes->post('/deletePassword', 'home::deletePassword');
+$routes->get('/deletePassword', 'Home::deletePassword');
+$routes->post('/deletePassword', 'Home::deletePassword');
 
-$routes->get('/deleteUser', 'home::index');
-$routes->post('/deleteUser', 'home::deleteUser');
+$routes->get('/deleteUser', 'Home::index');
+$routes->post('/deleteUser', 'Home::deleteUser');
 
-$routes->get('/editProfile', 'user::editProfile');
-$routes->post('/editProfile', 'user::editProfile');
+$routes->get('/editProfile', 'User::editProfile');
+$routes->post('/editProfile', 'User::editProfile');
 
-$routes->get('/insertChangesProfile', 'user::insertChangesProfile');
-$routes->post('/insertChangesProfile', 'user::insertChangesProfile');
+$routes->get('/insertChangesProfile', 'User::insertChangesProfile');
+$routes->post('/insertChangesProfile', 'User::insertChangesProfile');
