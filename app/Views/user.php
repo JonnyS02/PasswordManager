@@ -66,7 +66,7 @@ include "partials/header.php";
                 <p></p>
                 <div class="d-inline mb-3">
                     <input type="checkbox" id="agb" value="1" name="agb"
-                           class="form-check-input <?= (isset($error['agb'])) ? 'is-invalid' : '' ?>" <?php if (isset($agb)) echo 'checked'; ?> <?= ($finished) ? 'disabled':''?>>
+                           class="form-check-input <?= (isset($error['agb'])) ? 'is-invalid' : '' ?>" <?php if (isset($agb) && $agb != "") echo 'checked'; ?> <?= ($finished) ? 'disabled':''?>>
                     <?php if (!isset($error['agb'])) echo ' <label for="agb">Accept terms and conditions</label><br><br>'; ?>
                     <?php if (isset($error['agb'])) echo ' <label for="agb" style="color: rgb(218,53,69)">' . $error['agb'] . '</label><br><br>'; ?>
                 </div>
