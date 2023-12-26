@@ -32,18 +32,28 @@ class Home extends BaseController
     public function insertPassword()
     {
         if ($this->session->get('logged')) {
+
             $plattform = $this->request->getPost('plattform');
             $password = $this->request->getPost('passwortVerschlusselt');
             $username = $this->request->getPost('username');
             $additional = $this->request->getPost('additional');
             $email = $this->session->get('email');
+            $id = $this->request->getPost('passwordID');
 
-            if (!$this->model->insertPassword($plattform, $password, $username, $additional, $email)) {
-                return $this->password($plattform, $username, $additional, "Password for plattform already inserted.");
+            if($id != ""){
+                $this->updatePassword($plattform,$password,$username,$additional,$email,$id);
+            }else {
+                if (!$this->model->insertPassword($plattform, $password, $username, $additional, $email)) {
+                    return $this->password($plattform, $username, $additional, "Password for plattform already inserted.");
+                }
             }
             return redirect()->to('home');
         } else
             return redirect()->to('login');
+    }
+
+    public function updatePassword($plattform,$password,$username,$additional,$email,$id){
+        $this->model->updatePassword($plattform,$password,$username,$additional,$email,$id);
     }
 
     public function deletePassword()
@@ -70,6 +80,7 @@ class Home extends BaseController
                 $data['plattform'] = $password[0]['Plattform'];
                 $data['username'] = $password[0]['Username'];
                 $data['additional'] = $password[0]['Additional'];
+                $data['id'] = $password[0]['ID'];
                 $data['success'] = "Edit Password";
             }
             return view('password', $data);

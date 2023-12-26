@@ -63,11 +63,11 @@ class GeneralModel extends Model
         return $attempts;
     }
 
-    public function getPasswords($email,$id=""): array
+    public function getPasswords($email, $id = ""): array
     {
         $passwords = $this->db->table('passwords');
         $passwords->where('Email', $email);
-        if($id != "")
+        if ($id != "")
             $passwords->where('ID', $id);
         $passwords->select();
         $result = $passwords->get();
@@ -90,6 +90,33 @@ class GeneralModel extends Model
         return false;
     }
 
+    public function updatePassword($plattform, $password, $username, $additional, $email, $id)
+    {
+
+        $passwordEntry = $this->db->table('passwords');
+        if ($plattform != "") {
+            $passwordEntry->set('Plattform', $plattform);
+            $this->submitUpdate($passwordEntry, $email, $id);
+        }
+        /*  if ($password != "") {
+              $passwordEntry->set('Password', $password);
+              $this->submitUpdate($passwordEntry,$email,$id);
+          }*/
+        $passwordEntry->set('Username', $username);
+        $this->submitUpdate($passwordEntry, $email, $id);
+
+        $passwordEntry->set('Additional', $additional);
+        $this->submitUpdate($passwordEntry, $email, $id);
+    }
+
+    public function submitUpdate($database, $email, $id)
+    {
+        $database->where('Email', $email);
+        $database->where('ID', $id);
+        $database->update();
+    }
+
+
     public function deletePassword($passwordID, $email)
     {
         $passwords = $this->db->table('passwords');
@@ -109,9 +136,9 @@ class GeneralModel extends Model
         return sizeof($result) == 0;
     }
 
-    public function deleteUser($email,$password)
+    public function deleteUser($email, $password)
     {
-        if ($this->checkPassword($email,$password) == -1)
+        if ($this->checkPassword($email, $password) == -1)
             return false;
 
         $passwords = $this->db->table('passwords');
@@ -128,7 +155,7 @@ class GeneralModel extends Model
     public function insertChangesProfile($name, $email, $oldEmail, $password = "")
     {
         $oldUser = $this->getUser($oldEmail);
-        if ($oldUser[0]['Name'] == $name &&  $oldUser[0]['Email'] == $email && (password_verify($password,$oldUser[0]['Password']) || $password == ""))
+        if ($oldUser[0]['Name'] == $name && $oldUser[0]['Email'] == $email && (password_verify($password, $oldUser[0]['Password']) || $password == ""))
             return false;
 
         if ($password == "") {
@@ -136,7 +163,7 @@ class GeneralModel extends Model
                 'Name' => $name,
                 'Email' => $email,
             ];
-        }else{
+        } else {
             $password = password_hash($password, PASSWORD_DEFAULT);
             $updated_user = [
                 'Name' => $name,
@@ -149,7 +176,7 @@ class GeneralModel extends Model
         $change->where('Email', $oldEmail);
         $change->update($updated_user);
 
-        if($oldEmail != $email){
+        if ($oldEmail != $email) {
             $change_email = $this->db->table('passwords');
             $change_email->set('Email', $email);
             $change_email->where('Email', $oldEmail);

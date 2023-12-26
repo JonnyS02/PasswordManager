@@ -19,6 +19,8 @@ class User extends BaseController
         $data['finished'] = false;
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            return $this->verify();
+
             $data['username'] = $this->request->getPost('username');
             $data['email'] = $this->request->getPost('email');
             $data['password'] = $this->request->getPost('password');
@@ -29,6 +31,7 @@ class User extends BaseController
                 if ($this->model->insertUser($data['username'], $data['password'], true, $data['email'], 3)) {
                     $data['success'] = "Account created !";
                     $data['finished'] = true;
+                    return $this->verify();
                 } else {
                     $data['error']['email'] = "Email is already in use.";
                 }
@@ -40,6 +43,12 @@ class User extends BaseController
             }
         }
         return view('user', $data);
+    }
+
+    public function verify(): string
+    {
+        $data['success'] = "Verify Email";
+        return view('verify', $data);
     }
 
     public function editProfile()

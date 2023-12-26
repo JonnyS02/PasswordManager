@@ -79,12 +79,17 @@ include "partials/header.php";
                     </div>
                 </div>
                 <p></p>
-
-                <?= ($error['plattform'] != "") ? '<script>window.onload = scrollToEnd();</script>' : ''; ?>
+                <div class="d-inline mb-3">
+                    <input type="checkbox" id="changePassword" value="1" name="changePassword" style="margin-bottom: -100px"
+                           class="form-check-input" onclick="">
+                    <label for="changePassword">Overwrite Password</label>
+                </div>
+                <p></p>
+                <div class="passwordHighlighter"></div>
 
                 <form action="<?= base_url('index.php/insertPassword') ?>" method="POST" id="submitPassword">
-                    <input type="hidden" value=""
-                           name="passwortVerschlusselt" id="passwortVerschlusselt">
+                    <input type="hidden" value="" name="passwortVerschlusselt" id="passwortVerschlusselt">
+                    <input type="hidden" value="<?= $id ?? '' ?>" name="passwordID" id="passwordID">
                     <div class="form-group">
                         <label for="emailInput">Plattform</label>
                         <input name="plattform" type="text"
