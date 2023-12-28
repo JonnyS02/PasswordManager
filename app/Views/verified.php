@@ -32,7 +32,6 @@ include "partials/header.php";
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Anzeige des ersten Bildes für 3,2 Sekunden
         setTimeout(function () {
             document.getElementById('gif').classList.add('hidden');
             document.getElementById('lastFrame').classList.remove('hidden');
