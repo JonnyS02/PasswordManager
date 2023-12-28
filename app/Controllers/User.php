@@ -19,19 +19,16 @@ class User extends BaseController
         $data['finished'] = false;
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            return $this->verify();
-
             $data['username'] = $this->request->getPost('username');
             $data['email'] = $this->request->getPost('email');
             $data['password'] = $this->request->getPost('password');
             $data['repeatpassword'] = $this->request->getPost('repeatpassword');
             $data['agb'] = $this->request->getPost('agb');
-
             if ($this->validation->run($this->request->getPost(), 'register') && $data['repeatpassword'] == $data['password']) {
-                if ($this->model->insertUser($data['username'], $data['password'], true, $data['email'], 3)) {
+                if ($this->model->insertUser($data['username'], $data['password'], mt_rand(10000, 99999), $data['email'], 3)) {
                     $data['success'] = "Account created !";
                     $data['finished'] = true;
-                    return $this->verify();
+                    return $this->email->initVerify($data['email']);
                 } else {
                     $data['error']['email'] = "Email is already in use.";
                 }
@@ -43,12 +40,6 @@ class User extends BaseController
             }
         }
         return view('user', $data);
-    }
-
-    public function verify(): string
-    {
-        $data['success'] = "Verify Email";
-        return view('verify', $data);
     }
 
     public function editProfile()
@@ -100,11 +91,11 @@ class User extends BaseController
                             $inserted = $this->model->insertChangesProfile($data['username'], $data['email'], $this->session->get('email'));
                         else
                             $inserted = $this->model->insertChangesProfile($data['username'], $data['email'], $this->session->get('email'), $data['password']);
-                        if($inserted) {
+                        if ($inserted) {
                             $this->session->set('email', $data['email']);
                             $data['success'] = "Profile changed !";
                             $data['finished'] = true;
-                        }else{
+                        } else {
                             $data['noChange'] = true;
                         }
                         return view('editUser', $data);

@@ -56,11 +56,7 @@ class Email extends BaseConfig
     public bool $SMTPKeepAlive = false;
 
     /**
-     * SMTP Encryption.
-     *
-     * @var string '', 'tls' or 'ssl'. 'tls' will issue a STARTTLS command
-     *             to the server. 'ssl' means implicit SSL. Connection on port
-     *             465 should set this to ''.
+     * SMTP Encryption. Either tls or ssl
      */
     public string $SMTPCrypto = 'tls';
 
@@ -77,7 +73,7 @@ class Email extends BaseConfig
     /**
      * Type of mail, either 'text' or 'html'
      */
-    public string $mailType = 'text';
+    public string $mailType = 'html';
 
     /**
      * Character set (utf-8, iso-8859-1, etc.)
@@ -92,7 +88,7 @@ class Email extends BaseConfig
     /**
      * Email Priority. 1 = highest. 5 = lowest. 3 = normal
      */
-    public int $priority = 3;
+    public int $priority = 0;
 
     /**
      * Newline character. (Use “\r\n” to comply with RFC 822)

@@ -27,6 +27,8 @@ class Login extends BaseController
                     $this->session->set('email', $data['email']);
                     $this->session->set('logged', TRUE);
                     $this->model->setAttempts($data['email'],false);
+                    if ($this->email->isVerified($data['email'])== "0")
+                        return $this->email->initVerify($data['email']);
                     return redirect()->to('home');
                 }
                 if ($status == -1) {

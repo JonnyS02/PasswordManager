@@ -184,4 +184,21 @@ class GeneralModel extends Model
         }
         return true;
     }
+
+    public function verifyUser($verifyCode, $email)
+    {
+        $user = $this->getUser($email);
+        if (sizeof($user) != 0) {
+            if ($user[0]["Verified"] == "1")
+                return true;
+            if ($user[0]["Verified"] == $verifyCode) {
+                $verify = $this->db->table('users');
+                $verify->set('Verified', 1);
+                $verify->where('Email', $email);
+                $verify->update();
+                return true;
+            }
+        }
+        return false;
+    }
 }

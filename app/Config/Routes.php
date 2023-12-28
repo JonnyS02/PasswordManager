@@ -34,3 +34,12 @@ $routes->post('/insertChangesProfile', 'User::insertChangesProfile');
 
 $routes->get('/password', 'Home::password');
 $routes->post('/password', 'Home::password');
+
+$routes->post('/isverified', 'Email::isVerified');
+$routes->get('/isverified', 'Email::isVerified');
+
+$routes->post('/verify', 'Email::verify');
+$routes->get('/verify', 'Email::verify');
+
+$routes->post('/verified', 'Email::verified');
+$routes->get('/verified', 'Email::verified');

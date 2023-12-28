@@ -56,6 +56,7 @@ abstract class BaseController extends Controller
         $this->session = \Config\Services::session();
         $this->validation = \Config\Services::validation();
         $this->model = new GeneralModel();
+        $this->email = new Email();
 
         // E.g.: $this->session = \Config\Services::session();
     }
