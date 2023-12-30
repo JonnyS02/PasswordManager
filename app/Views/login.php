@@ -29,7 +29,7 @@ include "partials/header.php";
                     <input name="password" type="password"
                            class=" form-control texinput <?= (isset($error['password'])) ? 'is-invalid' : '' ?>"
                            id="password"
-                           placeholder="Enter your passwort" value="<?php if (isset($password)) {
+                           placeholder="Enter your password" value="<?php if (isset($password)) {
                         echo $password;
                     } ?>">
                     <div class="invalid-feedback">

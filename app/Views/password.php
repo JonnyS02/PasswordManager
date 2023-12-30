@@ -17,9 +17,9 @@ include "partials/header.php";
         <div class="middle">
             <div class="insertPassword passwordGenerator" style="margin-right: 10px;">
                 <div class="generator-container" style="padding: 10px;">
-                    <h3 style="font-family: 'Brush Script MT', cursive;">Password Generator</h3>
+                    <h3 style="font-family: 'Brush Script MT', cursive;">Password generator</h3>
                     <br>
-                    <label for="passwordLength">Passwort Länge: <span id="passwordLengthDisplay">12</span></label>
+                    <label for="passwordLength">Password length: <span id="passwordLengthDisplay">12</span></label>
                     <br>
                     <input type="range" id="passwordLength" name="passwordLength" min="1" max="30" value="12"
                            oninput="updatePasswordLength(this.value)" class="form-range">
@@ -27,21 +27,21 @@ include "partials/header.php";
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="includeLetters"
                                name="zahlen" checked>
-                        <label class="form-check-label" for="flexSwitchCheckChecked" id="includeLetters">Mit
-                            Buchstaben</label>
+                        <label class="form-check-label" for="flexSwitchCheckChecked" id="includeLetters">With
+                            Letters</label>
                     </div>
                     <br>
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="includeNumbers"
                                name="zahlen" checked>
-                        <label class="form-check-label" for="flexSwitchCheckChecked" id="includeNumbers">Mit
-                            Zahlen</label>
+                        <label class="form-check-label" for="flexSwitchCheckChecked" id="includeNumbers">With
+                            numbers</label>
                     </div>
                     <br>
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="includeSpecialChars"
                                name="sonderzeichen" checked>
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Mit Sonderzeichen</label>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">With special characters</label>
                     </div>
                     <hr>
                     <div class="d-inline">
@@ -54,7 +54,7 @@ include "partials/header.php";
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="viewPassword" checked
                                onclick="passwortSichtbarMachen()">
-                        <label class="form-check-label">Passwort anzeigen</label>
+                        <label class="form-check-label">Show password</label>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,8 @@ include "partials/header.php";
                 </div>
                 <p></p>
                 <div class="d-inline mb-3">
-                    <input type="checkbox" id="changePassword" value="1" name="changePassword" style="margin-bottom: -100px"
+                    <input type="checkbox" id="changePassword" value="1" name="changePassword"
+                           style="margin-bottom: -100px"
                            class="form-check-input" onclick="">
                     <label for="changePassword">Overwrite Password</label>
                 </div>
@@ -91,10 +92,10 @@ include "partials/header.php";
                     <input type="hidden" value="" name="passwortVerschlusselt" id="passwortVerschlusselt">
                     <input type="hidden" value="<?= $id ?? '' ?>" name="passwordID" id="passwordID">
                     <div class="form-group">
-                        <label for="emailInput">Plattform</label>
+                        <label for="emailInput">Platform</label>
                         <input name="plattform" type="text"
                                class="form-control texinput <?= ($error['plattform'] != "") ? 'is-invalid' : '' ?>"
-                               id="plattform" placeholder="Enter plattform"
+                               id="plattform" placeholder="Enter platform"
                                value="<?php if (isset($plattform)) {
                                    echo $plattform;
                                } ?>">
@@ -126,15 +127,14 @@ include "partials/header.php";
                     </div>
                     <p></p>
 
-                    <a onclick="generatePassword_and_sendForm()" class="btn btn-primary">Submit password</a> <a href="<?= base_url('index.php/home')?>" class="btn btn-secondary">Abort</a>
+                    <a onclick="generatePassword_and_sendForm()" class="btn btn-primary">Submit password</a>
+                    <a href="<?= base_url('index.php/home') ?>" class="btn btn-secondary">Abort</a>
 
                 </form>
             </div>
         </div>
         <div class="right side" style="background-color: rgba(0,0,0,0)">
-
         </div>
-
     </div>
 </div>
 <?php include "partials/footer.php" ?>

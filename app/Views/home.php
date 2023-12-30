@@ -82,7 +82,7 @@ include "partials/header.php";
                 <a class="text-decoration-none" href="<?= base_url('index.php/password') ?>">Insert Password</a>
             </div>
             <div class="side-element">
-                <input type="text" id="myInput" onkeyup="searchTable()" placeholder="🔍 Plattform" class="form-control">
+                <input type="text" id="myInput" onkeyup="searchTable()" placeholder="🔍 Platform" class="form-control">
             </div>
         </div>
         <div class="middle">
@@ -90,7 +90,7 @@ include "partials/header.php";
                 <thead class="bg-light">
                 <tr>
                     <th scope="col">No.</th>
-                    <th scope="col">Plattform</th>
+                    <th scope="col">Platform</th>
                     <th scope="col">Username</th>
                     <th scope="col">Other</th>
                     <th scope="col">Password</th>
