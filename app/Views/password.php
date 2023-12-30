@@ -28,7 +28,7 @@ include "partials/header.php";
                         <input class="form-check-input" type="checkbox" role="switch" id="includeLetters"
                                name="zahlen" checked>
                         <label class="form-check-label" for="flexSwitchCheckChecked" id="includeLetters">With
-                            Letters</label>
+                            letters</label>
                     </div>
                     <br>
                     <div class="form-check form-switch">
