@@ -136,7 +136,7 @@ class GeneralModel extends Model
         return sizeof($result) == 0;
     }
 
-    public function deleteUser($email, $password)
+    public function deleteUser($email, $password): bool
     {
         if ($this->checkPassword($email, $password) == -1)
             return false;
@@ -152,7 +152,7 @@ class GeneralModel extends Model
         return true;
     }
 
-    public function insertChangesProfile($name, $email, $oldEmail, $password = "")
+    public function insertChangesProfile($name, $email, $oldEmail, $password = ""): bool
     {
         $oldUser = $this->getUser($oldEmail);
         if ($oldUser[0]['Name'] == $name && $oldUser[0]['Email'] == $email && (password_verify($password, $oldUser[0]['Password']) || $password == ""))
@@ -185,7 +185,7 @@ class GeneralModel extends Model
         return true;
     }
 
-    public function verifyUser($verifyCode, $email)
+    public function verifyUser($verifyCode, $email): bool
     {
         $user = $this->getUser($email);
         if (sizeof($user) != 0) {
