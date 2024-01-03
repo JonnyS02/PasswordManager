@@ -17,7 +17,8 @@ include "partials/header.php";
         <div class="middle">
             <div class="insertPassword passwordGenerator" style="margin-right: 10px;">
                 <div class="generator-container" style="padding: 10px;">
-                    <h3 style="font-family: 'Brush Script MT', cursive;">Password generator</h3>
+                    <h3 style="font-family: 'Brush Script MT','Dancing Script', 'Calibri', 'Arial', cursive;">Password generator</h3>
+
                     <br>
                     <label for="passwordLength">Password length: <span id="passwordLengthDisplay">12</span></label>
                     <br>

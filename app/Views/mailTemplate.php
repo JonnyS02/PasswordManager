@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dancing+Script">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Smooch+Sans">
     <title>PassSafe Pro</title>
 </head>
 <body style="font-family: 'Arial', sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
@@ -14,9 +16,9 @@
                 <tr>
                     <td style="padding: 20px; text-align: center;">
                         <h1 style="font-size: 3.5em">
-                            <span style="color: black;font-family: 'Brush Script MT', cursive;font-weight: bold;">PassSafe</span>
+                            <span style="color: black;font-family: 'Brush Script MT','Dancing Script', 'Calibri', 'Arial', cursive;font-weight: bold;">PassSafe</span>
                             <sup><span style="font-family: 'Agency FB',serif; color: white; background-color: #00bcff;padding-left: 5px;padding-right: 5px;border-radius: 5px">Pro</span></sup>
-                            <span style="color: black;font-family: 'Brush Script MT', cursive;font-weight: bold;white-space: pre;"> <?php if (isset($name)) echo $name; ?></span>
+                            <span style="color: black;font-family: 'Brush Script MT','Dancing Script', 'Calibri', 'Arial', cursive;font-weight: bold;white-space: pre;"> <?php if (isset($name)) echo $name; ?></span>
                             <div class="diver" style="border-radius: 5px 5px 0 0;width: 100%; background-color: rgba(255,183,0,0.9);padding-top: 10px;"></div>
                             <div class="diver" style="width: 100%; background-color: rgba(255,128,0,0.9);padding-top: 10px;"></div>
                             <div class="diver" style="border-radius: 0 0 5px 5px;width: 100%; background-color: rgba(255,77,0,0.9);padding-top: 10px;"></div>

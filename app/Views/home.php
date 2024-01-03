@@ -18,15 +18,25 @@ include "partials/header.php";
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Warte eine Sekunde und leere das Textfeld
         setTimeout(function() {
-            var myInput = document.getElementById('myInput');
-            myInput.value = '';
-            var schluesselHolder = document.getElementById('schluesselHolder');
-            schluesselHolder.value = '';
+            document.getElementById("myInput").disabled = false;
+            document.getElementById("schluesselHolder").disabled = false;
         }, 700);
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            searchTable('myInput');
+        }, 1500);
+    });
+
 </script>
+
+<style>
+    .form-control {
+        transition: background-color 0.3s ease;
+    }
+</style>
 
 <div id="confirmationModal-account" class="confirmationModal" style="<?= (isset($notDeleted)) ? 'opacity: 1':""?>">
     <div id="modalContent-account" class="modalContent" style="<?= (isset($notDeleted)) ? 'opacity: 1':""?>">
@@ -82,7 +92,7 @@ include "partials/header.php";
                 <a class="text-decoration-none" href="<?= base_url('index.php/password') ?>">Insert Password</a>
             </div>
             <div class="side-element">
-                <input type="text" id="myInput" onkeyup="searchTable()" placeholder="🔍 Platform" class="form-control">
+                <input type="text" id="myInput" onkeyup="searchTable('myInput')" placeholder="🔍 Platform" class="form-control" disabled>
             </div>
         </div>
         <div class="middle">
@@ -159,7 +169,7 @@ include "partials/header.php";
                     Account</a>
             </div>
             <div class="side-element">
-                <input type="password" id="schluesselHolder" placeholder="🔑 Key" class="form-control">
+                <input type="password" id="schluesselHolder" placeholder="🔑 Key" class="form-control" disabled>
             </div>
         </div>
     </div>
