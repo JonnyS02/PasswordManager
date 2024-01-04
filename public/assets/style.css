@@ -11,11 +11,11 @@ body {
     justify-content: center;
 }
 
-.PRO{
+.PRO {
     border-radius: 5px;
 }
 
-.header{
+.header {
     font-size: 4.5em;
 }
 
@@ -26,13 +26,13 @@ body {
     background-color: rgba(0, 188, 255, 0);
 }
 
-.formHead{
+.formHead {
     margin-left: 15%;
     margin-right: 15%;
     max-width: 400px
 }
 
-.side{
+.side {
     border-radius: 20px;
     margin: 20px;
     padding: 20px;
@@ -41,13 +41,13 @@ body {
     background-color: #f6f7f9;
 }
 
-.middle{
+.middle {
     padding-bottom: 50px;
     width: 60%;
     float: left;
 }
 
-.side-element{
+.side-element {
     border: 2px #00bcff;
     border-style: none none solid none;
     padding: 10px;
@@ -55,36 +55,40 @@ body {
     float: left;
 }
 
-.empty{
+.empty {
     padding: 0;
 }
 
-.insertPassword{
+.insertPassword {
     width: calc(50% - 10px);
     float: left;
 }
 
-.passwordGenerator{
+.passwordGenerator {
     border: 2px solid #00bcff;
     border-radius: 20px;
 }
 
-.passwordHighlighter{
+.passwordHighlighter {
     margin-top: 15px;
     margin-bottom: 15px;
     border: 1px solid #00bcff;
     border-radius: 20px;
 }
 
-td i{
+td i {
     transition: color 0.25s;
 }
 
-td i:hover{
+td i:hover {
     cursor: pointer;
     color: #00bcff;
 }
 
-hr{
+.form-control {
+    transition: background-color 0.3s ease;
+}
+
+hr {
     z-index: 0;
 }

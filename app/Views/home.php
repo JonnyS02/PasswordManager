@@ -32,12 +32,6 @@ include "partials/header.php";
 
 </script>
 
-<style>
-    .form-control {
-        transition: background-color 0.3s ease;
-    }
-</style>
-
 <div id="confirmationModal-account" class="confirmationModal" style="<?= (isset($notDeleted)) ? 'opacity: 1':""?>">
     <div id="modalContent-account" class="modalContent" style="<?= (isset($notDeleted)) ? 'opacity: 1':""?>">
         <h3>Delete Account</h3>
