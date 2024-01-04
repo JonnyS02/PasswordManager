@@ -90,29 +90,25 @@ class GeneralModel extends Model
         return false;
     }
 
-    public function updatePassword($plattform, $password, $username, $additional, $email, $id)
+    public function updatePassword($plattform, $username, $additional, $email, $oldPlattform, $changePassword, $password)
     {
-
         $passwordEntry = $this->db->table('passwords');
-        if ($plattform != "") {
-            $passwordEntry->set('Plattform', $plattform);
-            $this->submitUpdate($passwordEntry, $email, $id);
+        if($changePassword){
+            $passwordEntry->set('Password', $password);
+            $this->submitUpdate($passwordEntry, $email, $oldPlattform);
         }
-        /*  if ($password != "") {
-              $passwordEntry->set('Password', $password);
-              $this->submitUpdate($passwordEntry,$email,$id);
-          }*/
         $passwordEntry->set('Username', $username);
-        $this->submitUpdate($passwordEntry, $email, $id);
-
+        $this->submitUpdate($passwordEntry, $email, $oldPlattform);
         $passwordEntry->set('Additional', $additional);
-        $this->submitUpdate($passwordEntry, $email, $id);
+        $this->submitUpdate($passwordEntry, $email, $oldPlattform);
+        $passwordEntry->set('Plattform', $plattform);
+        $this->submitUpdate($passwordEntry, $email, $oldPlattform);
     }
 
     public function submitUpdate($database, $email, $id)
     {
         $database->where('Email', $email);
-        $database->where('ID', $id);
+        $database->where('Plattform', $id);
         $database->update();
     }
 

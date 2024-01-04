@@ -43,7 +43,7 @@ include "partials/header.php";
                 <p></p>
                 <div class="passwordHighlighter"></div>
                 <div class="form-group">
-                    <label for="password">New Password</label>
+                    <label for="password">New password</label>
                     <input name="password" type="password" <?php if (!(isset($changePassword))) echo 'disabled'; ?>
                            class=" form-control texinput <?= (isset($error['password'])) ? 'is-invalid' : '' ?>"
                            id="password"
@@ -71,13 +71,13 @@ include "partials/header.php";
                 <div class="d-inline mb-3">
                     <input type="checkbox" id="changePassword" value="1" name="changePassword" style="margin-bottom: -100px"
                            class="form-check-input" <?php if (isset($changePassword)) echo 'checked'; ?> <?= ($finished) ? 'disabled' : '' ?>
-                           onclick="enableNewPassword()"
+                           onclick="enableNewPassword('repeatpassword','Repeat your new password','password','Enter your new password')"
                     >
-                    <label for="changePassword">Change Password</label>
+                    <label for="changePassword">Change password</label>
                 </div>
                 <div class="passwordHighlighter"></div>
                 <div class="form-group">
-                    <label for="password">Confirmation Password</label>
+                    <label for="password">Confirmation password</label>
                     <input name="password_old" type="password"
                            class=" form-control texinput <?= (isset($error['password_old'])) ? 'is-invalid' : '' ?>"
                            id="password_old"

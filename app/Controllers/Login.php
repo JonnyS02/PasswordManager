@@ -13,6 +13,7 @@ class Login extends BaseController
 
         $this->session->set('email', '');
         $this->session->set('logged', FALSE);
+        $this->session->set('plattform','');
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data['email'] = $this->request->getPost('email');

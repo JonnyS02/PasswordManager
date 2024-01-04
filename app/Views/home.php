@@ -59,10 +59,8 @@ include "partials/header.php";
             </div>
             <p></p>
         </form>
-        <input type="submit" class="btn btn-danger font-weight-bold" onclick="send_Form('deleteUser')" value="Delete Account">
-
-        &nbsp&nbsp
-        <button class="btn btn-primary btn-sm"
+        <input type="submit" class="btn btn-danger" onclick="send_Form('deleteUser')" value="Delete Account">
+        <button class="btn btn-primary"
                 onclick="closeConfirmationModal('confirmationModal-account','modalContent-account');
                 document.getElementById('password_account').classList.remove('is-invalid'); document.getElementById('password_account').value ='' ">Abort
         </button>
@@ -144,7 +142,6 @@ include "partials/header.php";
                                     onclick="window.location.href ='<?= base_url('index.php/deletePassword?ID=' . $passwordFormList['ID']) ?>'">
                                 Yes
                             </button>
-                            &nbsp&nbsp
                             <button class="btn btn-primary btn-sm"
                                     onclick="closeConfirmationModal('confirmationModal-password<?= $c ?>','modalContent-password<?= $c ?>')">
                                 Abort

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php include "partials/head.php" ?>
-<?php include "partials/home_script.html"; ?>
+<?php include "partials/home_script.html" ?>
 
 <body>
 <?php
@@ -64,8 +64,8 @@ include "partials/header.php";
                     <label for="emailInput">Password-Key</label>
                     <input name="username" type="password"
                            class="form-control texinput "
-                           id="key" placeholder="Enter the key to encrypt your password"
-                           value="">
+                           id="key" placeholder="<?php if (!isset($id)) echo "Enter the key to encrypt your password"?>"
+                           value="" <?php if (isset($id)) echo "disabled"?>>
                     <div class="invalid-feedback" id="key-invalid">
                     </div>
                 </div>
@@ -74,24 +74,17 @@ include "partials/header.php";
                     <label for="emailInput">Password</label>
                     <input name="password" type="text"
                            class="form-control texinput "
-                           id="password" placeholder="Enter your password"
-                           value="">
+                           id="password" placeholder="<?php if (!isset($id)) echo "Enter your password"?>"
+                           value="" <?php if (isset($id)) echo "disabled"?>>
                     <div class="invalid-feedback" id="password-invalid">
                     </div>
                 </div>
-                <p></p>
-                <div class="d-inline mb-3">
-                    <input type="checkbox" id="changePassword" value="1" name="changePassword"
-                           style="margin-bottom: -100px"
-                           class="form-check-input" onclick="">
-                    <label for="changePassword">Overwrite Password</label>
-                </div>
-                <p></p>
-                <div class="passwordHighlighter"></div>
-
                 <form action="<?= base_url('index.php/insertPassword') ?>" method="POST" id="submitPassword">
+                    <p></p>
+                    <?php if (isset($id)){ include "partials/changePassword.php";} ?>
+
+                    <div class="passwordHighlighter"></div>
                     <input type="hidden" value="" name="passwortVerschlusselt" id="passwortVerschlusselt">
-                    <input type="hidden" value="<?= $id ?? '' ?>" name="passwordID" id="passwordID">
                     <div class="form-group">
                         <label for="emailInput">Platform</label>
                         <input name="plattform" type="text"

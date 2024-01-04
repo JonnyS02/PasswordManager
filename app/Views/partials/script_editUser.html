@@ -1,25 +1,24 @@
 <script>
-    function enableNewPassword() {
-        var repeatpassword = document.getElementById('repeatpassword');
-        repeatpassword.disabled = !repeatpassword.disabled;
-        var password = document.getElementById('password');
-        password.disabled = !password.disabled;
+    function enableNewPassword(field1,placeholder1,field2,placeholder2){
+        var field1 = document.getElementById(field1);
+        field1.disabled = !field1.disabled;
+        var field2 = document.getElementById(field2);
+        field2.disabled = !field2.disabled;
 
-        if (repeatpassword.disabled) {
-            repeatpassword.value = "";
-            repeatpassword.placeholder ="";
-            repeatpassword.classList.remove("is-invalid");
+        if (field1.disabled) {
+            field1.value = "";
+            field1.placeholder ="";
+            field1.classList.remove("is-invalid");
         }else {
-            repeatpassword.placeholder ="Repeat your new password";
+            field1.placeholder =placeholder1;
         }
 
-        if (password.disabled) {
-            password.value = "";
-            password.placeholder ="";
-            password.classList.remove("is-invalid");
+        if (field2.disabled) {
+            field2.value = "";
+            field2.placeholder ="";
+            field2.classList.remove("is-invalid");
         }else {
-            password.placeholder ="Enter your new password";
+            field2.placeholder =placeholder2;
         }
     }
-
 </script>
