@@ -83,7 +83,7 @@
     }
 
     input[type="range"] {
-        height: 20px; /* Setze die Höhe der Leiste nach Bedarf */
+        height: 20px;
     }
 
     .passwordHighlighter{
@@ -91,14 +91,13 @@
 
     }
 
-    /* Stile für den Slider */
     input[type="range"]::-webkit-slider-thumb {
-        width: 30px; /* Setze die Breite des Sliders nach Bedarf */
-        height: 30px; /* Setze die Höhe des Sliders nach Bedarf */
-        background-color: #007bff; /* Setze die Hintergrundfarbe des Sliders nach Bedarf */
-        border: 2px solid #007bff; /* Setze die Rahmenfarbe und -breite des Sliders nach Bedarf */
-        border-radius: 50%; /* Runde die Ecken des Sliders ab, um einen Kreis zu erhalten */
-        -webkit-appearance: none; /* Entferne die Standard-Styles für WebKit-basierte Browser */
-        margin-top: -10px; /* Korrektur für die vertikale Ausrichtung des Sliders */
+        width: 30px;
+        height: 30px;
+        background-color: #007bff;
+        border: 2px solid #007bff;
+        border-radius: 50%;
+        -webkit-appearance: none;
+        margin-top: -10px;
     }
 }
