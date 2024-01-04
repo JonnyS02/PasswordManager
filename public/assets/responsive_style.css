@@ -1,0 +1,99 @@
+@media only screen and (max-width: 980px) {
+    body {
+        font-size: 40px;
+    }
+
+    .spacer {
+        height: 25px;
+        width: 100%;
+        background-color: #f6f7f9;
+    }
+
+    .texinput {
+        border: 2px solid #cccccc;
+        border-radius: 15px;
+        width: 100%;
+        font-size: 40px;
+        max-width: unset;
+    }
+
+    .header{
+        font-size: 300%;
+    }
+
+    .PRO{
+        border-radius: 10px;
+    }
+
+    .btn{
+        font-size: 40px;
+    }
+
+    .formHead {
+        max-width: unset;
+    }
+
+    .btn{
+        border-radius: 15px;
+    }
+
+    .formHead{
+        padding-top: 5%;
+    }
+
+    .form-group{
+        padding-top: 5%;
+    }
+
+    #agb-divider{
+        padding-top: 5%;
+    }
+
+    input[type="checkbox"] {
+        border: 2px solid #b7b7b7;
+    }
+
+    .passwordGenerator{
+        border: 4px solid #00bcff;
+        border-radius: 20px;
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .passwordGenerator h3{
+        font-size: 200%;
+    }
+
+
+    .side{
+        border-radius: 20px;
+        margin: 20px;
+        padding: 20px;
+        float: left;
+        width: calc(10% - 40px);
+        background-color: #f6f7f9;
+    }
+
+    .insertPassword{
+        width: 100%;
+    }
+
+    .middle{
+        width: 80%;
+    }
+
+    input[type="range"] {
+        height: 20px; /* Setze die Höhe der Leiste nach Bedarf */
+    }
+
+    /* Stile für den Slider */
+    input[type="range"]::-webkit-slider-thumb {
+        width: 30px; /* Setze die Breite des Sliders nach Bedarf */
+        height: 30px; /* Setze die Höhe des Sliders nach Bedarf */
+        background-color: #007bff; /* Setze die Hintergrundfarbe des Sliders nach Bedarf */
+        border: 2px solid #007bff; /* Setze die Rahmenfarbe und -breite des Sliders nach Bedarf */
+        border-radius: 50%; /* Runde die Ecken des Sliders ab, um einen Kreis zu erhalten */
+        -webkit-appearance: none; /* Entferne die Standard-Styles für WebKit-basierte Browser */
+        margin-top: -10px; /* Korrektur für die vertikale Ausrichtung des Sliders */
+    }
+}

@@ -4,6 +4,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="<?php echo base_url("assets/style.css")?>" rel="stylesheet"/>
     <link href="<?php echo base_url("assets/modal_style.css")?>" rel="stylesheet"/>
+    <?php
+    function isMobileDevice() {
+        $userAgent = $_SERVER['HTTP_USER_AGENT'];
+        $mobileKeywords = array('Mobile', 'Android', 'iPhone', 'iPad', 'Windows Phone', 'BlackBerry');
+        foreach ($mobileKeywords as $keyword) {
+            if (stripos($userAgent, $keyword) !== false) {
+                return true;
+            }
+        }
+        return false;
+    }
+    if (isMobileDevice()){
+        echo '<link href='.base_url("assets/responsive_style.css").' rel="stylesheet"/>';
+    }
+    ?>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dancing+Script">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Smooch+Sans">
     <link rel="icon" type="image/x-icon" href="<?= base_url('assets/icon.ico') ?>">

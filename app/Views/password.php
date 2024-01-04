@@ -11,7 +11,7 @@ include "partials/header.php";
 ?>
 <div class="containerSELF">
     <div class="centered-div" style="padding-top: 20px">
-        <div class="left side" style="background-color: rgba(0,0,0,0)">
+        <div class="generator-spacer left side" style="background-color: rgba(0,0,0,0)">
         </div>
 
         <div class="middle">
@@ -126,7 +126,7 @@ include "partials/header.php";
                 </form>
             </div>
         </div>
-        <div class="right side" style="background-color: rgba(0,0,0,0)">
+        <div class="generator-spacer right side" style="background-color: rgba(0,0,0,0)">
         </div>
     </div>
 </div>
