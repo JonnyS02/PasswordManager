@@ -120,10 +120,9 @@ include "partials/header.php";
                         </div>
                     </div>
                     <p></p>
-
                     <a onclick="generatePassword_and_sendForm()" class="btn btn-primary">Submit password</a>
                     <a href="<?= base_url('index.php/home') ?>" class="btn btn-secondary">Abort</a>
-
+                    <?php if (isset($id)) echo '<p></p><label for="agb" style="color: rgb(218,53,69)">Changes can not be undone.</label>'?>
                 </form>
             </div>
         </div>
