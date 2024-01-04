@@ -86,6 +86,11 @@
         height: 20px; /* Setze die Höhe der Leiste nach Bedarf */
     }
 
+    .passwordHighlighter{
+        border: 2px solid #00bcff;
+
+    }
+
     /* Stile für den Slider */
     input[type="range"]::-webkit-slider-thumb {
         width: 30px; /* Setze die Breite des Sliders nach Bedarf */
