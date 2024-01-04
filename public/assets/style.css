@@ -11,6 +11,14 @@ body {
     justify-content: center;
 }
 
+.PRO{
+    border-radius: 5px;
+}
+
+.header{
+    font-size: 4.5em;
+}
+
 .centered-div {
     min-height: calc(100vh - 274px);
     width: 100%;
@@ -57,16 +65,14 @@ body {
 }
 
 .passwordGenerator{
-    border: 2px #00bcff;
-    border-style: solid;
+    border: 2px solid #00bcff;
     border-radius: 20px;
 }
 
 .passwordHighlighter{
     margin-top: 15px;
     margin-bottom: 15px;
-    border: 1px #00bcff;
-    border-style: solid;
+    border: 1px solid #00bcff;
     border-radius: 20px;
 }
 
