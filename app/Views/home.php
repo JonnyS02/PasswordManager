@@ -94,13 +94,22 @@ include "partials/header.php";
                 if (isset($passwords)): foreach ($passwords as $passwordFormList): ?>
                     <tr>
                         <td><?= $c ?></td>
-                        <td onclick="copy('<?= $passwordFormList['Plattform'] ?>')"><?= $passwordFormList['Plattform'] ?></td>
-                        <td onclick="copy('<?= $passwordFormList['Username'] ?>')"><?= $passwordFormList['Username'] ?></td>
-                        <td onclick="copy('<?= $passwordFormList['Additional'] ?>')"><?= $passwordFormList['Additional'] ?></td>
+                        <td> <span style="cursor: pointer;"
+                            onmouseover="this.style.color='#00bcff'"
+                            onmouseout="this.style.color='black'"
+                            onclick="copy('<?= $passwordFormList['Plattform'] ?>')"><?= $passwordFormList['Plattform'] ?></span></td>
+                        <td> <span style="cursor: pointer;"
+                                   onmouseover="this.style.color='#00bcff'"
+                                   onmouseout="this.style.color='black'"
+                                   onclick="copy('<?= $passwordFormList['Username'] ?>')"><?= $passwordFormList['Username'] ?></span></td>
+                        <td> <span style="cursor: pointer;"
+                                   onmouseover="this.style.color='#00bcff'"
+                                   onmouseout="this.style.color='black'"
+                                   onclick="copy('<?= $passwordFormList['Additional'] ?>')"><?= $passwordFormList['Additional'] ?></span></td>
                         <td>
-                            <i class="fa-regular fa-eye" style="font-size: 1.2em"
+                            <i class="fa-regular fa-eye interactive" style="font-size: 1.2em"
                                onclick="dehas('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>&nbsp
-                            <i class="fa-regular fa-copy" style="font-size: 1.2em"
+                            <i class="fa-regular fa-copy interactive" style="font-size: 1.2em"
                                onclick="dehasCopy('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>
                         </td>
                         <td>
@@ -108,10 +117,10 @@ include "partials/header.php";
                                 <form style="margin: 0;padding: 0" id="editPassword<?= $c ?>"
                                       action="<?= base_url('index.php/password') ?>" method="POST">
                                     <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
-                                    <i class="fa-regular fa-pen-to-square" style="font-size: 1.2em" onclick="send_Form('editPassword<?= $c ?>')"></i>&nbsp;&nbsp;
+                                    <i class="fa-regular fa-pen-to-square interactive" style="font-size: 1.2em" onclick="send_Form('editPassword<?= $c ?>')"></i>&nbsp;&nbsp;
                                 </form>
                                 <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
-                                <i class="fa-regular fa-trash-can" style="font-size: 1.2em"
+                                <i class="fa-regular fa-trash-can interactive" style="font-size: 1.2em"
                                    onclick="openConfirmationModal('confirmationModal-password<?= $c ?>','modalContent-password<?= $c ?>')"></i>&nbsp;&nbsp;
                             </div>
                         </td>

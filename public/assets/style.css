@@ -80,7 +80,7 @@ td i {
     transition: color 0.25s;
 }
 
-td i:hover {
+.interactive:hover {
     cursor: pointer;
     color: #00bcff;
 }
