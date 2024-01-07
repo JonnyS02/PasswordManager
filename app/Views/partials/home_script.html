@@ -79,8 +79,7 @@
     }
 
     function entschluesseln(verschluesselt, schluessel) {
-        let entschluesselt = CryptoJS.AES.decrypt(verschluesselt, schluessel).toString(CryptoJS.enc.Utf8);
-        return entschluesselt;
+        return CryptoJS.AES.decrypt(verschluesselt, schluessel).toString(CryptoJS.enc.Utf8);
     }
 
     function passwortSichtbarMachen() {
@@ -93,15 +92,23 @@
     }
 
     function dehas(passwort, modal_name, modalContent_name) {
-        var field = document.getElementById('schluesselHolder');
-        if (document.getElementById("schluesselHolder").value === "") {
+        if (!triggerKeyAlert()) {
             openConfirmationModal(modal_name, modalContent_name);
-            field.classList.add("is-invalid");
-            return
+        } else {
+            let schluessel = document.getElementById("schluesselHolder").value;
+            alert("Passwort: " + entschluesseln(passwort, schluessel));
         }
-        field.classList.remove("is-invalid");
-        let schluessel = document.getElementById("schluesselHolder").value;
-        alert("Passwort: " + entschluesseln(passwort, schluessel));
+    }
+
+    function triggerKeyAlert() {
+        var field = document.getElementById('schluesselHolder');
+        if (field.value === "") {
+            field.classList.add("is-invalid");
+            return false;
+        } else {
+            field.classList.remove("is-invalid");
+            return true;
+        }
     }
 
     function dehasCopy(passwort, modal_name, modalContent_name) {
@@ -117,6 +124,8 @@
     }
 
     function copy(content) {
+        document.getElementById("myInput").disabled = true;
+        document.getElementById("schluesselHolder").disabled = true;
         let hiddenInput = document.createElement("input");
         hiddenInput.setAttribute("type", "text");
         hiddenInput.setAttribute("value", content);
@@ -124,6 +133,14 @@
         hiddenInput.select();
         document.execCommand("copy");
         document.body.removeChild(hiddenInput);
+        removeDisabled();
+    }
+
+    function removeDisabled(){
+        setTimeout(function () {
+            document.getElementById("myInput").disabled = false;
+            document.getElementById("schluesselHolder").disabled = false;
+        }, 700);
     }
 
     var pageLoadTime = new Date().getTime();

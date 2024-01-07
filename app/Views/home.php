@@ -18,18 +18,8 @@ include "partials/header.php";
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-            document.getElementById("myInput").disabled = false;
-            document.getElementById("schluesselHolder").disabled = false;
-        }, 700);
+        removeDisabled();
     });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-            searchTable('myInput');
-        }, 1500);
-    });
-
 </script>
 
 <div id="confirmationModal-account" class="confirmationModal" style="<?= (isset($notDeleted)) ? 'opacity: 1':""?>">
@@ -104,9 +94,9 @@ include "partials/header.php";
                 if (isset($passwords)): foreach ($passwords as $passwordFormList): ?>
                     <tr>
                         <td><?= $c ?></td>
-                        <td><?= $passwordFormList['Plattform'] ?></td>
-                        <td><?= $passwordFormList['Username'] ?></td>
-                        <td><?= $passwordFormList['Additional'] ?></td>
+                        <td onclick="copy('<?= $passwordFormList['Plattform'] ?>')"><?= $passwordFormList['Plattform'] ?></td>
+                        <td onclick="copy('<?= $passwordFormList['Username'] ?>')"><?= $passwordFormList['Username'] ?></td>
+                        <td onclick="copy('<?= $passwordFormList['Additional'] ?>')"><?= $passwordFormList['Additional'] ?></td>
                         <td>
                             <i class="fa-regular fa-eye" style="font-size: 1.2em"
                                onclick="dehas('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>&nbsp
@@ -160,7 +150,7 @@ include "partials/header.php";
                     Account</a>
             </div>
             <div class="side-element">
-                <input type="password" id="schluesselHolder" placeholder="🔑 Key" class="form-control" disabled>
+                <input type="password" id="schluesselHolder" placeholder="🔑 Key" class="form-control" onkeyup="triggerKeyAlert()" disabled>
             </div>
         </div>
     </div>
