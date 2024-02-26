@@ -43,3 +43,19 @@ $routes->get('/verify', 'Email::verify');
 
 $routes->post('/verified', 'Email::verified');
 $routes->get('/verified', 'Email::verified');
+
+
+$routes->get('/resetPassword','ResetPassword::index');
+
+$routes->post('/isReset','ResetPassword::isReset');
+
+$routes->get('/resetVerified','ResetPassword::resetVerified');
+
+$routes->get('/insertResetPassword', 'ResetPassword::insertResetPassword');
+
+$routes->post('/submitResetPassword', 'ResetPassword::submitResetPassword');
+
+$routes->get('abortReset', 'ResetPassword::abortReset');
+
+
+

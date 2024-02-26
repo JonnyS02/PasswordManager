@@ -55,11 +55,20 @@ class GeneralModel extends Model
             $attempts = $attempts - 1;
         else
             $attempts = 3;
+        $this->dbAttempts($attempts,$email);
+        return $attempts;
+    }
 
+    public function dbAttempts($attempts,$email){
         $change = $this->db->table('users');
         $change->set('Attempts', $attempts);
         $change->where('Email', $email);
         $change->update();
+    }
+
+    public function settAttemptsCode($email){
+        $attempts = - (mt_rand(10000000000000000, 99999999999999999));
+        $this->dbAttempts($attempts,$email);
         return $attempts;
     }
 

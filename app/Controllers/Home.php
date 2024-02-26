@@ -42,7 +42,7 @@ class Home extends BaseController
             if ($this->session->get('plattform') != "") {
                 $oldPlattform = $this->session->get('plattform');
                 $this->model->updatePassword($plattform, $username, $additional, $email, $oldPlattform, $changePassword, $password);
-                $this->session->set('plattform','');
+                $this->session->set('plattform', '');
             } else {
                 if (!$this->model->insertPassword($plattform, $password, $username, $additional, $email)) {
                     return $this->password($plattform, $username, $additional, "Password for plattform already inserted.");
@@ -97,10 +97,13 @@ class Home extends BaseController
             if ($password_account == "")
                 return $this->index("", "", "", "", "The password field is required.", $password_account);
             $attempts = $this->model->setAttempts($email, true);
-            if ($attempts <= 0)
+            if ($attempts <= 0) {
                 $notDeleted = "You've reached the maximum of attempts.";
-            else
+                $url = "resetPassword". "?email=" . urlencode($email);
+                $notDeleted .='&nbsp <a href='.$url.'> Reset password</a>';
+            } else
                 $notDeleted = "Wrong password, " . $attempts . " attempts left.";
+
             return $this->index("", "", "", "", $notDeleted, $password_account);
         }
     }

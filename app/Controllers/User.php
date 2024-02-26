@@ -35,7 +35,7 @@ class User extends BaseController
             } else {
                 $data['error'] = $this->validation->getErrors();
                 if ($data['repeatpassword'] != $data['password'] && $data['repeatpassword'] != "" && $data['password'] != "") {
-                    $data['error']['repeatpassword'] = "There was a typo in that password.";
+                    $data['error']['repeatpassword'] = "There is a typo in that password.";
                 }
             }
         }
@@ -80,6 +80,8 @@ class User extends BaseController
                         $attempts = $this->model->setAttempts($data['email'], true);
                         if ($attempts <= 0) {
                             $data['error']['password_old'] = "You've reached the maximum of attempts.";
+                            $url = "resetPassword". "?email=" . urlencode($data['email']);
+                            $data['error']['password_old'] .='&nbsp <a href='.$url.'> Reset password</a>';
                         } else {
                             $data['error']['password_old'] = "Wrong password, " . $attempts . " attempts left.";
                         }
@@ -105,7 +107,7 @@ class User extends BaseController
 
                     if ($data['changePassword'] == "1") {
                         if ($data['repeatpassword'] != $data['password'] && $data['password'] != "") {
-                            $data['error']['repeatpassword'] = "There was a typo in that password.";
+                            $data['error']['repeatpassword'] = "There is a typo in that password.";
                         }
                         if ($data['password'] == "") {
                             $data['error']['password'] = "The password field is required.";

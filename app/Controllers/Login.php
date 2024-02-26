@@ -36,6 +36,8 @@ class Login extends BaseController
                     $attempts = $this->model->setAttempts($data['email'],true);
                     if($attempts <= 0){
                         $data['error']['password'] = "You've reached the maximum of attempts.";
+                        $url = "resetPassword". "?email=" . urlencode($data['email']);
+                        $data['error']['password'] .='&nbsp <a href='.$url.'> Reset password</a>';
                     }else{
                         $data['error']['password'] = "Wrong password, ".$attempts." attempts left.";
                     }
