@@ -31,7 +31,7 @@ $routes->post('/isReset','ResetPassword::isReset');
 $routes->get('/resetVerified','ResetPassword::resetVerified');
 $routes->get('/insertResetPassword', 'ResetPassword::insertResetPassword');
 $routes->post('/submitResetPassword', 'ResetPassword::submitResetPassword');
-$routes->get('abortReset', 'ResetPassword::abortReset');
+$routes->get('/abortReset', 'ResetPassword::abortReset');
 
 
 
