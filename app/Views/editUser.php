@@ -47,9 +47,10 @@ include "partials/header.php";
                     <input name="password" type="password" <?php if (!(isset($changePassword))) echo 'disabled'; ?>
                            class=" form-control texinput <?= (isset($error['password'])) ? 'is-invalid' : '' ?>"
                            id="password"
-                           placeholder="<?= (isset($changePassword)) ? 'Enter your new password' : '' ?>" value="<?php if (isset($password)) {
-                        echo $password;
-                    } ?>" <?= ($finished) ? 'disabled' : '' ?>>
+                           placeholder="<?= (isset($changePassword)) ? 'Enter your new password' : '' ?>"
+                           value="<?php if (isset($password)) {
+                               echo $password;
+                           } ?>" <?= ($finished) ? 'disabled' : '' ?>>
                     <div class="invalid-feedback">
                         <?php if (isset($error['password'])) echo $error['password']; ?>
                     </div>
@@ -57,19 +58,22 @@ include "partials/header.php";
                 <p></p>
                 <div class="form-group">
                     <label for="repeatpassword">Password verification</label>
-                    <input name="repeatpassword" type="password" <?php if (!(isset($changePassword))) echo 'disabled'; ?>
+                    <input name="repeatpassword"
+                           type="password" <?php if (!(isset($changePassword))) echo 'disabled'; ?>
                            class=" form-control texinput <?= (isset($error['repeatpassword'])) ? 'is-invalid' : '' ?>"
                            id="repeatpassword"
-                           placeholder="<?= (isset($changePassword)) ? 'Repeat your new password' : '' ?>" value="<?php if (isset($repeatpassword)) {
-                        echo $repeatpassword;
-                    } ?>" <?= ($finished) ? 'disabled' : '' ?>>
+                           placeholder="<?= (isset($changePassword)) ? 'Repeat your new password' : '' ?>"
+                           value="<?php if (isset($repeatpassword)) {
+                               echo $repeatpassword;
+                           } ?>" <?= ($finished) ? 'disabled' : '' ?>>
                     <div class="invalid-feedback">
                         <?php if (isset($error['repeatpassword'])) echo $error['repeatpassword']; ?>
                     </div>
                 </div>
                 <p></p>
                 <div class="d-inline mb-3">
-                    <input type="checkbox" id="changePassword" value="1" name="changePassword" style="margin-bottom: -100px"
+                    <input type="checkbox" id="changePassword" value="1" name="changePassword"
+                           style="margin-bottom: -100px"
                            class="form-check-input" <?php if (isset($changePassword)) echo 'checked'; ?> <?= ($finished) ? 'disabled' : '' ?>
                            onclick="enableNewPassword('repeatpassword','Repeat your new password','password','Enter your new password')"
                     >
@@ -88,10 +92,10 @@ include "partials/header.php";
                         <?php if (isset($error['password_old'])) echo $error['password_old']; ?>
                     </div>
                 </div>
-                <?php if(isset($noChange)) echo '                    
+                <?php if (isset($noChange)) echo '                    
                     <div style="color: rgb(218,53,69); margin-top: 20px">
                         The changes are identical to the current profile. 
-                    </div>'?>
+                    </div>' ?>
                 <br>
                 <?php if (!$finished) {
                     echo '<input type="submit" class="btn btn-primary font-weight-bold" value="Submit changes"> <a href="' . base_url("index.php/home") . '" class="btn btn-secondary">Abort</a>';

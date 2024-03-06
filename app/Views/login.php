@@ -15,10 +15,10 @@ include "partials/header.php";
                     <label for="emailInput">Email</label>
                     <input name="email" type="text"
                            class="form-control texinput <?= (isset($error['email'])) ? 'is-invalid' : '' ?>" id=" email"
-                    placeholder="Enter your email"
-                    value="<?php if (isset($email)) {
-                        echo $email;
-                    } ?>">
+                           placeholder="Enter your email"
+                           value="<?php if (isset($email)) {
+                               echo $email;
+                           } ?>">
                     <div class="invalid-feedback">
                         <?php if (isset($error['email'])) echo $error['email']; ?>
                     </div>
@@ -41,7 +41,8 @@ include "partials/header.php";
             </form>
             <br>
             <small>Not registered yet?</small>
-            <small><a class="text-decoration-none" href="<?php echo base_url("/index.php/register") ?>">Join the group ;)</a></small>
+            <small><a class="text-decoration-none" href="<?php echo base_url("/index.php/register") ?>">Join the group
+                    ;)</a></small>
         </div>
     </div>
 </div>

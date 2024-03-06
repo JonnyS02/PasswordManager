@@ -17,13 +17,13 @@ include "partials/header.php";
     </script>" : ""; ?>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         removeDisabled();
     });
 </script>
 
-<div id="confirmationModal-account" class="confirmationModal" style="<?= (isset($notDeleted)) ? 'opacity: 1':""?>">
-    <div id="modalContent-account" class="modalContent" style="<?= (isset($notDeleted)) ? 'opacity: 1':""?>">
+<div id="confirmationModal-account" class="confirmationModal" style="<?= (isset($notDeleted)) ? 'opacity: 1' : "" ?>">
+    <div id="modalContent-account" class="modalContent" style="<?= (isset($notDeleted)) ? 'opacity: 1' : "" ?>">
         <h3>Delete Account</h3>
         <hr>
         <p>Are you sure you want to delete your account?</p>
@@ -46,7 +46,8 @@ include "partials/header.php";
         <input type="submit" class="btn btn-danger" onclick="send_Form('deleteUser')" value="Delete Account">
         <button class="btn btn-primary"
                 onclick="closeConfirmationModal('confirmationModal-account','modalContent-account');
-                document.getElementById('password_account').classList.remove('is-invalid'); document.getElementById('password_account').value ='' ">Abort
+                document.getElementById('password_account').classList.remove('is-invalid'); document.getElementById('password_account').value ='' ">
+            Abort
         </button>
     </div>
 </div>
@@ -74,7 +75,8 @@ include "partials/header.php";
                 <a class="text-decoration-none" href="<?= base_url('index.php/password') ?>">Insert Password</a>
             </div>
             <div class="side-element">
-                <input type="text" id="myInput" onkeyup="searchTable('myInput')" placeholder="🔍 Platform" class="form-control" disabled>
+                <input type="text" id="myInput" onkeyup="searchTable('myInput')" placeholder="🔍 Platform"
+                       class="form-control" disabled>
             </div>
         </div>
         <div class="middle">
@@ -95,17 +97,20 @@ include "partials/header.php";
                     <tr>
                         <td><?= $c ?></td>
                         <td> <span style="cursor: pointer;"
-                            onmouseover="this.style.color='#00bcff'"
-                            onmouseout="this.style.color='black'"
-                            onclick="copy('<?= $passwordFormList['Plattform'] ?>')"><?= $passwordFormList['Plattform'] ?></span></td>
+                                   onmouseover="this.style.color='#00bcff'"
+                                   onmouseout="this.style.color='black'"
+                                   onclick="copy('<?= $passwordFormList['Plattform'] ?>')"><?= $passwordFormList['Plattform'] ?></span>
+                        </td>
                         <td> <span style="cursor: pointer;"
                                    onmouseover="this.style.color='#00bcff'"
                                    onmouseout="this.style.color='black'"
-                                   onclick="copy('<?= $passwordFormList['Username'] ?>')"><?= $passwordFormList['Username'] ?></span></td>
+                                   onclick="copy('<?= $passwordFormList['Username'] ?>')"><?= $passwordFormList['Username'] ?></span>
+                        </td>
                         <td> <span style="cursor: pointer;"
                                    onmouseover="this.style.color='#00bcff'"
                                    onmouseout="this.style.color='black'"
-                                   onclick="copy('<?= $passwordFormList['Additional'] ?>')"><?= $passwordFormList['Additional'] ?></span></td>
+                                   onclick="copy('<?= $passwordFormList['Additional'] ?>')"><?= $passwordFormList['Additional'] ?></span>
+                        </td>
                         <td>
                             <i class="fa-regular fa-eye interactive" style="font-size: 1.2em"
                                onclick="dehas('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>&nbsp
@@ -117,7 +122,8 @@ include "partials/header.php";
                                 <form style="margin: 0;padding: 0" id="editPassword<?= $c ?>"
                                       action="<?= base_url('index.php/password') ?>" method="POST">
                                     <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
-                                    <i class="fa-regular fa-pen-to-square interactive" style="font-size: 1.2em" onclick="send_Form('editPassword<?= $c ?>')"></i>&nbsp;&nbsp;
+                                    <i class="fa-regular fa-pen-to-square interactive" style="font-size: 1.2em"
+                                       onclick="send_Form('editPassword<?= $c ?>')"></i>&nbsp;&nbsp;
                                 </form>
                                 <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
                                 <i class="fa-regular fa-trash-can interactive" style="font-size: 1.2em"
@@ -159,7 +165,8 @@ include "partials/header.php";
                     Account</a>
             </div>
             <div class="side-element">
-                <input type="password" id="schluesselHolder" placeholder="🔑 Key" class="form-control" onkeyup="triggerKeyAlert()" disabled>
+                <input type="password" id="schluesselHolder" placeholder="🔑 Key" class="form-control"
+                       onkeyup="triggerKeyAlert()" disabled>
             </div>
         </div>
     </div>

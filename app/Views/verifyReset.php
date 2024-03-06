@@ -35,12 +35,14 @@ include "partials/header.php";
         var data = "email=<?php echo $email ?? ''?>";
         xhr.send(data);
     }
+
     setInterval(makeAjaxRequest, 5000);
 </script>
 
 <div class="containerSELF">
     <div class="centered-div">
-        <img style="margin-top: 10px" id="deinGIF" src="<?= base_url('assets/verify.gif') ?>" alt="verify your email address" >
+        <img style="margin-top: 10px" id="deinGIF" src="<?= base_url('assets/verify.gif') ?>"
+             alt="verify your email address">
         <hr style="margin-left: calc(50% - 220px);width: 440px">
         <p style="font-size: 20px; text-align: center">Please use the email we sent you to reset your password.</p>
     </div>

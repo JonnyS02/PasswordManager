@@ -17,7 +17,8 @@ include "partials/header.php";
         <div class="middle">
             <div class="insertPassword passwordGenerator" style="margin-right: 10px;">
                 <div class="generator-container" style="padding: 10px;">
-                    <h3 style="font-family: 'Brush Script MT','Dancing Script', 'Calibri', 'Arial', cursive;">Password generator</h3>
+                    <h3 style="font-family: 'Brush Script MT','Dancing Script', 'Calibri', 'Arial', cursive;">Password
+                        generator</h3>
 
                     <br>
                     <label for="passwordLength">Password length: <span id="passwordLengthDisplay">12</span></label>
@@ -64,8 +65,9 @@ include "partials/header.php";
                     <label for="emailInput">Password-Key</label>
                     <input name="username" type="password"
                            class="form-control texinput "
-                           id="key" placeholder="<?php if (!isset($id)) echo "Enter the key to encrypt your password"?>"
-                           value="" <?php if (isset($id)) echo "disabled"?>>
+                           id="key"
+                           placeholder="<?php if (!isset($id)) echo "Enter the key to encrypt your password" ?>"
+                           value="" <?php if (isset($id)) echo "disabled" ?>>
                     <div class="invalid-feedback" id="key-invalid">
                     </div>
                 </div>
@@ -74,14 +76,16 @@ include "partials/header.php";
                     <label for="emailInput">Password</label>
                     <input name="password" type="text"
                            class="form-control texinput "
-                           id="password" placeholder="<?php if (!isset($id)) echo "Enter your password"?>"
-                           value="" <?php if (isset($id)) echo "disabled"?>>
+                           id="password" placeholder="<?php if (!isset($id)) echo "Enter your password" ?>"
+                           value="" <?php if (isset($id)) echo "disabled" ?>>
                     <div class="invalid-feedback" id="password-invalid">
                     </div>
                 </div>
                 <form action="<?= base_url('index.php/insertPassword') ?>" method="POST" id="submitPassword">
                     <p></p>
-                    <?php if (isset($id)){ include "partials/changePassword.php";} ?>
+                    <?php if (isset($id)) {
+                        include "partials/changePassword.php";
+                    } ?>
 
                     <div class="passwordHighlighter"></div>
                     <input type="hidden" value="" name="passwortVerschlusselt" id="passwortVerschlusselt">
@@ -122,7 +126,7 @@ include "partials/header.php";
                     <p></p>
                     <a onclick="generatePassword_and_sendForm()" class="btn btn-primary">Submit password</a>
                     <a href="<?= base_url('index.php/home') ?>" class="btn btn-secondary">Abort</a>
-                    <?php if (isset($id)) echo '<p></p><label for="agb" style="color: rgb(218,53,69)">Changes can not be undone.</label>'?>
+                    <?php if (isset($id)) echo '<p></p><label for="agb" style="color: rgb(218,53,69)">Changes can not be undone.</label>' ?>
                 </form>
             </div>
         </div>

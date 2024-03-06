@@ -12,9 +12,9 @@ include "partials/header.php";
     <div class="centered-div">
         <div class="formHead">
             <form action="<?= base_url('index.php/submitResetPassword') ?>" method="POST" class="mt-4">
-                <input type="hidden" id="email" name="email" value="<?=$email?>">
-                <input type="hidden" id="xyz" name="xyz" value="<?=$xyz?>">
-                <input type="hidden" id="username" name="username" value="<?=$username?>">
+                <input type="hidden" id="email" name="email" value="<?= $email ?>">
+                <input type="hidden" id="xyz" name="xyz" value="<?= $xyz ?>">
+                <input type="hidden" id="username" name="username" value="<?= $username ?>">
 
                 <p style="font-size: 20px">Hello <?= $username ?>,
                     <br>
