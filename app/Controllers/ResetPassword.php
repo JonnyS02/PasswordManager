@@ -59,56 +59,47 @@ class ResetPassword extends BaseController
 
     public function submitResetPassword()
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-            if ($this->request->getPost('password') !== null and $this->request->getPost('password') != "") {
-                $data['password'] = $this->request->getPost('password');
-            } else {
-                $data['error']['password'] = "The password field is required.";
+        $data = $this->checkParameter('password', 'The password field is required.', false);
+        $data = $this->checkParameter('repeatpassword', 'Please repeat your password.', false, $data);
+        if (!isset($data['error']['password']) and !isset($data['error']['repeatpassword'])) {
+            if ($data['repeatpassword'] != $data['password']) {
+                $data['error']['repeatpassword'] = "There is a typo in that password.";
             }
-            if ($this->request->getPost('repeatpassword') !== null and $this->request->getPost('repeatpassword') != "") {
-                $data['repeatpassword'] = $this->request->getPost('repeatpassword');
-            } else {
-                $data['error']['repeatpassword'] = "Please repeat your password.";
-            }
-            if (!isset($data['error']['password']) and !isset($data['error']['repeatpassword'])) {
-                if ($data['repeatpassword'] != $data['password']) {
-                    $data['error']['repeatpassword'] = "There is a typo in that password.";
-                }
-            }
-            if ($this->request->getPost('email') !== null and $this->request->getPost('email') != "") {
-                $data['email'] = $this->request->getPost('email');
-            } else {
-                return redirect()->to('/');
-            }
-            if ($this->request->getPost('xyz') !== null and $this->request->getPost('xyz') != "") {
-                $data['xyz'] = $this->request->getPost('xyz');
-            } else {
-                return redirect()->to('/');
-            }
-            if ($this->request->getPost('username') !== null and $this->request->getPost('username') != "") {
-                $data['username'] = $this->request->getPost('username');
-            } else {
-                return redirect()->to('/');
-            }
-            $data['link'] = base_url("index.php/abortReset?xyz=" . $data['xyz'] . "&email=" . $data['email']);
-            $user = $this->model->getUser($data['email']);
-            if (count($user) == 0 || $user[0]['Attempts'] >= 0) {
-                return redirect()->to('/');
-            }
-            if ($user[0]['Attempts'] == $data['xyz'] and !isset($data['error'])) {
-                $this->model->insertChangesProfile($user[0]['Name'], $user[0]['Email'], $user[0]['Email'], $data['password']);
-                $this->model->dbAttempts(3, $user[0]['Email']);
-            }
-            $data['success'] = "Reset Password";
-            if (isset($data['error'])) {
-                return view('insertResetPassword', $data);
-            } else {
-                return $this->resetVerified();
-            }
-        } else {
+        }
+        $parameters = ['email', 'xyz', 'username'];
+        foreach ($parameters as $parameter) {
+            $data = $this->checkParameter($parameter, '', true, $data);
+        }
+        if (isset($data['error']['critical'])) return redirect()->to('/');
+        $data['link'] = base_url("index.php/abortReset?xyz=" . $data['xyz'] . "&email=" . $data['email']);
+        $user = $this->model->getUser($data['email']);
+        if (count($user) == 0 || $user[0]['Attempts'] >= 0) {
             return redirect()->to('/');
         }
+        if ($user[0]['Attempts'] == $data['xyz'] and !isset($data['error'])) {
+            $this->model->insertChangesProfile($user[0]['Name'], $user[0]['Email'], $user[0]['Email'], $data['password']);
+            $this->model->dbAttempts(3, $user[0]['Email']);
+        }
+        $data['success'] = "Reset Password";
+        if (isset($data['error'])) {
+            return view('insertResetPassword', $data);
+        } else {
+            return $this->resetVerified();
+        }
+    }
+
+    public function checkParameter($parameter, $error_message, $isCritical, $data = null)
+    {
+        if ($this->request->getPost($parameter) == null || $this->request->getPost($parameter) === "") {
+            if ($isCritical) {
+                $data['error']['critical'] = True;
+            } else {
+                $data['error'][$parameter] = $error_message;
+            }
+        } else {
+            $data[$parameter] = $this->request->getPost($parameter);
+        }
+        return $data;
     }
 
     public function abortReset()

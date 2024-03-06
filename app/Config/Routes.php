@@ -19,7 +19,6 @@ $routes->get('/register', 'User::index');
 $routes->post('/register', 'User::index');
 $routes->get('/editProfile', 'User::editProfile');
 $routes->post('/editProfile', 'User::editProfile');
-$routes->get('/insertChangesProfile', 'User::insertChangesProfile');
 $routes->post('/insertChangesProfile', 'User::insertChangesProfile');
 
 $routes->post('/isverified', 'VerifyEmail::isVerified');
