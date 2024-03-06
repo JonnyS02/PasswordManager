@@ -19,7 +19,7 @@ class User extends BaseController
             $data['agb'] = $this->request->getPost('agb');
             if ($this->validation->run($this->request->getPost(), 'register') && $data['repeatpassword'] == $data['password']) {
                 if ($this->model->insertUser($data['username'], $data['password'], mt_rand(10000, 99999), $data['email'], 3)) {
-                    return $this->email->initVerify($data['email']);
+                    return $this->verifyEmail->initVerify($data['email']);
                 } else {
                     $data['error']['email'] = "Email is already in use.";
                 }

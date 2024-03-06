@@ -18,7 +18,7 @@ class VerifyEmail extends BaseController
     public function sendVerifyMail($emailTo)
     {
         $email = Services::email();
-        $email->setFrom('date.manager@jonathan-stengl.de', 'PassSafePro official');
+        $email->setFrom('official@jonathan-stengl.de', 'PassSafePro official');
         $email->setTo($emailTo);
         $email->setSubject('Verify your email address.');
         $data['name'] = "Verification";
