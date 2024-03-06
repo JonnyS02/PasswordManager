@@ -150,7 +150,7 @@ include "partials/header.php";
             <div class="side-element empty">
             </div>
             <div class="side-element">
-                <a class="text-decoration-none" href="<?= base_url('index.php/login') ?>">Sign Off</a>
+                <a class="text-decoration-none" href="<?= base_url('index.php') ?>">Sign Off</a>
             </div>
             <div class="side-element">
                 <a onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'"

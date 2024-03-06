@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\GeneralModel;
 use Config\Services;
 
-class Email extends BaseController
+class VerifyEmail extends BaseController
 {
     public function initVerify($email)
     {
@@ -38,9 +38,7 @@ class Email extends BaseController
         }
         $model = new GeneralModel();
         $isVerified = $model->getUser($email);
-        if (isset($isVerified[0]["Verified"]) && $isVerified[0]["Verified"] == 1)
-            return "1";
-        return "0";
+        return isset($isVerified[0]["Verified"]) && $isVerified[0]["Verified"] == 1 ? "1" : "0";
     }
 
     public function verified()
@@ -50,7 +48,7 @@ class Email extends BaseController
             $data['main'] = true;
             return view('verified', $data);
         }
-        return "Error";
+        return redirect()->to('/');
     }
 
     public function verify()
@@ -63,6 +61,6 @@ class Email extends BaseController
                 return view('verified', $data);
             }
         }
-        return "Error";
+        return redirect()->to('/');
     }
 }

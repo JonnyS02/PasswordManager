@@ -55,7 +55,7 @@ class User extends BaseController
 
             return view('editUser', $data);
         } else
-            return redirect()->to('login');
+            return redirect()->to('/');
     }
 
     public function insertChangesProfile()
@@ -77,17 +77,10 @@ class User extends BaseController
 
                     $status = $this->model->checkPassword($this->session->get('email'), $data['password_old']);
                     if ($status == -1) {
-                        $attempts = $this->model->setAttempts($data['email'], true);
-                        if ($attempts <= 0) {
-                            $data['error']['password_old'] = "You've reached the maximum of attempts.";
-                            $url = "resetPassword". "?email=" . urlencode($data['email']);
-                            $data['error']['password_old'] .='&nbsp <a href='.$url.'> Reset password</a>';
-                        } else {
-                            $data['error']['password_old'] = "Wrong password, " . $attempts . " attempts left.";
-                        }
+                        $data['error']['password_old'] = $this->model->wrongPassword($data['email']);
                         return view('editUser', $data);
                     } else if ($status == 0) {
-                        return redirect()->to('login');
+                        return redirect()->to('/');
                     } else {
                         if ($data['changePassword'] != "1")
                             $inserted = $this->model->insertChangesProfile($data['username'], $data['email'], $this->session->get('email'));
@@ -121,8 +114,11 @@ class User extends BaseController
                     }
                     return view('editUser', $data);
                 }
+            }else{
+                return redirect()->to('/');
             }
-        } else
+        } else{
             return $this->editProfile();
+        }
     }
 }

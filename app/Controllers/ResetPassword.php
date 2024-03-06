@@ -10,11 +10,10 @@ class ResetPassword extends BaseController
     public function index()
     {
         if (isset($_GET['email'])) {
-
             $email = $_GET['email'];
             $status = $this->model->checkPassword($email, "");
             if ($status == 0) {
-                return redirect()->to('login');
+                return redirect()->to('/');
             }
             $code = $this->model->settAttemptsCode($email);
             $data['success'] = "Reset Password";
@@ -22,7 +21,7 @@ class ResetPassword extends BaseController
             $this->sendResetEmail($email, $code);
             return view('verifyReset', $data);
         }
-        return redirect()->to('login');
+        return redirect()->to('/');
     }
 
     public function sendResetEmail($emailTo, $code)
@@ -43,8 +42,9 @@ class ResetPassword extends BaseController
     {
         if (isset($_GET['email']) and isset($_GET['xyz'])) {
             $user = $this->model->getUser($_GET['email']);
-            if ($user[0]['Attempts'] >= 0)
-                return redirect()->to('login');
+            if (count($user) == 0 || $user[0]['Attempts'] >= 0) {
+                return redirect()->to('/');
+            }
             $data['email'] = $_GET['email'];
             $data['xyz'] = $_GET['xyz'];
             $data['username'] = $user[0]['Name'];
@@ -52,12 +52,9 @@ class ResetPassword extends BaseController
             if ($user[0]['Attempts'] == $_GET['xyz']) {
                 $data['link'] = base_url("index.php/abortReset?xyz=" . $data['xyz'] . "&email=" . $data['email']);
                 return view('insertResetPassword', $data);
-            } else {
-                return "Error";
             }
-        } else {
-            return redirect()->to('login');
         }
+        return redirect()->to('/');
     }
 
     public function submitResetPassword()
@@ -69,57 +66,48 @@ class ResetPassword extends BaseController
             } else {
                 $data['error']['password'] = "The password field is required.";
             }
-
             if ($this->request->getPost('repeatpassword') !== null and $this->request->getPost('repeatpassword') != "") {
                 $data['repeatpassword'] = $this->request->getPost('repeatpassword');
             } else {
                 $data['error']['repeatpassword'] = "Please repeat your password.";
             }
-
             if (!isset($data['error']['password']) and !isset($data['error']['repeatpassword'])) {
                 if ($data['repeatpassword'] != $data['password']) {
                     $data['error']['repeatpassword'] = "There is a typo in that password.";
                 }
             }
-
             if ($this->request->getPost('email') !== null and $this->request->getPost('email') != "") {
                 $data['email'] = $this->request->getPost('email');
             } else {
-                return redirect()->to('login');
+                return redirect()->to('/');
             }
-
             if ($this->request->getPost('xyz') !== null and $this->request->getPost('xyz') != "") {
                 $data['xyz'] = $this->request->getPost('xyz');
             } else {
-                return redirect()->to('login');
+                return redirect()->to('/');
             }
-
             if ($this->request->getPost('username') !== null and $this->request->getPost('username') != "") {
                 $data['username'] = $this->request->getPost('username');
             } else {
-                return redirect()->to('login');
+                return redirect()->to('/');
             }
             $data['link'] = base_url("index.php/abortReset?xyz=" . $data['xyz'] . "&email=" . $data['email']);
-
             $user = $this->model->getUser($data['email']);
-            if (count($user) == 0)
-                return redirect()->to('login');
-            if ($user[0]['Attempts'] >= 0)
-                return redirect()->to('login');
-
+            if (count($user) == 0 || $user[0]['Attempts'] >= 0) {
+                return redirect()->to('/');
+            }
             if ($user[0]['Attempts'] == $data['xyz'] and !isset($data['error'])) {
                 $this->model->insertChangesProfile($user[0]['Name'], $user[0]['Email'], $user[0]['Email'], $data['password']);
                 $this->model->dbAttempts(3, $user[0]['Email']);
             }
-
             $data['success'] = "Reset Password";
-
-            if (isset($data['error']))
+            if (isset($data['error'])) {
                 return view('insertResetPassword', $data);
-            else
+            } else {
                 return $this->resetVerified();
+            }
         } else {
-            return redirect()->to('login');
+            return redirect()->to('/');
         }
     }
 
@@ -127,29 +115,25 @@ class ResetPassword extends BaseController
     {
         if (isset($_GET['email']) and isset($_GET['xyz'])) {
             $user = $this->model->getUser($_GET['email']);
-            if ($user[0]['Attempts'] >= 0)
-                return redirect()->to('login');
+            if ($user[0]['Attempts'] >= 0) {
+                return redirect()->to('/');
+            }
             if ($user[0]['Attempts'] == $_GET['xyz']) {
                 $this->model->dbAttempts(0, $user[0]['Email']);
             }
         }
-        return redirect()->to('login');
+        return redirect()->to('/');
     }
 
     public function isReset()
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $data['email'] = $this->request->getPost('email');
-            $user = $this->model->getUser($data['email']);
-            $attempts = $user[0]['Attempts'];
-            if ($attempts <= 0) {
-                echo 0;
-            } else {
-                echo 1;
-            }
-        } else {
-            return redirect()->to('login');
+        $data['email'] = $this->request->getPost('email');
+        $user = $this->model->getUser($data['email']);
+        if (count($user) == 0) {
+            return redirect()->to('/');
         }
+        $attempts = $user[0]['Attempts'];
+        echo $attempts <= 0 ? 0 : 1;
     }
 
     public function resetVerified()

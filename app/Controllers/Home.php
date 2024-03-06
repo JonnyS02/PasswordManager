@@ -10,9 +10,7 @@ class Home extends BaseController
 {
     public function index($plattform = "", $username = "", $additional = "", $plattform_error = "", $notDeleted = "", $password_account = "")
     {
-
         if ($this->session->get('logged')) {
-
             $data['user'] = ($this->model->getUser($this->session->get('email')))[0]['Name'];
             $data['passwords'] = $this->model->getPasswords($this->session->get('email'));
             $data['plattform'] = $plattform;
@@ -24,15 +22,14 @@ class Home extends BaseController
                 $data['password_account'] = $password_account;
             }
             return view('home', $data);
-        } else
-            return redirect()->to('login');
+        } else{
+            return redirect()->to('/');
+        }
     }
-
 
     public function insertPassword()
     {
         if ($this->session->get('logged')) {
-
             $plattform = $this->request->getPost('plattform');
             $username = $this->request->getPost('username');
             $additional = $this->request->getPost('additional');
@@ -49,15 +46,15 @@ class Home extends BaseController
                 }
             }
             return redirect()->to('home');
-        } else
-            return redirect()->to('login');
+        } else{
+            return redirect()->to('/');
+        }
     }
 
     public function deletePassword()
     {
         $passwordID = $_GET['ID'];
         $email = $this->session->get('email');
-
         $this->model->deletePassword($passwordID, $email);
         return redirect()->to('home');
     }
@@ -71,7 +68,6 @@ class Home extends BaseController
             $data['username'] = $username;
             $data['additional'] = $additional;
             $passwordID = $this->request->getPost('passwordID');
-
             if ($passwordID != "") {
                 $password = $this->model->getPasswords($this->session->get('email'), $passwordID);
                 $data['plattform'] = $password[0]['Plattform'];
@@ -82,8 +78,9 @@ class Home extends BaseController
                 $this->session->set('plattform', $password[0]['Plattform']);
             }
             return view('password', $data);
-        } else
-            return redirect()->to('login');
+        } else{
+            return redirect()->to('/');
+        }
     }
 
     public function deleteUser()
@@ -92,20 +89,13 @@ class Home extends BaseController
         $email = $this->session->get('email');
         $deleted = $this->model->deleteUser($email, $password_account);
         if ($deleted) {
-            return redirect()->to('login');
+            return redirect()->to('/');
         } else {
-            if ($password_account == "")
+            if ($password_account == "") {
                 return $this->index("", "", "", "", "The password field is required.", $password_account);
-            $attempts = $this->model->setAttempts($email, true);
-            if ($attempts <= 0) {
-                $notDeleted = "You've reached the maximum of attempts.";
-                $url = "resetPassword". "?email=" . urlencode($email);
-                $notDeleted .='&nbsp <a href='.$url.'> Reset password</a>';
-            } else
-                $notDeleted = "Wrong password, " . $attempts . " attempts left.";
-
+            }
+            $notDeleted = $this->model->wrongPassword($email);
             return $this->index("", "", "", "", $notDeleted, $password_account);
         }
     }
-
 }

@@ -55,20 +55,22 @@ class GeneralModel extends Model
             $attempts = $attempts - 1;
         else
             $attempts = 3;
-        $this->dbAttempts($attempts,$email);
+        $this->dbAttempts($attempts, $email);
         return $attempts;
     }
 
-    public function dbAttempts($attempts,$email){
+    public function dbAttempts($attempts, $email)
+    {
         $change = $this->db->table('users');
         $change->set('Attempts', $attempts);
         $change->where('Email', $email);
         $change->update();
     }
 
-    public function settAttemptsCode($email){
-        $attempts = - (mt_rand(10000000000000000, 99999999999999999));
-        $this->dbAttempts($attempts,$email);
+    public function settAttemptsCode($email)
+    {
+        $attempts = -(mt_rand(10000000000000000, 99999999999999999));
+        $this->dbAttempts($attempts, $email);
         return $attempts;
     }
 
@@ -102,7 +104,7 @@ class GeneralModel extends Model
     public function updatePassword($plattform, $username, $additional, $email, $oldPlattform, $changePassword, $password)
     {
         $passwordEntry = $this->db->table('passwords');
-        if($changePassword){
+        if ($changePassword) {
             $passwordEntry->set('Password', $password);
             $this->submitUpdate($passwordEntry, $email, $oldPlattform);
         }
@@ -205,5 +207,18 @@ class GeneralModel extends Model
             }
         }
         return false;
+    }
+
+    public function wrongPassword($email): string
+    {
+        $attempts = $this->setAttempts($email, true);
+        if ($attempts <= 0) {
+            $response = "You've reached the maximum of attempts.";
+            $url = "resetPassword" . "?email=" . urlencode($email);
+            $response .= '&nbsp <a href=' . $url . '> Reset password</a>';
+        } else {
+            $response = "Wrong password, " . $attempts . " attempts left.";
+        }
+        return $response;
     }
 }
