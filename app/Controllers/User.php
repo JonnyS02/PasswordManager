@@ -37,13 +37,14 @@ class User extends BaseController
     {
         $data['finished'] = false;
         $data['success'] = "Edit Profile";
-        if ($this->session->get('logged')) {
-            $user = ($this->model->getUser($this->session->get('email')));
-            $data['email'] = $user[0]['Email'];
-            $data['username'] = $user[0]['Name'];
-            return view('editUser', $data);
-        } else
+        if (!$this->session->get('logged')) {
             return redirect()->to('/');
+        }
+        $user = ($this->model->getUser($this->session->get('email')));
+        $data['email'] = $user[0]['Email'];
+        $data['username'] = $user[0]['Name'];
+        return view('editUser', $data);
+
     }
 
     public function initializeData()
@@ -62,7 +63,7 @@ class User extends BaseController
 
     public function validateNewPassword($data)
     {
-        if (!$this->validation->run($this->request->getPost(), 'insertChangesProfile')){
+        if (!$this->validation->run($this->request->getPost(), 'insertChangesProfile')) {
             $data['error'] = $this->validation->getErrors();
         }
         if ($data['changePassword'] == "1") {
