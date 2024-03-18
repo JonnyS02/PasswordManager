@@ -1,9 +1,14 @@
 <script>
-    function enableNewPassword(field1,placeholder1,field2,placeholder2){
+    function enableFields(field1,placeholder1,field2,placeholder2){
         var field1 = document.getElementById(field1);
         field1.disabled = !field1.disabled;
         var field2 = document.getElementById(field2);
         field2.disabled = !field2.disabled;
+
+        var generateButton = document.getElementById("generateButton");
+        if (generateButton){
+            generateButton.disabled = !generateButton.disabled;
+        }
 
         if (field1.disabled) {
             field1.value = "";
@@ -20,5 +25,6 @@
         }else {
             field2.placeholder =placeholder2;
         }
+
     }
 </script>

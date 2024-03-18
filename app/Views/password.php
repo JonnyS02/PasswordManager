@@ -47,8 +47,8 @@ include "partials/header.php";
                     </div>
                     <hr>
                     <div class="d-inline">
-                        <input type="submit" class="btn btn-primary btn-sm" value="Generieren"
-                               onclick="generatePassword()">
+                        <input type="submit" class="btn btn-primary btn-sm" value="Generieren" id="generateButton"
+                               onclick="generatePassword()" <?php if (isset($id)) echo "disabled" ?>>
                     </div>
                     <a onclick="resetSettings()" class="btn btn-info btn-sm text-white">Reset</a>
                     <br>

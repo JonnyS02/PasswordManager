@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php include "partials/head.php" ?>
-<?php include "partials/script_editUser.html"; ?>
+<?php include "partials/script_enableFields.html"; ?>
 
 
 <body>
@@ -75,7 +75,7 @@ include "partials/header.php";
                     <input type="checkbox" id="changePassword" value="1" name="changePassword"
                            style="margin-bottom: -100px"
                            class="form-check-input" <?php if (isset($changePassword)) echo 'checked'; ?> <?= ($finished) ? 'disabled' : '' ?>
-                           onclick="enableNewPassword('repeatpassword','Repeat your new password','password','Enter your new password')"
+                           onclick="enableFields('repeatpassword','Repeat your new password','password','Enter your new password')"
                     >
                     <label for="changePassword">Change password</label>
                 </div>

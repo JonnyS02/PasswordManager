@@ -14,6 +14,7 @@ $routes->get('/deletePassword', 'Home::deletePassword');
 $routes->get('/deleteUser', 'Home::index');
 $routes->post('/deleteUser', 'Home::deleteUser');
 $routes->get('/password', 'Home::password');
+$routes->post('/password', 'Home::password');
 
 $routes->get('/register', 'User::index');
 $routes->post('/register', 'User::index');
