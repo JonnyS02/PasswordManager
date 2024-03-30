@@ -152,6 +152,10 @@ class GeneralModel extends Model
         $passwords->where('Email', $email);
         $passwords->delete();
 
+        $passwords = $this->db->table('dates');
+        $passwords->where('Email', $email);
+        $passwords->delete();
+
         $user = $this->db->table('users');
         $user->where('Email', $email);
         $user->delete();
@@ -184,6 +188,11 @@ class GeneralModel extends Model
         $change->update($updated_user);
 
         if ($oldEmail != $email) {
+            $change_email = $this->db->table('dates');
+            $change_email->set('Email', $email);
+            $change_email->where('Email', $oldEmail);
+            $change_email->update();
+
             $change_email = $this->db->table('passwords');
             $change_email->set('Email', $email);
             $change_email->where('Email', $oldEmail);

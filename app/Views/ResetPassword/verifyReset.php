@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include "partials/head.php" ?>
+<?php include_once(dirname(__FILE__) . '/../partials/head.php') ?>
+
 
 <body>
 <?php
 $name = $success;
-include "partials/header.php";
+include_once(dirname(__FILE__) . '/../partials/header.php');
 ?>
 <style>
     .centered-div {
@@ -47,6 +48,6 @@ include "partials/header.php";
         <p style="font-size: 20px; text-align: center">Please use the email we sent you to reset your password.</p>
     </div>
 </div>
-<?php include "partials/footer.php" ?>
+<?php include_once(dirname(__FILE__) . '/../partials/footer.php') ?>
 </body>
 </html>

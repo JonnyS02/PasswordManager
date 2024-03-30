@@ -19,7 +19,7 @@ class ResetPassword extends BaseController
             $data['success'] = "Reset Password";
             $data['email'] = $email;
             $this->sendResetEmail($email, $code);
-            return view('verifyReset', $data);
+            return view('ResetPassword/verifyReset', $data);
         }
         return redirect()->to('/');
     }
@@ -51,7 +51,7 @@ class ResetPassword extends BaseController
             $data['success'] = "Reset Password";
             if ($user[0]['Attempts'] == $_GET['xyz']) {
                 $data['link'] = base_url("index.php/abortReset?xyz=" . $data['xyz'] . "&email=" . $data['email']);
-                return view('insertResetPassword', $data);
+                return view('ResetPassword/insertResetPassword', $data);
             }
         }
         return redirect()->to('/');
@@ -82,7 +82,7 @@ class ResetPassword extends BaseController
         }
         $data['success'] = "Reset Password";
         if (isset($data['error'])) {
-            return view('insertResetPassword', $data);
+            return view('ResetPassword/insertResetPassword', $data);
         } else {
             return $this->resetVerified();
         }
@@ -130,6 +130,6 @@ class ResetPassword extends BaseController
     public function resetVerified()
     {
         $data['success'] = "Password reset!";
-        return view('verifiedReset', $data);
+        return view('ResetPassword/verifiedReset', $data);
     }
 }

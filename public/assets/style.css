@@ -20,7 +20,7 @@ body {
 }
 
 .centered-div {
-    min-height: calc(100vh - 274px);
+    min-height: calc(100vh - 238px);
     width: 100%;
     max-width: 1920px;
     background-color: rgba(0, 188, 255, 0);

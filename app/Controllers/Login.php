@@ -11,9 +11,7 @@ class Login extends BaseController
         $data['email'] = "";
         $data['password'] = "";
 
-        $this->session->set('email', '');
-        $this->session->set('logged', FALSE);
-        $this->session->set('plattform', '');
+        $this->session->destroy();
 
         return view('login', $data);
     }

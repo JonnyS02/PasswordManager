@@ -82,6 +82,9 @@ class Home extends BaseController
 
     public function deleteUser()
     {
+        if (!$this->session->get('logged')) {
+            return redirect()->to('/');
+        }
         $password_account = $this->request->getPost('password_account');
         $email = $this->session->get('email');
         $deleted = $this->model->deleteUser($email, $password_account);

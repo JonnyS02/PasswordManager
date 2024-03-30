@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include "partials/head.php" ?>
+<?php include_once(dirname(__FILE__) . '/../partials/head.php') ?>
 <body>
 <?php
 $name = $success;
-include "partials/header.php";
+include_once(dirname(__FILE__) . '/../partials/header.php');
 ?>
 <style>
     .centered-div {
@@ -27,7 +27,7 @@ include "partials/header.php";
     </div>
 </div>
 
-<?php include "partials/footer.php" ?>
+<?php include_once(dirname(__FILE__) . '/../partials/footer.php') ?>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
