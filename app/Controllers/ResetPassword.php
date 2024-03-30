@@ -102,7 +102,7 @@ class ResetPassword extends BaseController
         return $data;
     }
 
-    public function abortReset()
+    public function abortReset(): \CodeIgniter\HTTP\RedirectResponse
     {
         if (isset($_GET['email']) and isset($_GET['xyz'])) {
             $user = $this->model->getUser($_GET['email']);
@@ -127,7 +127,7 @@ class ResetPassword extends BaseController
         echo $attempts <= 0 ? 0 : 1;
     }
 
-    public function resetVerified()
+    public function resetVerified(): string
     {
         $data['success'] = "Password reset!";
         return view('ResetPassword/verifiedReset', $data);

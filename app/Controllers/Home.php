@@ -49,7 +49,7 @@ class Home extends BaseController
         return redirect()->to('home');
     }
 
-    public function deletePassword()
+    public function deletePassword(): RedirectResponse
     {
         $passwordID = $_GET['ID'];
         $email = $this->session->get('email');

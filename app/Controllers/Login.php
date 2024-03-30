@@ -6,7 +6,7 @@ use App\Models\GeneralModel;
 
 class Login extends BaseController
 {
-    public function index()
+    public function index(): string
     {
         $data['email'] = "";
         $data['password'] = "";

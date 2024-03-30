@@ -7,7 +7,7 @@ use Config\Services;
 
 class VerifyEmail extends BaseController
 {
-    public function initVerify($email)
+    public function initVerify($email): string
     {
         $this->sendVerifyMail($email);
         $data['success'] = "Verify Email";

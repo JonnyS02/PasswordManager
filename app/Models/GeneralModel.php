@@ -67,7 +67,7 @@ class GeneralModel extends Model
         $change->update();
     }
 
-    public function settAttemptsCode($email)
+    public function settAttemptsCode($email): int
     {
         $attempts = -(mt_rand(10000000000000000, 99999999999999999));
         $this->dbAttempts($attempts, $email);

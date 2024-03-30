@@ -47,7 +47,7 @@ class User extends BaseController
 
     }
 
-    public function initializeData()
+    public function initializeData(): array
     {
         return [
             'finished' => false,
