@@ -19,7 +19,8 @@ include "partials/header.php";
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         removeDisabled();
-        syncronizeKeyInputs('schluesselHolder','schluesselHolder-r');
+        synchronizeInputs('schluesselHolder','schluesselHolder-r');
+        synchronizeInputs('myInput','myInput-r');
     });
 </script>
 
