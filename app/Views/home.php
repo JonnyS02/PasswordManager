@@ -19,6 +19,7 @@ include "partials/header.php";
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         removeDisabled();
+        syncronizeKeyInputs('schluesselHolder','schluesselHolder-r');
     });
 </script>
 
@@ -75,82 +76,117 @@ include "partials/header.php";
                 <a class="text-decoration-none" href="<?= base_url('index.php/password') ?>">Insert Password</a>
             </div>
             <div class="side-element">
-                <input type="text" id="myInput" onkeyup="searchTable('myInput')" placeholder="🔍 Platform"
+                <input  type="text" id="myInput" onkeyup="searchTable('myInput')" placeholder="🔍 Platform"
                        class="form-control" disabled>
             </div>
         </div>
+        <div class="left side responsive-side">
+            <div class="side-element empty">
+            </div>
+            <div class="side-element">
+                <a class="text-decoration-none" href="<?= base_url('index.php/editProfile') ?>">Edit Profile</a>
+            </div>
+            <div class="side-element">
+                <a class="text-decoration-none" href="<?= base_url('index.php/password') ?>">Insert Password</a>
+            </div>
+            <div class="side-element">
+                <input type="text" id="myInput-r" onkeyup="searchTable('myInput-r')" placeholder="🔍 Platform"
+                       class="form-control texinput" disabled>
+            </div>
+        </div>
+        <div class="left side responsive-side">
+            <div class="side-element empty">
+            </div>
+            <div class="side-element">
+                <a class="text-decoration-none" href="<?= base_url('index.php') ?>">Sign Off</a>
+            </div>
+            <div class="side-element">
+                <a onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'"
+                   class="text-decoration-none"
+                   onclick="openConfirmationModal('confirmationModal-account','modalContent-account')">Delete
+                    Account</a>
+            </div>
+            <div class="side-element">
+                <input type="password" id="schluesselHolder-r" placeholder="🔑 Key" class="form-control texinput"
+                       onkeyup="triggerKeyAlert()" disabled>
+            </div>
+        </div>
         <div class="middle">
-            <table class="table table-striped" id="myTable">
-                <thead class="bg-light">
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Platform</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Other</th>
-                    <th scope="col">Password</th>
-                    <th scope="col">Edit</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php $c = 1;
-                if (isset($passwords)): foreach ($passwords as $passwordFormList): ?>
+            <div id="tableContainer">
+
+                <table class="table table-striped" id="myTable">
+                    <thead class="bg-light">
                     <tr>
-                        <td><?= $c ?></td>
-                        <td> <span style="cursor: pointer;"
-                                   onmouseover="this.style.color='#00bcff'"
-                                   onmouseout="this.style.color='black'"
-                                   onclick="copy('<?= $passwordFormList['Plattform'] ?>')"><?= $passwordFormList['Plattform'] ?></span>
-                        </td>
-                        <td> <span style="cursor: pointer;"
-                                   onmouseover="this.style.color='#00bcff'"
-                                   onmouseout="this.style.color='black'"
-                                   onclick="copy('<?= $passwordFormList['Username'] ?>')"><?= $passwordFormList['Username'] ?></span>
-                        </td>
-                        <td> <span style="cursor: pointer;"
-                                   onmouseover="this.style.color='#00bcff'"
-                                   onmouseout="this.style.color='black'"
-                                   onclick="copy('<?= $passwordFormList['Additional'] ?>')"><?= $passwordFormList['Additional'] ?></span>
-                        </td>
-                        <td>
-                            <i class="fa-regular fa-eye interactive" style="font-size: 1.2em"
-                               onclick="dehas('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>&nbsp
-                            <i class="fa-regular fa-copy interactive" style="font-size: 1.2em"
-                               onclick="dehasCopy('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>
-                        </td>
-                        <td>
-                            <div style="display: flex; align-items: center;">
-                                <form style="margin: 0;padding: 0" id="editPassword<?= $c ?>"
-                                      action="<?= base_url('index.php/password') ?>" method="POST">
-                                    <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
-                                    <i class="fa-regular fa-pen-to-square interactive" style="font-size: 1.2em"
-                                       onclick="send_Form('editPassword<?= $c ?>')"></i>&nbsp;&nbsp;
-                                </form>
-                                <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
-                                <i class="fa-regular fa-trash-can interactive" style="font-size: 1.2em"
-                                   onclick="openConfirmationModal('confirmationModal-password<?= $c ?>','modalContent-password<?= $c ?>')"></i>&nbsp;&nbsp;
-                            </div>
-                        </td>
+                        <th scope="col">No.</th>
+                        <th scope="col">Platform</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Other</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Edit</th>
                     </tr>
-                    <div id="confirmationModal-password<?= $c ?>" class="confirmationModal">
-                        <div id="modalContent-password<?= $c ?>" class="modalContent">
-                            <h3>Delete Password</h3>
-                            <hr>
-                            <p>Are you sure you want to delete the password for
-                                <b><?= $passwordFormList['Plattform'] ?></b> ?</p>
-                            <button class="btn btn-danger btn-sm"
-                                    onclick="window.location.href ='<?= base_url('index.php/deletePassword?ID=' . $passwordFormList['ID']) ?>'">
-                                Yes
-                            </button>
-                            <button class="btn btn-primary btn-sm"
-                                    onclick="closeConfirmationModal('confirmationModal-password<?= $c ?>','modalContent-password<?= $c ?>')">
-                                Abort
-                            </button>
+                    </thead>
+                    <tbody>
+                    <?php $c = 1;
+                    if (isset($passwords)): foreach ($passwords as $passwordFormList): ?>
+                        <tr>
+                            <td><?= $c ?></td>
+                            <td> <span style="cursor: pointer;"
+                                       onmouseover="this.style.color='#00bcff'"
+                                       onmouseout="this.style.color='black'"
+                                       onclick="copy('<?= $passwordFormList['Plattform'] ?>')"><?= $passwordFormList['Plattform'] ?></span>
+                            </td>
+                            <td> <span style="cursor: pointer;"
+                                       onmouseover="this.style.color='#00bcff'"
+                                       onmouseout="this.style.color='black'"
+                                       onclick="copy('<?= $passwordFormList['Username'] ?>')"><?= $passwordFormList['Username'] ?></span>
+                            </td>
+                            <td> <span style="cursor: pointer;"
+                                       onmouseover="this.style.color='#00bcff'"
+                                       onmouseout="this.style.color='black'"
+                                       onclick="copy('<?= $passwordFormList['Additional'] ?>')"><?= $passwordFormList['Additional'] ?></span>
+                            </td>
+                            <td>
+                                <i class="fa-regular fa-eye interactive" style="font-size: 1.2em"
+                                   onclick="dehas('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>&nbsp
+                                <i class="fa-regular fa-copy interactive" style="font-size: 1.2em"
+                                   onclick="dehasCopy('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>
+                            </td>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <form style="margin: 0;padding: 0" id="editPassword<?= $c ?>"
+                                          action="<?= base_url('index.php/password') ?>" method="POST">
+                                        <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
+                                        <i class="fa-regular fa-pen-to-square interactive" style="font-size: 1.2em"
+                                           onclick="send_Form('editPassword<?= $c ?>')"></i>&nbsp;&nbsp;
+                                    </form>
+                                    <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
+                                    <i class="fa-regular fa-trash-can interactive" style="font-size: 1.2em"
+                                       onclick="openConfirmationModal('confirmationModal-password<?= $c ?>','modalContent-password<?= $c ?>')"></i>&nbsp;&nbsp;
+                                </div>
+                            </td>
+                        </tr>
+                        <div id="confirmationModal-password<?= $c ?>" class="confirmationModal">
+                            <div id="modalContent-password<?= $c ?>" class="modalContent">
+                                <h3>Delete Password</h3>
+                                <hr>
+                                <p>Are you sure you want to delete the password for
+                                    <b><?= $passwordFormList['Plattform'] ?></b> ?</p>
+                                <button class="btn btn-danger btn-sm"
+                                        onclick="window.location.href ='<?= base_url('index.php/deletePassword?ID=' . $passwordFormList['ID']) ?>'">
+                                    Yes
+                                </button>
+                                <button class="btn btn-primary btn-sm"
+                                        onclick="closeConfirmationModal('confirmationModal-password<?= $c ?>','modalContent-password<?= $c ?>')">
+                                    Abort
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <?php $c++ ?>
-                <?php endforeach; endif; ?>
-                </tbody>
-            </table>
+                        <?php $c++ ?>
+                    <?php endforeach; endif; ?>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
         <div class="right side">
             <div class="side-element empty">

@@ -102,8 +102,10 @@
 
     function triggerKeyAlert() {
         var field = document.getElementById('schluesselHolder');
+        var fieldr = document.getElementById('schluesselHolder-r');
         if (field.value === "") {
             field.classList.add("is-invalid");
+            fieldr.classList.add("is-invalid");
             return false;
         } else {
             field.classList.remove("is-invalid");
@@ -126,6 +128,9 @@
     function copy(content) {
         document.getElementById("myInput").disabled = true;
         document.getElementById("schluesselHolder").disabled = true;
+        document.getElementById("myInput-r").disabled = true;
+        document.getElementById("schluesselHolder-r").disabled = true;
+
         let hiddenInput = document.createElement("input");
         hiddenInput.setAttribute("type", "text");
         hiddenInput.setAttribute("value", content);
@@ -140,6 +145,8 @@
         setTimeout(function () {
             document.getElementById("myInput").disabled = false;
             document.getElementById("schluesselHolder").disabled = false;
+            document.getElementById("myInput-r").disabled = false;
+            document.getElementById("schluesselHolder-r").disabled = false;
         }, 700);
     }
 
@@ -183,6 +190,19 @@
         setTimeout(function () {
             modal.style.display = 'none';
         }, 500);
+    }
+
+    function syncronizeKeyInputs(inputId1, inputId2) {
+        const input1 = document.getElementById(inputId1);
+        const input2 = document.getElementById(inputId2);
+
+        input1.addEventListener('input', () => {
+            input2.value = input1.value;
+        });
+
+        input2.addEventListener('input', () => {
+            input1.value = input2.value;
+        });
     }
 
 </script>

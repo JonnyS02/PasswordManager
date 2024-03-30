@@ -92,3 +92,36 @@ td i {
 hr {
     z-index: 0;
 }
+
+.responsive-side {
+    display: none;
+}
+
+@media only screen and (max-width: 800px) {
+    .middle {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .side {
+        display: none;
+    }
+
+    .responsive-side {
+        margin-right: 5px;
+        margin-bottom: 5px;
+        width: calc(50vw - 40px);
+        display: block;
+    }
+}
+
+#tableContainer {
+    overflow-x: auto;
+}
+
+td {
+    max-width: 10vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -17,15 +17,15 @@
         max-width: unset;
     }
 
-    .header{
+    .header {
         font-size: 300%;
     }
 
-    .PRO{
+    .PRO {
         border-radius: 10px;
     }
 
-    .btn{
+    .btn {
         font-size: 40px;
     }
 
@@ -33,19 +33,19 @@
         max-width: unset;
     }
 
-    .btn{
+    .btn {
         border-radius: 15px;
     }
 
-    .formHead{
+    .formHead {
         padding-top: 5%;
     }
 
-    .form-group{
+    .form-group {
         padding-top: 5%;
     }
 
-    #agb-divider{
+    #agb-divider {
         padding-top: 5%;
     }
 
@@ -53,19 +53,19 @@
         border: 2px solid #b7b7b7;
     }
 
-    .passwordGenerator{
+    .passwordGenerator {
         border: 4px solid #00bcff;
         border-radius: 20px;
         width: 100%;
         margin-right: 0;
     }
 
-    .passwordGenerator h3{
+    .passwordGenerator h3 {
         font-size: 200%;
     }
 
 
-    .side{
+    .side {
         border-radius: 20px;
         margin: 20px;
         padding: 20px;
@@ -74,11 +74,11 @@
         background-color: #f6f7f9;
     }
 
-    .insertPassword{
+    .insertPassword {
         width: 100%;
     }
 
-    .middle{
+    .middle {
         width: 80%;
     }
 
@@ -86,7 +86,7 @@
         height: 20px;
     }
 
-    .passwordHighlighter{
+    .passwordHighlighter {
         border: 2px solid #00bcff;
 
     }
@@ -99,5 +99,21 @@
         border-radius: 50%;
         -webkit-appearance: none;
         margin-top: -10px;
+    }
+
+    .middle {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .side {
+        display: none;
+    }
+
+    .responsive-side {
+        margin-right: 5px;
+        margin-bottom: 5px;
+        width: calc(50vw - 40px);
+        display: block;
     }
 }
