@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php include "partials/head.php" ?>
-<body>
-<?php
-$name = $success;
-include "partials/header.php";
-?>
 <style>
     .centered-div {
         text-align: center;
@@ -30,8 +22,6 @@ include "partials/header.php";
     </div>
 </div>
 
-<?php include "partials/footer.php" ?>
-
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         setTimeout(function () {
@@ -40,6 +30,3 @@ include "partials/header.php";
         }, 3250);
     });
 </script>
-
-</body>
-</html>

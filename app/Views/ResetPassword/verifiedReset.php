@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php include_once(dirname(__FILE__) . '/../partials/head.php') ?>
-<body>
-<?php
-$name = $success;
-include_once(dirname(__FILE__) . '/../partials/header.php');
-?>
 <style>
     .centered-div {
         text-align: center;
@@ -27,8 +19,6 @@ include_once(dirname(__FILE__) . '/../partials/header.php');
     </div>
 </div>
 
-<?php include_once(dirname(__FILE__) . '/../partials/footer.php') ?>
-
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         setTimeout(function () {
@@ -38,5 +28,3 @@ include_once(dirname(__FILE__) . '/../partials/header.php');
     });
 </script>
 
-</body>
-</html>

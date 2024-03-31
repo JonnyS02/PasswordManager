@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<?php include "partials/head.php" ?>
-<?php include "partials/home_script.html"; ?>
-
-<body>
-<?php
-$name = "&nbsp" . $user;
-include "partials/header.php";
-?>
-
-<?= (isset($notDeleted)) ? "    <script>
+<script>
+    <?php if (isset($notDeleted)) echo "
         window.onload = function () {
             openConfirmationModal('confirmationModal-account', 'modalContent-account');
         };
-    </script>" : ""; ?>
-
-<script>
+    ";
+    ?>
     document.addEventListener('DOMContentLoaded', function () {
         removeDisabled();
-        synchronizeInputs('schluesselHolder','schluesselHolder-r');
-        synchronizeInputs('myInput','myInput-r');
+        synchronizeInputs('keyHolder', 'keyHolder-r');
+        synchronizeInputs('plattformHolder', 'plattformHolder-r');
     });
 </script>
 
@@ -32,15 +20,13 @@ include "partials/header.php";
         <p>Your user-information and passwords will immediately be deleted.</p>
         <form action="<?= base_url('index.php/deleteUser') ?>" method="POST" class="mt-4" id="deleteUser">
             <div class="form-group">
-                <label for="password_account">Confirmation Password</label>
+                <label>Confirmation Password</label>
                 <input name="password_account" type="password"
-                       class=" form-control texinput <?= (isset($notDeleted)) ? 'is-invalid' : '' ?>"
-                       id="password_account"
-                       placeholder="Enter your passwort" value="<?php if (isset($password_account)) {
-                    echo $password_account;
-                } ?>">
+                       class=" form-control textinput <?= (isset($notDeleted)) ? 'is-invalid' : '' ?>"
+                       id="password_account" placeholder="Enter your passwort"
+                       value="<?= $password_account ?? '' ?>">
                 <div class="invalid-feedback">
-                    <?php if (isset($notDeleted)) echo $notDeleted; ?>
+                    <?= $notDeleted ?? '' ?>
                 </div>
             </div>
             <p></p>
@@ -67,55 +53,22 @@ include "partials/header.php";
 
 <div class="containerSELF">
     <div class="centered-div">
-        <div class="left side">
-            <div class="side-element empty">
-            </div>
-            <div class="side-element">
-                <a class="text-decoration-none" href="<?= base_url('index.php/editProfile') ?>">Edit Profile</a>
-            </div>
-            <div class="side-element">
-                <a class="text-decoration-none" href="<?= base_url('index.php/password') ?>">Insert Password</a>
-            </div>
-            <div class="side-element">
-                <input  type="text" id="myInput" onkeyup="searchTable('myInput')" placeholder="🔍 Platform"
-                       class="form-control" disabled>
-            </div>
-        </div>
-        <div class="left side responsive-side">
-            <div class="side-element empty">
-            </div>
-            <div class="side-element">
-                <a class="text-decoration-none" href="<?= base_url('index.php/editProfile') ?>">Edit Profile</a>
-            </div>
-            <div class="side-element">
-                <a class="text-decoration-none" href="<?= base_url('index.php/password') ?>">Insert Password</a>
-            </div>
-            <div class="side-element">
-                <input type="text" id="myInput-r" onkeyup="searchTable('myInput-r')" placeholder="🔍 Platform"
-                       class="form-control texinput" disabled>
-            </div>
-        </div>
-        <div class="left side responsive-side">
-            <div class="side-element empty">
-            </div>
-            <div class="side-element">
-                <a class="text-decoration-none" href="<?= base_url('index.php') ?>">Sign Off</a>
-            </div>
-            <div class="side-element">
-                <a onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'"
-                   class="text-decoration-none"
-                   onclick="openConfirmationModal('confirmationModal-account','modalContent-account')">Delete
-                    Account</a>
-            </div>
-            <div class="side-element">
-                <input type="password" id="schluesselHolder-r" placeholder="🔑 Key" class="form-control texinput"
-                       onkeyup="triggerKeyAlert()" disabled>
-            </div>
-        </div>
+        <?php
+        $inputname = 'plattformHolder';
+        include 'partials/leftMenu.php';
+
+        $responsiveClass = 'responsive-side';
+        $inputname = 'plattformHolder-r';
+        include 'partials/leftMenu.php';
+
+        $inputname = 'keyHolder-r';
+        include 'partials/rightMenu.php';
+        $responsiveClass = null;
+        ?>
         <div class="middle">
             <div id="tableContainer">
 
-                <table class="table table-striped" id="myTable">
+                <table class="table table-striped" id="mainTable">
                     <thead class="bg-light">
                     <tr>
                         <th scope="col">No.</th>
@@ -131,21 +84,16 @@ include "partials/header.php";
                     if (isset($passwords)): foreach ($passwords as $passwordFormList): ?>
                         <tr>
                             <td><?= $c ?></td>
-                            <td> <span style="cursor: pointer;"
-                                       onmouseover="this.style.color='#00bcff'"
-                                       onmouseout="this.style.color='black'"
-                                       onclick="copy('<?= $passwordFormList['Plattform'] ?>')"><?= $passwordFormList['Plattform'] ?></span>
-                            </td>
-                            <td> <span style="cursor: pointer;"
-                                       onmouseover="this.style.color='#00bcff'"
-                                       onmouseout="this.style.color='black'"
-                                       onclick="copy('<?= $passwordFormList['Username'] ?>')"><?= $passwordFormList['Username'] ?></span>
-                            </td>
-                            <td> <span style="cursor: pointer;"
-                                       onmouseover="this.style.color='#00bcff'"
-                                       onmouseout="this.style.color='black'"
-                                       onclick="copy('<?= $passwordFormList['Additional'] ?>')"><?= $passwordFormList['Additional'] ?></span>
-                            </td>
+                            <?php
+                            $tdContent = 'Plattform';
+                            include 'partials/tdElement.php';
+
+                            $tdContent = 'Username';
+                            include 'partials/tdElement.php';
+
+                            $tdContent = 'Additional';
+                            include 'partials/tdElement.php';
+                            ?>
                             <td>
                                 <i class="fa-regular fa-eye interactive" style="font-size: 1.2em"
                                    onclick="dehas('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>&nbsp
@@ -187,28 +135,10 @@ include "partials/header.php";
                     </tbody>
                 </table>
             </div>
-
         </div>
-        <div class="right side">
-            <div class="side-element empty">
-            </div>
-            <div class="side-element">
-                <a class="text-decoration-none" href="<?= base_url('index.php') ?>">Sign Off</a>
-            </div>
-            <div class="side-element">
-                <a onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'"
-                   class="text-decoration-none"
-                   onclick="openConfirmationModal('confirmationModal-account','modalContent-account')">Delete
-                    Account</a>
-            </div>
-            <div class="side-element">
-                <input type="password" id="schluesselHolder" placeholder="🔑 Key" class="form-control"
-                       onkeyup="triggerKeyAlert()" disabled>
-            </div>
-        </div>
+        <?php
+        $inputname = 'keyHolder';
+        include 'partials/rightMenu.php';
+        ?>
     </div>
 </div>
-<?php include "partials/footer.php" ?>
-
-</body>
-</html>

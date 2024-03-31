@@ -1,19 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<?php include "partials/head.php" ?>
-
-<body>
-<?php
-$name = $success;
-include "partials/header.php";
-?>
-<style>
-    .centered-div {
-        text-align: center;
-    }
-</style>
-
 <script>
     function makeAjaxRequest() {
         var xhr = new XMLHttpRequest();
@@ -25,14 +9,14 @@ include "partials/header.php";
 
                 if (xhr.responseText.trim().startsWith(1)) {
                     console.log(xhr.responseText.trim())
-                    window.location.href = "https://jonathan-stengl.de/PassSafePro/public/index.php/verified?email=<?php echo $email . '"' ?? '"'?>;
+                    window.location.href = "https://jonathan-stengl.de/PassSafePro/public/index.php/verified?email=<?= $email . '"' ?? '"'?>;
                 }
             }
         };
         xhr.onerror = function () {
             console.error("Ajax-Error.");
         };
-        var data = <?php echo '"email=' . $email . '"'?>;
+        var data = <?= '"email=' . $email . '"'?>;
         xhr.send(data);
     }
 
@@ -40,13 +24,10 @@ include "partials/header.php";
 </script>
 
 <div class="containerSELF">
-    <div class="centered-div">
+    <div class="centered-div" style="text-align: center">
         <img style="margin-top: 10px" id="deinGIF" src="<?= base_url('assets/verify.gif') ?>"
              alt="verify your email address">
         <hr style="margin-left: calc(50% - 220px);width: 440px">
         <p style="font-size: 20px; text-align: center">Please confirm the verification email we sent you.</p>
     </div>
 </div>
-<?php include "partials/footer.php" ?>
-</body>
-</html>

@@ -13,7 +13,7 @@ class Home extends BaseController
         if (!$this->session->get('logged')) {
             return redirect()->to('/');
         }
-        $data['user'] = ($this->model->getUser($this->session->get('email')))[0]['Name'];
+        $data['headline'] = ($this->model->getUser($this->session->get('email')))[0]['Name'];
         $data['passwords'] = $this->model->getPasswords($this->session->get('email'));
         $data['plattform'] = $plattform;
         $data['error']['plattform'] = $plattform_error;
@@ -23,7 +23,7 @@ class Home extends BaseController
             $data['notDeleted'] = $notDeleted;
             $data['password_account'] = $password_account;
         }
-        return view('home', $data);
+        return $this->returnView($data, 'home');
     }
 
     public function insertPassword()
@@ -62,7 +62,7 @@ class Home extends BaseController
         if (!$this->session->get('logged')) {
             return redirect()->to('/');
         }
-        $data['success'] = "Insert Password";
+        $data['headline'] = "Insert Password";
         $data['plattform'] = $plattform;
         $data['error']['plattform'] = $plattform_error;
         $data['username'] = $username;
@@ -74,10 +74,10 @@ class Home extends BaseController
             $data['username'] = $password[0]['Username'];
             $data['additional'] = $password[0]['Additional'];
             $data['id'] = $password[0]['ID'];
-            $data['success'] = "Edit Password";
+            $data['headline'] = "Edit Password";
             $this->session->set('plattform', $password[0]['Plattform']);
         }
-        return view('password', $data);
+        return $this->returnView($data, 'password');
     }
 
     public function deleteUser()

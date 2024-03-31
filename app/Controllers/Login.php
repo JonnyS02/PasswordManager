@@ -8,12 +8,8 @@ class Login extends BaseController
 {
     public function index(): string
     {
-        $data['email'] = "";
-        $data['password'] = "";
-
         $this->session->destroy();
-
-        return view('login', $data);
+        return $this->returnView();
     }
 
     public function login()
@@ -41,6 +37,7 @@ class Login extends BaseController
         } else {
             $data['error'] = $this->validation->getErrors();
         }
-        return view('login', $data);
+
+        return $this->returnView($data);
     }
 }

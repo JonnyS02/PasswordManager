@@ -9,8 +9,7 @@ class User extends BaseController
 {
     public function index(): string
     {
-        $data['success'] = "Register";
-        $data['finished'] = false;
+        $data['headline'] = "Register";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data['username'] = $this->request->getPost('username');
             $data['email'] = $this->request->getPost('email');
@@ -30,28 +29,25 @@ class User extends BaseController
                 }
             }
         }
-        return view('user', $data);
+        return $this->returnView($data, 'user');
     }
 
     public function editProfile()
     {
-        $data['finished'] = false;
-        $data['success'] = "Edit Profile";
+        $data['headline'] = "Edit Profile";
         if (!$this->session->get('logged')) {
             return redirect()->to('/');
         }
         $user = ($this->model->getUser($this->session->get('email')));
         $data['email'] = $user[0]['Email'];
         $data['username'] = $user[0]['Name'];
-        return view('editUser', $data);
-
+        return $this->returnView($data, 'editUser');
     }
 
     public function initializeData(): array
     {
         return [
-            'finished' => false,
-            'success' => "Edit Profile",
+            'headline' => "Edit Profile",
             'username' => $this->request->getPost('username'),
             'email' => $this->request->getPost('email'),
             'password' => $this->request->getPost('password'),
@@ -104,14 +100,13 @@ class User extends BaseController
                 }
                 if ($inserted) {
                     $this->session->set('email', $data['email']);
-                    $data['success'] = "Profile changed !";
+                    $data['headline'] = "Profile changed !";
                     $data['finished'] = true;
                 } else {
                     $data['noChange'] = true;
-
                 }
             }
         }
-        return view('editUser', $data);
+        return $this->returnView($data, 'editUser');
     }
 }

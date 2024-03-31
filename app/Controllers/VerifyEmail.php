@@ -10,9 +10,9 @@ class VerifyEmail extends BaseController
     public function initVerify($email): string
     {
         $this->sendVerifyMail($email);
-        $data['success'] = "Verify Email";
+        $data['headline'] = "Verify Email";
         $data['email'] = $email;
-        return view('verify', $data);
+        return $this->returnView($data,'verify');
     }
 
     public function sendVerifyMail($emailTo)
@@ -44,9 +44,9 @@ class VerifyEmail extends BaseController
     public function verified()
     {
         if (isset($_GET['email']) and $this->isVerified($_GET['email']) == "1") {
-            $data['success'] = "Email verified!";
+            $data['headline'] = "Email verified!";
             $data['main'] = true;
-            return view('verified', $data);
+            return $this->returnView($data,'verified');
         }
         return redirect()->to('/');
     }
@@ -57,8 +57,8 @@ class VerifyEmail extends BaseController
             $verifyCode = $_GET['verifyCode'];
             $email = $_GET['email'];
             if ($this->model->verifyUser($verifyCode, $email)) {
-                $data['success'] = "Email verified!";
-                return view('verified', $data);
+                $data['headline'] = "Email verified!";
+                return $this->returnView($data,'verified');
             }
         }
         return redirect()->to('/');

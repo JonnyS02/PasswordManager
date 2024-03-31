@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<?php include_once(dirname(__FILE__) . '/../partials/head.php') ?>
-
-<body>
-<?php
-$name = $success;
-include_once(dirname(__FILE__) . '/../partials/header.php');
-?>
 <div class="containerSELF">
     <div class="centered-div">
         <div class="formHead">
@@ -21,29 +11,19 @@ include_once(dirname(__FILE__) . '/../partials/header.php');
                     reset your password here.
                 </p>
                 <br>
-                <div class="form-group">
-                    <label for="password">New Password</label>
-                    <input name="password" type="password"
-                           class=" form-control texinput <?= (isset($error['password'])) ? 'is-invalid' : '' ?>"
-                           id="password"
-                           placeholder="Enter your new password" value="<?php if (isset($password)) {
-                        echo $password;
-                    } ?>">
-                    <div class="invalid-feedback">
-                        <?php if (isset($error['password'])) echo $error['password']; ?>
-                    </div>
-                </div>
+                <?php
+                $newPassword = "New";
+                include_once(dirname(__FILE__) . '/../inputPartials/password.php');
+                ?>
                 <p></p>
                 <div class="form-group">
-                    <label for="repeatpassword">Password verification</label>
+                    <label>Password verification</label>
                     <input name="repeatpassword" type="password"
-                           class=" form-control texinput <?= (isset($error['repeatpassword'])) ? 'is-invalid' : '' ?>"
-                           id="repeatpassword"
-                           placeholder="Repeat your new password" value="<?php if (isset($repeatpassword)) {
-                        echo $repeatpassword;
-                    } ?>">
+                           class=" form-control textinput <?= (isset($error['repeatpassword'])) ? 'is-invalid' : '' ?>"
+                           id="repeatpassword" placeholder="Repeat your new password"
+                           value="<?= $repeatpassword ?? '' ?>">
                     <div class="invalid-feedback">
-                        <?php if (isset($error['repeatpassword'])) echo $error['repeatpassword']; ?>
+                        <?= $error['repeatpassword'] ?? '' ?>
                     </div>
                 </div>
                 <p></p>
@@ -54,6 +34,3 @@ include_once(dirname(__FILE__) . '/../partials/header.php');
         </div>
     </div>
 </div>
-<?php include_once(dirname(__FILE__) . '/../partials/footer.php') ?>
-</body>
-</html>

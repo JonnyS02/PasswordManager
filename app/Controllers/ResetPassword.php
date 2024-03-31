@@ -16,10 +16,10 @@ class ResetPassword extends BaseController
                 return redirect()->to('/');
             }
             $code = $this->model->settAttemptsCode($email);
-            $data['success'] = "Reset Password";
+            $data['headline'] = "Reset Password";
             $data['email'] = $email;
             $this->sendResetEmail($email, $code);
-            return view('ResetPassword/verifyReset', $data);
+            return $this->returnView($data,'ResetPassword/verifyReset');
         }
         return redirect()->to('/');
     }
@@ -48,10 +48,10 @@ class ResetPassword extends BaseController
             $data['email'] = $_GET['email'];
             $data['xyz'] = $_GET['xyz'];
             $data['username'] = $user[0]['Name'];
-            $data['success'] = "Reset Password";
+            $data['headline'] = "Reset Password";
             if ($user[0]['Attempts'] == $_GET['xyz']) {
                 $data['link'] = base_url("index.php/abortReset?xyz=" . $data['xyz'] . "&email=" . $data['email']);
-                return view('ResetPassword/insertResetPassword', $data);
+                return $this->returnView($data,'ResetPassword/insertResetPassword');
             }
         }
         return redirect()->to('/');
@@ -80,9 +80,9 @@ class ResetPassword extends BaseController
             $this->model->insertChangesProfile($user[0]['Name'], $user[0]['Email'], $user[0]['Email'], $data['password']);
             $this->model->dbAttempts(3, $user[0]['Email']);
         }
-        $data['success'] = "Reset Password";
+        $data['headline'] = "Reset Password";
         if (isset($data['error'])) {
-            return view('ResetPassword/insertResetPassword', $data);
+            return $this->returnView($data,'ResetPassword/insertResetPassword');
         } else {
             return $this->resetVerified();
         }
@@ -129,7 +129,7 @@ class ResetPassword extends BaseController
 
     public function resetVerified(): string
     {
-        $data['success'] = "Password reset!";
-        return view('ResetPassword/verifiedReset', $data);
+        $data['headline'] = "Password reset!";
+        return $this->returnView($data,'ResetPassword/verifiedReset');
     }
 }

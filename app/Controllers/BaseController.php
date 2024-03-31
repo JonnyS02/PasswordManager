@@ -58,4 +58,10 @@ abstract class BaseController extends Controller
         $this->model = new GeneralModel();
         $this->verifyEmail = new VerifyEmail();
     }
+
+    public function returnView($data = null, $view = 'login'): string
+    {
+        $data['view'] = $view.'.php';
+        return view('template', $data);
+    }
 }
