@@ -8,7 +8,7 @@
         <span style="font-family: 'Brush Script MT','Dancing Script', 'Calibri', 'Arial', cursive;font-weight: bold;"><?= $headline ?? '' ?></span>
     </h1>
 </div>
-<div class="diver" style="width: 100%; background-color: rgba(255,183,0,0.9);padding-top: 20px;"></div>
-<div class="diver" style="width: 100%; background-color: rgba(255,128,0,0.9);padding-top: 20px;"></div>
-<div class="diver" style="width: 100%; background-color: rgba(255,77,0,0.9);padding-top: 20px;"></div>
+<div class="diver" style="background-color: rgba(255,183,0,0.9)"></div>
+<div class="diver" style="background-color: rgba(255,128,0,0.9)"></div>
+<div class="diver" style="background-color: rgba(255,77,0,0.9)"></div>
 
