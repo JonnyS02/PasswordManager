@@ -113,7 +113,11 @@
         width: 80vw;
     }
 
-    .modalContent h3{
+    .modalContent h3 {
         font-size: 100%;
+    }
+
+    .centered-div {
+        min-height: calc(100vh - 201px);
     }
 }
