@@ -107,6 +107,7 @@ function triggerKeyAlert() {
         return false;
     } else {
         field.classList.remove("is-invalid");
+        fieldr.classList.remove("is-invalid");
         return true;
     }
 }
