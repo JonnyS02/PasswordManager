@@ -83,6 +83,11 @@
         padding: 15px 20px 20px 20px;
     }
 
+    .side-element{
+        border: 3px #00bcff;
+        border-style: none none solid none;
+    }
+
     input[type="range"] {
         height: 20px;
     }
