@@ -137,6 +137,14 @@ td {
     text-overflow: ellipsis;
 }
 
+i {
+    font-size: 1.2em;
+}
+
+.hidden {
+    display: none;
+}
+
 @media only screen and (max-width: 800px) {
     .centered-div {
         min-height: calc(100vh - 201px);

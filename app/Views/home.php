@@ -95,9 +95,9 @@
                             include 'partials/tdElement.php';
                             ?>
                             <td>
-                                <i class="fa-regular fa-eye interactive" style="font-size: 1.2em"
+                                <i class="fa-regular fa-eye interactive"
                                    onclick="dehas('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>&nbsp
-                                <i class="fa-regular fa-copy interactive" style="font-size: 1.2em"
+                                <i class="fa-regular fa-copy interactive"
                                    onclick="dehasCopy('<?= $passwordFormList['Password'] ?>','confirmationModal-noKey','modalContent-noKey')"></i>
                             </td>
                             <td>
@@ -105,11 +105,11 @@
                                     <form style="margin: 0;padding: 0" id="editPassword<?= $c ?>"
                                           action="<?= base_url('index.php/password') ?>" method="POST">
                                         <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
-                                        <i class="fa-regular fa-pen-to-square interactive" style="font-size: 1.2em"
+                                        <i class="fa-regular fa-pen-to-square interactive"
                                            onclick="send_Form('editPassword<?= $c ?>')"></i>&nbsp;&nbsp;
                                     </form>
                                     <input type="hidden" value="<?= $passwordFormList['ID'] ?>" name="passwordID">
-                                    <i class="fa-regular fa-trash-can interactive" style="font-size: 1.2em"
+                                    <i class="fa-regular fa-trash-can interactive"
                                        onclick="openConfirmationModal('confirmationModal-password<?= $c ?>','modalContent-password<?= $c ?>')"></i>&nbsp;&nbsp;
                                 </div>
                             </td>

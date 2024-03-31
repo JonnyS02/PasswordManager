@@ -25,8 +25,7 @@
 
 <div class="containerSELF">
     <div class="centered-div" style="text-align: center">
-        <img style="margin-top: 10px" id="deinGIF" src="<?= base_url('assets/verify.gif') ?>"
-             alt="verify your email address">
+        <img style="margin-top: 10px" src="<?= base_url('assets/verify.gif') ?>" alt="verify your email address">
         <hr style="margin-left: calc(50% - 220px);width: 440px">
         <p style="font-size: 20px; text-align: center">Please confirm the verification email we sent you.</p>
     </div>

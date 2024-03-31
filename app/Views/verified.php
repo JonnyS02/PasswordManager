@@ -1,15 +1,5 @@
-<style>
-    .centered-div {
-        text-align: center;
-    }
-
-    .hidden {
-        display: none;
-    }
-</style>
-
 <div class="containerSELF">
-    <div class="centered-div">
+    <div class="centered-div" style="text-align: center">
         <img src="<?= base_url('assets/verified.gif') ?>" alt="GIF" id="gif">
         <img src="<?= base_url('assets/verified.png') ?>" alt="Last Frame" id="lastFrame" class="hidden">
         <hr style="margin-left: calc(50% - 210px);width: 420px">
