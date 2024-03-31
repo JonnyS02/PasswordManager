@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <p></p>
-                <?php include 'inputPartials/email.php'?>
+                <?php include 'inputPartials/email.php' ?>
                 <p></p>
                 <div class="passwordHighlighter"></div>
                 <div class="form-group">
