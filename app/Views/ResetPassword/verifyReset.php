@@ -1,27 +1,8 @@
-<script>
-    function makeAjaxRequest() {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://jonathan-stengl.de/PassSafePro/public/index.php/isReset", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                console.log(xhr.responseText.trim());
-
-                if (xhr.responseText.trim().startsWith("1")) {
-                    console.log(xhr.responseText.trim());
-                    window.location.href = "https://jonathan-stengl.de/PassSafePro/public/index.php/resetVerified";
-                }
-            }
-        };
-        xhr.onerror = function () {
-            console.error("Ajax-Error.");
-        };
-        var data = "email=<?= $email ?? ''?>";
-        xhr.send(data);
-    }
-
-    setInterval(makeAjaxRequest, 5000);
-</script>
+<?php
+$request = "https://jonathan-stengl.de/PassSafePro/public/index.php/isReset";
+$redirection = "https://jonathan-stengl.de/PassSafePro/public/index.php/resetVerified";
+include_once(dirname(__FILE__) . '/../scripts/ajaxRequest.php');
+?>
 
 <div class="containerSELF">
     <div class="centered-div" style="text-align: center">
