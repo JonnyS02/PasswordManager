@@ -27,8 +27,13 @@ function generatePassword() {
 
 function generatePassword_and_sendForm() {
     if (areInputsValid()) {
-        document.getElementById('passwortVerschlusselt').value = verschluesseln(document.getElementById("password").value, document.getElementById('key').value);
-        const formElement = document.getElementById('submitPassword');
+        var passwordInput = document.getElementById('password');
+        var keyInput = document.getElementById('key');
+
+        var encryptedPassword = verschluesseln(passwordInput.value, keyInput.value);
+        document.getElementById('passwortVerschlusselt').value = encryptedPassword;
+
+        var formElement = document.getElementById('submitPassword');
         formElement.submit();
     }
 }
@@ -63,12 +68,11 @@ function updatePasswordLength(length) {
 function resetSettings() {
     document.getElementById('passwordLength').value = 12;
     updatePasswordLength(12);
-    if (!document.getElementById('viewPassword').checked === true)
+    if (!document.getElementById('viewPassword').checked)
         viewPassword();
-    document.getElementById('includeLetters').checked = true;
-    document.getElementById('includeNumbers').checked = true;
-    document.getElementById('includeSpecialChars').checked = true;
-    document.getElementById('viewPassword').checked = true;
+    ['includeLetters', 'includeNumbers', 'includeSpecialChars', 'viewPassword'].forEach(id => {
+        document.getElementById(id).checked = true;
+    });
 }
 
 function verschluesseln(passwort, schluessel) {
@@ -101,15 +105,10 @@ function dehas(passwort, modal_name, modalContent_name) {
 function triggerKeyAlert() {
     var field = document.getElementById('keyHolder');
     var fieldr = document.getElementById('keyHolder-r');
-    if (field.value === "") {
-        field.classList.add("is-invalid");
-        fieldr.classList.add("is-invalid");
-        return false;
-    } else {
-        field.classList.remove("is-invalid");
-        fieldr.classList.remove("is-invalid");
-        return true;
-    }
+    var isEmpty = field.value === "";
+    field.classList.toggle("is-invalid", isEmpty);
+    fieldr.classList.toggle("is-invalid", isEmpty);
+    return !isEmpty;
 }
 
 function dehasCopy(passwort, modal_name, modalContent_name) {
@@ -125,14 +124,11 @@ function dehasCopy(passwort, modal_name, modalContent_name) {
 }
 
 function copy(content) {
-    document.getElementById("plattformHolder").disabled = true;
-    document.getElementById("keyHolder").disabled = true;
-    document.getElementById("plattformHolder-r").disabled = true;
-    document.getElementById("keyHolder-r").disabled = true;
-
+    ["plattformHolder", "keyHolder", "plattformHolder-r", "keyHolder-r"].forEach(function (id) {
+        document.getElementById(id).disabled = true;
+    });
     let hiddenInput = document.createElement("input");
-    hiddenInput.setAttribute("type", "text");
-    hiddenInput.setAttribute("value", content);
+    Object.assign(hiddenInput, {type: "text", value: content});
     document.body.appendChild(hiddenInput);
     hiddenInput.select();
     document.execCommand("copy");
@@ -142,10 +138,9 @@ function copy(content) {
 
 function removeDisabled() {
     setTimeout(function () {
-        document.getElementById("plattformHolder").disabled = false;
-        document.getElementById("keyHolder").disabled = false;
-        document.getElementById("plattformHolder-r").disabled = false;
-        document.getElementById("keyHolder-r").disabled = false;
+        ["plattformHolder", "keyHolder", "plattformHolder-r", "keyHolder-r"].forEach(function (id) {
+            document.getElementById(id).disabled = false;
+        });
     }, 700);
 }
 
@@ -205,26 +200,18 @@ function synchronizeInputs(inputId1, inputId2) {
 }
 
 function enableFields(field1, placeholder1, field2, placeholder2) {
-    var field1 = document.getElementById(field1);
-    field1.disabled = !field1.disabled;
-    var field2 = document.getElementById(field2);
-    field2.disabled = !field2.disabled;
+    var field1Element = document.getElementById(field1);
+    var field2Element = document.getElementById(field2);
     var generateButton = document.getElementById("generateButton");
+    [{element: field1Element, placeholder: placeholder1},
+        {element: field2Element, placeholder: placeholder2
+        }].forEach(function (item) {
+        item.element.disabled = !item.element.disabled;
+        item.element.value = item.element.disabled ? "" : item.element.value;
+        item.element.placeholder = item.element.disabled ? "" : item.placeholder;
+        item.element.classList.remove("is-invalid");
+    });
     if (generateButton) {
         generateButton.disabled = !generateButton.disabled;
-    }
-    if (field1.disabled) {
-        field1.value = "";
-        field1.placeholder = "";
-        field1.classList.remove("is-invalid");
-    } else {
-        field1.placeholder = placeholder1;
-    }
-    if (field2.disabled) {
-        field2.value = "";
-        field2.placeholder = "";
-        field2.classList.remove("is-invalid");
-    } else {
-        field2.placeholder = placeholder2;
     }
 }
