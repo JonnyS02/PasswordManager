@@ -2,9 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\GeneralModel;
-use Config\Services;
-
 class User extends BaseController
 {
     public function index(): string

@@ -2,9 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\GeneralModel;
 use CodeIgniter\HTTP\RedirectResponse;
-use Config\Services;
 
 class Home extends BaseController
 {

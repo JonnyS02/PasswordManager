@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\GeneralModel;
 use Config\Services;
 
 class ResetPassword extends BaseController
