@@ -61,12 +61,12 @@ abstract class BaseController extends Controller
 
     public function emailServerAddress(): string
     {
-        return "server@address.com";
+        return 'server@address.com';
     }
 
     public function backUpDestination(): string
     {
-        return "destination@address.com";
+        return 'destination@address.com';
     }
 
     public function returnView($data = null, $view = 'login'): string
