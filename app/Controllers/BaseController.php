@@ -59,6 +59,16 @@ abstract class BaseController extends Controller
         $this->verifyEmail = new VerifyEmail();
     }
 
+    public function emailServerAddress(): string
+    {
+        return "server@address.com";
+    }
+
+    public function backUpDestination(): string
+    {
+        return "destination@address.com";
+    }
+
     public function returnView($data = null, $view = 'login'): string
     {
         $data['view'] = $view.'.php';
