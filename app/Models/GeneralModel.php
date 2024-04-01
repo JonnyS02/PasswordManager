@@ -85,6 +85,22 @@ class GeneralModel extends Model
         return $result->getResultArray();
     }
 
+    function getUserAuto(): array
+    {
+        $user = $this->db->table('users');
+        $user->select();
+        $result = $user->get();
+        return $result->getResultArray();
+    }
+
+    function deleteUserAuto($email): bool
+    {
+        $user = $this->db->table('users');
+        $user->where('Email', $email);
+        $user->delete();
+        return true;
+    }
+
     public function insertPassword($plattform, $password, $username, $additional, $email): bool
     {
         if ($this->getPlattform($plattform, $email)) {
