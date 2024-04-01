@@ -9,6 +9,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+include_once(dirname(__FILE__) . '/../../Config.php');
 
 /**
  * Class BaseController
@@ -61,12 +62,12 @@ abstract class BaseController extends Controller
 
     public function emailServerAddress(): string
     {
-        return 'server@address.com';
+        return getenv('emailServerAddress');
     }
 
     public function backUpDestination(): string
     {
-        return 'destination@address.com';
+        return getenv('backUpDestination');
     }
 
     public function returnView($data = null, $view = 'login'): string

@@ -1,6 +1,7 @@
 <?php
 
 use CodeIgniter\Router\RouteCollection;
+include_once(dirname(__FILE__) . '/../../Config.php');
 
 /**
  * @var RouteCollection $routes
@@ -33,8 +34,8 @@ $routes->get('/insertResetPassword', 'ResetPassword::insertResetPassword');
 $routes->post('/submitResetPassword', 'ResetPassword::submitResetPassword');
 $routes->get('/abortReset', 'ResetPassword::abortReset');
 
-$routes->get('/backUp','BackUpTrigger::index');
+$routes->get(getenv('BackUpTrigger'),'BackUpTrigger::index');
 
-$routes->get('/autoDeleteUser','DeleteUserTrigger::index');
+$routes->get(getenv('DeleteUserTrigger'),'DeleteUserTrigger::index');
 
 
