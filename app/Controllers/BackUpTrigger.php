@@ -68,9 +68,9 @@ class BackUpTrigger extends BaseController
     public function sendBackup($to, $backup_file): string
     {
         $email = Services::email();
-        $email->setFrom($this->emailServerAddress(), 'DayTrackMax official');
+        $email->setFrom($this->emailServerAddress(), 'PassSafePro official');
         $email->setTo($to);
-        $email->setSubject("Monatliches DB-Backup 🖥️");
+        $email->setSubject("Monthly DB-Backup 🖥️");
         $email->attach($backup_file);
         $email->send();
         return "Email sent to $to!";
