@@ -1,6 +1,6 @@
 <?php
-$request = "https://jonathan-stengl.de/PassSafePro/public/index.php/isReset";
-$redirection = "https://jonathan-stengl.de/PassSafePro/public/index.php/resetVerified";
+$request = base_url('index.php/isReset');
+$redirection = base_url('index.php/resetVerified');
 include_once(dirname(__FILE__) . '/../scripts/ajaxRequest.php');
 ?>
 

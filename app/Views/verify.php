@@ -1,6 +1,6 @@
 <?php
-$request = "https://jonathan-stengl.de/PassSafePro/public/index.php/isverified";
-$redirection = "https://jonathan-stengl.de/PassSafePro/public/index.php/verified?email=$email";
+$request = base_url('index.php/isverified');
+$redirection = base_url("index.php/verified?email=$email");
 include 'scripts/ajaxRequest.php';
 ?>
 
