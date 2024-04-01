@@ -17,7 +17,7 @@
                     <td style="padding: 20px; text-align: center;">
                         <h1 style="font-size: 3.5em">
                             <span style="color: black;font-family: 'Brush Script MT','Dancing Script', 'Calibri', 'Arial', cursive;font-weight: bold;">PassSafe</span>
-                            <sup><span style="font-family: 'Agency FB','Smooch Sans','Arial',serif;  color: white; background-color: #00bcff;padding-left: 5px;padding-right: 5px;">Pro</span></sup>
+                            <sup><span style="font-family: 'Agency FB','Smooch Sans','Arial',serif;  color: white; background-color: #00bcff;padding-left: 5px;padding-right: 5px;border-radius: 5px;">Pro</span></sup>
                             <span style="color: black;font-family: 'Brush Script MT','Dancing Script', 'Calibri', 'Arial', cursive;font-weight: bold;white-space: pre;"> <?= $name ?? '' ?></span>
                             <div class="diver"
                                  style="border-radius: 5px 5px 0 0;width: 100%; background-color: rgba(255,183,0,0.9);padding-top: 10px;"></div>
