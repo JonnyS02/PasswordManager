@@ -33,8 +33,8 @@ $routes->get('/insertResetPassword', 'ResetPassword::insertResetPassword');
 $routes->post('/submitResetPassword', 'ResetPassword::submitResetPassword');
 $routes->get('/abortReset', 'ResetPassword::abortReset');
 
-$routes->get('/l6OoS4z98eINfk2v2SKI179GLIwWIu','BackUpTrigger::index');
+$routes->get('/backUp','BackUpTrigger::index');
 
-$routes->get('/q5j9O8ts3rVcUcWQ5OPTQK2oZsnICE','DeleteUserTrigger::index');
+$routes->get('/autoDeleteUser','DeleteUserTrigger::index');
 
 
