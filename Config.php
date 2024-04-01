@@ -1,5 +1,7 @@
 <?php
 
+putenv("baseURL= ");
+
 putenv("emailServerAddress= ");
 putenv("backUpDestination= ");
 
