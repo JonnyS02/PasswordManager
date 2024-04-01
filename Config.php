@@ -1,17 +1,17 @@
 <?php
 
-putenv("emailServerAddress=");
-putenv("backUpDestination=");
+putenv("emailServerAddress= ");
+putenv("backUpDestination= ");
 
-putenv("BackUpTrigger=");
-putenv("DeleteUserTrigger=");
+putenv("BackUpTrigger= ");
+putenv("DeleteUserTrigger= ");
 
-putenv("hostname=");
-putenv("username=");
-putenv("password=");
-putenv("database=");
+putenv("hostname= ");
+putenv("username= ");
+putenv("password= ");
+putenv("database= ");
 
-putenv("Admin=");
+putenv("Admin= ");
 
 ?>
 
