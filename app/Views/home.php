@@ -74,7 +74,7 @@
                         <th scope="col">No.</th>
                         <th scope="col">Platform</th>
                         <th scope="col">Username</th>
-                        <th scope="col">Other</th>
+                        <th scope="col">Additional</th>
                         <th scope="col">Password</th>
                         <th scope="col">Edit</th>
                     </tr>
