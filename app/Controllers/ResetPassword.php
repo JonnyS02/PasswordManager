@@ -26,7 +26,7 @@ class ResetPassword extends BaseController
     public function sendResetEmail($emailTo, $code)
     {
         $email = Services::email();
-        $email->setFrom($this->emailServerAddress(), 'PassSafePro official');
+        $email->setFrom($this->emailServerAddress(), 'PassSafePro');
         $email->setTo($emailTo);
         $email->setSubject('Reset your Password.');
         $data['name'] = "Reset password";

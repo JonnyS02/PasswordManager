@@ -68,7 +68,7 @@ class BackUpTrigger extends BaseController
     public function sendBackup($to, $backup_file): string
     {
         $email = Services::email();
-        $email->setFrom($this->emailServerAddress(), 'PassSafePro official');
+        $email->setFrom($this->emailServerAddress(), 'PassSafePro');
         $email->setTo($to);
         $email->setSubject("Monthly DB-Backup 🖥️");
         $email->attach($backup_file);
